@@ -6,4 +6,3 @@ Integrantes:
 - Franco Sosa
 - Nico Taborda
 - Agustin Celant
-- Cristian Castro
