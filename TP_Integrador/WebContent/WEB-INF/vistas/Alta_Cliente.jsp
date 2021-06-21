@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Agregar Clientes</title>
 </head>
 <body>
 
@@ -55,7 +55,7 @@ background:black;
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Agregar Cliente</h4>
-	<p align="center">Nombree: <input class="controls" type="text" name="nombre" ></p>
+	<p align="center">Nombre: <input class="controls" type="text" name="nombre" ></p>
     <p align="center">Apellido: <input class="controls" type="text" name="apellido" ></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
@@ -75,8 +75,7 @@ background:black;
          <option>Virreyes</option>
         
          </select> </p>    
-         <p>Usuario: <input class="controls" type="text" name="apellido" ></p>
-         <p>Contraseña: <input class="controls"  type="text" name="apellido" ></p>
+        
 	  <input class="botons"type="submit" value="Agregar">
 	</div>
 </body>
