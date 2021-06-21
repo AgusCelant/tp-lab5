@@ -8,7 +8,6 @@
 </head>
 <body>
 
-	<h3>TP INTEGRADOR | GRUPO 2</h3>
 
 </body>
 </html>
