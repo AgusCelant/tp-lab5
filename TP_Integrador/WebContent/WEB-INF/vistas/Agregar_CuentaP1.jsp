@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <style>
 table, td, th {
   border: 1px solid black;
@@ -24,10 +23,10 @@ th {
 
 
 
-.AltaCliente{
+.AltaCuenta{
 justify-content:center;
-width:320px;
-height:150px;
+width:200px;
+height:100px;
 background-color:#2C3E50 ;
 border:double;
 }
@@ -38,19 +37,12 @@ color:white;
 
 </style>
 
-
-
-
-
-
-	<center>
-	<div class="AltaCliente" align="center">	
-	<h2 class="h2">Bienvenido admin<h2>
-	<h2 class="h2">Clientes<h2>
-	<input type="submit" value="Agregar Cliente">
+<center>
+	<div class="AltaCuenta" align="center">	
+	<h2 class="h2" align="center">Bienvenido Admin<h2>
 	</div >
 	</center>
-	<p>
+	
 <table>
   <tr>
     <th>Nombre</th>
@@ -75,13 +67,11 @@ color:white;
     <td>Argentina</td>
     <td>Virreyes</td>
     <td>PeterG</td>
-    <td> <input type="submit" value="Editar"> </td>
-    <td> <input type="submit" value="Eliminar"></td>
+    <td> <input type="submit" value="Agregar Cuenta"> </td>
+
 
    
   </tr>
 </table>
-
-	</p>
 </body>
 </html>
