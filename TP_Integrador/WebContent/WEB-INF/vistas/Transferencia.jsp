@@ -16,12 +16,17 @@
 	<br><br>
 	
 	<lablel>Cuenta destino:</lablel>
-	<input type="number">
+	<select id="selectCuentaDestino" name="cuentaDestino">
+		<option>Transferir a cuenta no propia...</option>
+	    <option>00002</option>
+	</select>
 	<br><br>
-	
+	<label>CBU destino:</label><input type="number">
+	<br><br>
+	<label>Dinero disponible: $1000</label>
+	<br>
 	<label>Monto a transferir:</label><input type="number">
 	<br><br>
-	<span>No se puede transferir entre cuentas de distinta moneda!</span><br>
 	<button>CANCELAR</button> <button>CONFIRMAR</button>
 </body>
 </html>
