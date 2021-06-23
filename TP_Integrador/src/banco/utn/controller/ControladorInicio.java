@@ -12,7 +12,7 @@ public class ControladorInicio {
 	public ModelAndView eventoRedireccionarPag1()
 	{
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Historial");
+		MV.setViewName("Editar_Cliente");
 		return MV;
 	}
 }
