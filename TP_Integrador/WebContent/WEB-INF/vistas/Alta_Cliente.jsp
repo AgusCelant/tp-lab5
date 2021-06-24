@@ -75,6 +75,8 @@ background:white;
          <option>Virreyes</option>
         
          </select> </p>    
+         <p align="center">Usuario: <input class="controls" type="text" name="usuario" ></p>
+    <p align="center">Contraseña: <input class="controls" type="text" name="contraseña" ></p>
         
 	  <input class="botons"type="submit" value="Agregar">
 	</div>

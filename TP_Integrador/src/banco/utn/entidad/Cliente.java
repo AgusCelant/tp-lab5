@@ -33,6 +33,10 @@ public class Cliente implements Serializable{
 	private String Provincia;
 	@Column(name="Localidad")
 	private String Localidad;
+	@Column(name="Usuario")
+	private String Usuario;
+	@Column(name="Contraseña")
+	private String Contraseña;
 	@Column(name="IdCliente")
 	private static int IdCliente;
 	@Id
@@ -45,7 +49,7 @@ public class Cliente implements Serializable{
 	}
 
 	public Cliente(String nombre, String apellido, String sexo, String nacimiento, String nacionalidad,
-			String provincia, String localidad, String dni) {
+			String provincia, String localidad, String dni, String usuario, String contraseña) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -54,6 +58,8 @@ public class Cliente implements Serializable{
 		Nacionalidad = nacionalidad;
 		Provincia = provincia;
 		Localidad = localidad;
+		Usuario=usuario;
+		Contraseña=contraseña;
 		this.dni = dni;
 	}
 
@@ -111,6 +117,20 @@ public class Cliente implements Serializable{
 
 	public void setLocalidad(String localidad) {
 		Localidad = localidad;
+	}
+	public String getUsuario() {
+		return Usuario;
+	}
+
+	public void setUsuario(String Usuario) {
+		this.Usuario = Usuario;
+	}
+	public String getContraseña() {
+		return Contraseña;
+	}
+
+	public void setContraseña(String Contraseña) {
+		this.Contraseña = Contraseña;
 	}
 
 	public static int getIdCliente() {
