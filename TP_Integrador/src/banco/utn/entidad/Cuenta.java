@@ -2,7 +2,7 @@ package banco.utn.entidad;
 
 public class Cuenta {
 	private int IdCuenta;
-	private Persona Persona;
+	private Cliente Persona;
 	private String Fecha;
 	private String TipoCuenta;
 	private int NumCuenta;
@@ -13,7 +13,7 @@ public class Cuenta {
 	
 	
 	
-	public Cuenta(int idCuenta, banco.utn.entidad.Persona persona, String fecha, String tipoCuenta, int numCuenta,
+	public Cuenta(int idCuenta, banco.utn.entidad.Cliente persona, String fecha, String tipoCuenta, int numCuenta,
 			int cbu, float saldo) {
 		super();
 		IdCuenta = idCuenta;
@@ -34,10 +34,10 @@ public class Cuenta {
 	public void setIdCuenta(int idCuenta) {
 		IdCuenta = idCuenta;
 	}
-	public Persona getPersona() {
+	public Cliente getPersona() {
 		return Persona;
 	}
-	public void setPersona(Persona persona) {
+	public void setPersona(Cliente persona) {
 		Persona = persona;
 	}
 	public String getFecha() {

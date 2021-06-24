@@ -47,11 +47,11 @@ animation: shadow-pulse 1000ms 1;
 background-color:#434343;
 }
 body{
-background:black;
+background:white;
 }
 </style>
 
-
+<form action="agregarPersona.html" method="post">
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Agregar Cliente</h4>
@@ -59,12 +59,12 @@ background:black;
     <p align="center">Apellido: <input class="controls" type="text" name="apellido" ></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
-    <input type="radio" name="Sexo" value="h"> Hombre
-    <input type="radio" name="Sexo" value="m"> Mujer
+    <input type="radio" name="Sexo" value="Hombre"> Hombre
+    <input type="radio" name="Sexo" value="Mujer"> Mujer
   		</p>
      <p align="center" >Dni: <input class="controls" type="number" name="Dni" ></p>
-     <p align="center">Año de nacimiento:<input class="controls"id="date" type="date">
-       <p align="center">Nacionalidad: <input class="controls" type="text" name="apellido" ></p>
+     <p align="center">Año de nacimiento:<input class="controls" type="date" name="date">
+       <p align="center">Nacionalidad: <input class="controls" type="text" name="Nacionalidad" ></p>
         <p>Provincia: <select class="controls" name='Provincia'>
         <option>Argentina</option>
          <option>Guatemala</option>
@@ -78,5 +78,9 @@ background:black;
         
 	  <input class="botons"type="submit" value="Agregar">
 	</div>
+	</form>
+	
+<h4>${estadoAgregarPersona}</h4>
+	
 </body>
 </html>

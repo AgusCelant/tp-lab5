@@ -9,8 +9,8 @@
      	 <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/BDEjemploSpringMVC2?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
-        <mapping class="banco.utn.entidad.Persona"/>
+        <mapping class="banco.utn.entidad.Cliente"/>
     </session-factory>
 </hibernate-configuration>

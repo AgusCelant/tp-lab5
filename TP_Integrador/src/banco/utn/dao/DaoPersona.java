@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import banco.utn.entidad.Persona;
+import banco.utn.entidad.Cliente;
 
 @Repository("daoPersona")
 public class DaoPersona {
@@ -14,14 +14,14 @@ public class DaoPersona {
 	@Autowired
 	private Conexion conexion;
 	
-	public List<Persona> listarPersonas() {
+	public List<Cliente> listarPersonas() {
 		Session session = conexion.abrirConexion();
 		
 		session.close();
 		return null;
 	}
 
-	public boolean agregarPersona(Persona p) {
+	public boolean agregarPersona(Cliente p) {
 		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;

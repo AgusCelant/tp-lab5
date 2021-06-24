@@ -12,7 +12,15 @@ public class ControladorInicio {
 	public ModelAndView eventoRedireccionarPag1()
 	{
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Inicio");
+		
+	
+		
+		
+					
+		MV.setViewName("Alta_Cliente");
+		
+		
+		
 		return MV;
 	}
 }
