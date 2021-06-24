@@ -56,7 +56,7 @@ background:white;
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Agregar Cliente</h4>
 	<p align="center">Nombre: <input class="controls" type="text" name="nombre" ></p>
-    <p align="center">Apellido: <input class="controls" type="text" name="apellido" ></p>
+    <p align="center">Apellido: <input class="controls" type="text" name="apellido"  ></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
     <input type="radio" name="Sexo" value="Hombre"> Hombre

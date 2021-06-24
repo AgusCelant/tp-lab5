@@ -26,7 +26,7 @@ public class ControladorCliente {
 	
 	
 	@RequestMapping("agregarPersona.html")
-	public ModelAndView eventoRedireccionarPag1(String nombre,String apellido,String Sexo,String Dni,String date,String Nacionalidad,String Provincia,String Localidad,String Usuario,String Contraseña)
+	public ModelAndView eventoRedireccionarPag1(String nombre,String apellido,String Sexo,String Dni,String date,String Nacionalidad,String Provincia,String Localidad,String usuario,String contraseña)
 	{
 		ModelAndView MV = new ModelAndView();
 		
@@ -38,8 +38,8 @@ public class ControladorCliente {
 		cliente.setNacionalidad(Nacionalidad);
 		cliente.setLocalidad(Localidad);
 		cliente.setProvincia(Provincia);
-		cliente.setUsuario(Usuario);
-		cliente.setContraseña(Contraseña);
+		cliente.setUsuario(usuario);
+		cliente.setContraseña(contraseña);
 		
 		boolean estado= negocioPersona.agregarPersona(cliente);
 		String cartel="No se pudo agregar la persona";
@@ -48,6 +48,9 @@ public class ControladorCliente {
 			cartel="La persona ha sido agregada exitosamente";
 		}
 		MV.addObject("estadoAgregarPersona",cartel);
+		
+	
+		
 		
 	
 		MV.setViewName("Alta_Cliente");
