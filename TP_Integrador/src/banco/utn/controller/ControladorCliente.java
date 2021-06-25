@@ -1,5 +1,7 @@
 package banco.utn.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.ServletConfig;
 
 import org.hibernate.service.config.spi.ConfigurationService.Converter;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import antlr.collections.List;
 import banco.utn.entidad.Cliente;
 import banco.utn.negocio.NegPersona;
 
@@ -40,7 +43,7 @@ public class ControladorCliente {
 		cliente.setProvincia(Provincia);
 		cliente.setUsuario(usuario);
 		cliente.setContraseña(contraseña);
-		
+		cliente.setEstado(true);
 		boolean estado= negocioPersona.agregarPersona(cliente);
 		String cartel="No se pudo agregar la persona";
 		if(estado)
@@ -54,6 +57,71 @@ public class ControladorCliente {
 		
 	
 		MV.setViewName("Alta_Cliente");
+		return MV;
+	}
+	
+	@RequestMapping("verCliente.html")
+	public ModelAndView eventovercliente()
+	{
+		ModelAndView MV = new ModelAndView();
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
+	
+		
+		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
+		MV.addObject("ListaClientes",ListaClientes);
+		MV.setViewName("Ver_Clientes");
+		return MV;
+	}
+	
+	
+	@RequestMapping("/Eliminar.html")
+	public ModelAndView eventoeliminar()
+	{
+		ModelAndView MV = new ModelAndView();
+		
+		
+		
+		cliente=negocioPersona.BuscarPersonaID("2");
+		
+		cliente.setDni(cliente.getDni());
+		cliente.setNombre("asdadsa");
+		cliente.setApellido("sadsadsadsadsadsa");
+		cliente.setContraseña(cliente.getContraseña());
+		cliente.setLocalidad(cliente.getLocalidad());
+		cliente.setProvincia(cliente.getProvincia());
+		cliente.setNacimiento(cliente.getNacimiento());
+		cliente.setSexo(cliente.getSexo());
+		cliente.setUsuario(cliente.getUsuario());
+		cliente.setNacionalidad(cliente.getNacionalidad());
+		cliente.setEstado(cliente.getEstado());
+		//negocioPersona.EliminarPersona(cliente);
+		/*String cartel="No se pudo eliminar la persona";
+		if(estado)
+		{
+			cartel="La persona ha sido Eliminada exitosamente";
+		}*/
+		
+		
+		//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
+		//ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
+		//MV.addObject("ListaClientes",ListaClientes);
+		MV.setViewName("Ver_Clientes");
+		return MV;
+	}
+	
+	
+	
+	@RequestMapping("/Editar.html")
+	public ModelAndView eventoeditar(String ID)
+	{
+		ModelAndView MV = new ModelAndView();
+		
+			
+		
+			
+		//cliente=negocioPersona.BuscarPersonaID("2");		
+		//MV.addObject("Cliente",cliente);
+		MV.setViewName("Editar_Cliente");
 		return MV;
 	}
 	

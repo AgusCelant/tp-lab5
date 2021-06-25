@@ -21,5 +21,17 @@ public class NegPersona {
 	public boolean agregarPersona(Cliente p) {
 		return daoPersona.agregarPersona(p);
 	}
+	public Cliente BuscarPersonaID(String id) {
+		
+		return daoPersona.BuscarPersonaID(id);
+	}
+	
+	
+	
+public boolean EliminarPersona(Cliente cliente) {
+		
+		return daoPersona.EliminarPersona(cliente);
+	}
+
 
 }

@@ -56,22 +56,24 @@ background:black;
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Editar Cliente</h4>
-	<p align="center">Nombre: <input class="controls" type="text" name="nombre" ></p>
-    <p align="center">Apellido: <input class="controls" type="text" name="apellido" ></p>
+	<p align="center">Nombre: <input class="controls" type="text" name="nombre" value="${cliente.nombre}"></p>
+    <p align="center">Apellido: <input class="controls" type="text" name="apellido" value="${cliente.apelllido}"></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
     <input type="radio" name="Sexo" value="h"> Hombre
     <input type="radio" name="Sexo" value="m"> Mujer
   		</p>
 
-     <p align="center">Año de nacimiento:<input class="controls"id="date" type="date">
-       <p align="center">Nacionalidad: <input class="controls" type="text" name="apellido" ></p>
+     <p align="center">Año de nacimiento:<input class="controls"id="date" type="date" value="${cliente.nacimiento}">
+       <p align="center">Nacionalidad: <input class="controls" type="text" name="nacionalidad" value="${cliente.nacionalidad}" ></p>
         <p>Provincia: <select class="controls" name='Provincia'>
+         <option selected="selected">"${cliente.provincia}" </option>
         <option>Argentina</option>
          <option>Guatemala</option>
         
          </select> </p>      
       <p>Localidad: <select class="controls" name='Localidad'>
+         <option selected="selected">"${cliente.localidad}" </option>
         <option>San Fernando</option>
          <option>Virreyes</option>
         

@@ -37,6 +37,8 @@ public class Cliente implements Serializable{
 	private String Usuario;
 	@Column(name="Contraseña")
 	private String Contraseña;
+	@Column(name="Estado")
+	private Boolean Estado;
 	@Column(name="IdCliente")
 	private static int IdCliente;
 	@Id
@@ -49,7 +51,7 @@ public class Cliente implements Serializable{
 	}
 
 	public Cliente(String nombre, String apellido, String sexo, String nacimiento, String nacionalidad,
-			String provincia, String localidad, String dni, String usuario, String contraseña) {
+			String provincia, String localidad, String dni, String usuario, String contraseña,Boolean Estado) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -61,6 +63,7 @@ public class Cliente implements Serializable{
 		Usuario=usuario;
 		Contraseña=contraseña;
 		this.dni = dni;
+		Estado=Estado;
 	}
 
 	public String getNombre() {
@@ -132,6 +135,17 @@ public class Cliente implements Serializable{
 	public void setContraseña(String Contraseña) {
 		this.Contraseña = Contraseña;
 	}
+	
+	
+	
+	public Boolean getEstado() {
+		return Estado;
+	}
+
+	public void setEstado(Boolean Estado) {
+		this.Estado = Estado;
+	}
+	
 
 	public static int getIdCliente() {
 		return IdCliente;
@@ -155,9 +169,9 @@ public class Cliente implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", apellido=" + apellido + ", Sexo=" + Sexo + ", Nacimiento=" + Nacimiento
-				+ ", Nacionalidad=" + Nacionalidad + ", Provincia=" + Provincia + ", Localidad=" + Localidad + ", dni="
-				+ dni + "]";
+		return "Nombre"+ nombre + " Apellido " + apellido + " Sexo " + Sexo + "  Nacimiento " + Nacimiento
+				+ " Nacionalidad " + Nacionalidad + " Provincia " + Provincia + "  Localidad " + Localidad + "  Dni "
+				+ dni + "";
 	}
 	
 

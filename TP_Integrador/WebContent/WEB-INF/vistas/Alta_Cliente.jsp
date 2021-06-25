@@ -71,6 +71,7 @@ background:white;
         
          </select> </p>      
       <p>Localidad: <select class="controls" name='Localidad'>
+
         <option>San Fernando</option>
          <option>Virreyes</option>
         
