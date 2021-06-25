@@ -8,13 +8,13 @@
 <title>LOGIN</title>
 </head>
 <body>
- <form action="">
- <div class="login">
+ 
+  <div class="login">
 	<h1>Login</h1>
-    <form method="post">
+    <form action="login.html" method="post">
     	<input type="text" name="txtUsuario" placeholder="Username" required="required" />
         <input type="password" name="txtPass" placeholder="Password" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">INGRESAR</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large" name="btnIngresar">INGRESAR</button>
     </form>
 </div>
 </body>

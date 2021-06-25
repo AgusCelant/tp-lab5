@@ -26,20 +26,20 @@
 
   
  <div>
-    <a class="logo" href="http://startific.com">
+    <a class="logo">
     </a> 
   </div> 
 <div class="settings"></div>
   
 <li>                                   
-<a href="http://startific.com">
+<a>
 <i class="fa fa-user fa-lg"></i>
 <span class="nav-text">CLIENTES</span>
 </a>
 </li>   
    
 <li>                                 
-<a href="http://startific.com">
+<a>
 <i class="fa fa-desktop fa-lg"></i>
 <span class="nav-text">CUENTAS</span>
 </a>
