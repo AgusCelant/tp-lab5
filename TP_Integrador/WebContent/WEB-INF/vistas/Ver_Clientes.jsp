@@ -80,8 +80,8 @@ color:white;
       <td>${cliente.provincia} </td>
       <td>${cliente.localidad} </td>
       <td>${cliente.usuario} </td>
-   	  <td><a href="Editar.html"id=${cliente.dni} >Editar </a> </td>
-   	  <td><a href="Eliminar.html"id=1>Eliminar </a> </td>
+   	  <td><a href="Editar.html?id=${cliente.dni}" >Editar </a> </td>
+   	  <td><a href="Eliminar.html?id=${cliente.dni}">Eliminar </a> </td>
 
   </tr>
   	</c:forEach>

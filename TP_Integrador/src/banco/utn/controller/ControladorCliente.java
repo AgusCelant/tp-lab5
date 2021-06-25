@@ -3,6 +3,7 @@ package banco.utn.controller;
 import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.service.config.spi.ConfigurationService.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,13 +76,14 @@ public class ControladorCliente {
 	
 	
 	@RequestMapping("/Eliminar.html")
-	public ModelAndView eventoeliminar()
+	public ModelAndView eventoeliminar(HttpServletRequest request)
 	{
 		ModelAndView MV = new ModelAndView();
+		String id=request.getParameter("id");
+		System.out.println(id);
 		
 		
-		
-		cliente=negocioPersona.BuscarPersonaID("2");
+		cliente=negocioPersona.BuscarPersonaID(id);
 		
 		cliente.setDni(cliente.getDni());
 		cliente.setNombre("asdadsa");
@@ -112,11 +114,11 @@ public class ControladorCliente {
 	
 	
 	@RequestMapping("/Editar.html")
-	public ModelAndView eventoeditar(String ID)
+	public ModelAndView eventoeditar(HttpServletRequest request)
 	{
 		ModelAndView MV = new ModelAndView();
-		
-			
+		String id=request.getParameter("id");
+			System.out.println(id);
 		
 			
 		//cliente=negocioPersona.BuscarPersonaID("2");		
