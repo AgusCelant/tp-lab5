@@ -33,5 +33,14 @@ public boolean EliminarPersona(Cliente cliente) {
 		return daoPersona.EliminarPersona(cliente);
 	}
 
+public List VerificarDni(String Dni) {
+	
+	return  daoPersona.VerificarDni(Dni);
+}
+
+public List VerificarUsuario(String Usuario) {
+	
+	return  daoPersona.VerificarUsuario(Usuario);
+}
 
 }

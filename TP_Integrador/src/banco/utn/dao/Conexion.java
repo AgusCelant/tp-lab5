@@ -25,7 +25,9 @@ public class Conexion {
 	
 	public Session abrirConexion()
 	{
+		System.out.println("abriendo");
 		session=sessionFactory.openSession();
+		System.out.println("pasando");
 		return session;
 	}
 	

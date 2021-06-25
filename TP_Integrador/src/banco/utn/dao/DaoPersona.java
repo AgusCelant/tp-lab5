@@ -2,6 +2,9 @@ package banco.utn.dao;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,7 @@ public class DaoPersona {
 	public List<Cliente> listarPersonas() {
 		Session session = conexion.abrirConexion();
 		session.beginTransaction();
-		List<Cliente> ListarClientes=(List<Cliente>) session.createQuery("From Cliente").list();
+		List<Cliente> ListarClientes=(List<Cliente>) session.createQuery("From Cliente where estado=true").list();
 		
 		
 		
@@ -50,7 +53,8 @@ public class DaoPersona {
 		System.out.println("a");
 		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();
-		System.out.println("b");		
+		System.out.println("b");	
+		boolean aux = true;
 		Cliente cliente=(Cliente)session.get(Cliente.class,ID);
 		tx = session.getTransaction();
 		tx.commit();
@@ -74,5 +78,41 @@ public class DaoPersona {
 		
 
 	}
+	
+	public List VerificarDni(String Dni) {
+		Session session = conexion.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="select c.Dni From Cliente as c WHERE c.Dni=:usuarioID and c.Estado=true ";
+		Query query=session.createQuery(hql);
+		query.setParameter("usuarioID", Dni);
+		List result=query.list();
+		tx.commit();
+		System.out.println(result.toString());
+		conexion.cerrarSession();
+		return result;
+			
+	}
+	
+	public List VerificarUsuario(String Usuario) {
+		Session session = conexion.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="select c.Usuario From Cliente as c WHERE c.Usuario=:usuario and c.Estado=true ";
+		Query query=session.createQuery(hql);
+		query.setParameter("usuario", Usuario);
+		List result=query.list();
+		tx.commit();
+		conexion.cerrarSession();
+		return result;
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

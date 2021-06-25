@@ -17,7 +17,7 @@ public class ControladorInicio {
 		
 		
 					
-		MV.setViewName("Ver_Clientes");
+		MV.setViewName("Alta_Cliente");
 		
 		
 		

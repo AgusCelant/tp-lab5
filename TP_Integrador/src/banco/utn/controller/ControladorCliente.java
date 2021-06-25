@@ -30,34 +30,53 @@ public class ControladorCliente {
 	
 	
 	@RequestMapping("agregarPersona.html")
-	public ModelAndView eventoRedireccionarPag1(String nombre,String apellido,String Sexo,String Dni,String date,String Nacionalidad,String Provincia,String Localidad,String usuario,String contraseña)
+	public ModelAndView eventoRedireccionarPag1(String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario)
 	{
 		ModelAndView MV = new ModelAndView();
-		
-		cliente.setNombre(nombre);
-		cliente.setApellido(apellido);
+		int c=0;
+		String cartel=" ";
+	
+		cliente.setNombre(Nombre);
+		cliente.setApellido(Apellido);
 		cliente.setSexo(Sexo);
 		cliente.setDni(Dni);
-		cliente.setNacimiento(date);
+		cliente.setNacimiento(Date);
 		cliente.setNacionalidad(Nacionalidad);
 		cliente.setLocalidad(Localidad);
 		cliente.setProvincia(Provincia);
-		cliente.setUsuario(usuario);
-		cliente.setContraseña(contraseña);
+		cliente.setUsuario(Usuario);
+		cliente.setContraseña(Contraseña);
 		cliente.setEstado(true);
-		boolean estado= negocioPersona.agregarPersona(cliente);
-		String cartel="No se pudo agregar la persona";
+		String dni=cliente.getDni();
+		String Usuarioo=cliente.getUsuario();
+		java.util.List verifDni = null;
+		java.util.List Usu=null;
+		verifDni=negocioPersona.VerificarDni(dni);
+		System.out.println(verifDni.toString());
+		System.out.println(Usuarioo);
+		Usu=negocioPersona.VerificarUsuario(Usuarioo);
+		if(Usu!=null) {c++;}
+		
+		if(c==0) {
+		//boolean estado= negocioPersona.agregarPersona(cliente);
+			boolean estado=true;
 		if(estado)
 		{
-			cartel="La persona ha sido agregada exitosamente";
+		cartel = "La persona ha sido agregada exitosamente";
+		
 		}
+		}
+		else {
+		cartel="No se pudo agregar la persona el dni o el usuario ya existen";
+			
+		}
+		
+		
+		
+
 		MV.addObject("estadoAgregarPersona",cartel);
-		
-	
-		
-		
-	
 		MV.setViewName("Alta_Cliente");
+		
 		return MV;
 	}
 	
@@ -81,10 +100,12 @@ public class ControladorCliente {
 		ModelAndView MV = new ModelAndView();
 		String id=request.getParameter("id");
 		System.out.println(id);
-		
+		boolean aux = true;
 		
 		cliente=negocioPersona.BuscarPersonaID(id);
 		
+		//aux=negocioPersona.BuscarPersonaID("2");
+		System.out.println(cliente.toString());
 		cliente.setDni(cliente.getDni());
 		cliente.setNombre("asdadsa");
 		cliente.setApellido("sadsadsadsadsadsa");
@@ -124,6 +145,35 @@ public class ControladorCliente {
 		//cliente=negocioPersona.BuscarPersonaID("2");		
 		//MV.addObject("Cliente",cliente);
 		MV.setViewName("Editar_Cliente");
+		return MV;
+	}
+	
+	
+	
+	@RequestMapping("/verificardni.html")
+	public ModelAndView eventoverificardni(HttpServletRequest request)
+	{
+		ModelAndView MV = new ModelAndView();
+		String dni=request.getParameter("id");
+		
+		java.util.List aux = null;
+		String Usuario="asdsadsa";	
+		
+		java.util.List Usu=null;
+		//aux=negocioPersona.VerificarDni(dni);
+		Usu=negocioPersona.VerificarUsuario(Usuario);
+		
+		System.out.println(Usu.toString());
+		
+		
+		String Dniduplicado="asd";
+		if(aux!=null) {
+			Dniduplicado="El dni ya existe";
+		
+		}
+		
+		MV.addObject("Dniduplicado",Dniduplicado);
+		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
 	

@@ -20,9 +20,9 @@ public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="Nombre")
-	private String nombre;
+	private String Nombre;
 	@Column(name="Apellido")
-	private String apellido;
+	private String Apellido;
 	@Column(name="Sexo")
 	private String Sexo;
 	@Column(name="Nacimiento")
@@ -43,7 +43,7 @@ public class Cliente implements Serializable{
 	private static int IdCliente;
 	@Id
 	@Column(name="DNI")
-	private String dni;
+	private String Dni;
 	
 	public Cliente()
 	{
@@ -53,8 +53,8 @@ public class Cliente implements Serializable{
 	public Cliente(String nombre, String apellido, String sexo, String nacimiento, String nacionalidad,
 			String provincia, String localidad, String dni, String usuario, String contraseña,Boolean Estado) {
 		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
+		this.Nombre = nombre;
+		this.Apellido = apellido;
 		Sexo = sexo;
 		Nacimiento = nacimiento;
 		Nacionalidad = nacionalidad;
@@ -62,24 +62,24 @@ public class Cliente implements Serializable{
 		Localidad = localidad;
 		Usuario=usuario;
 		Contraseña=contraseña;
-		this.dni = dni;
+		this.Dni = dni;
 		Estado=Estado;
 	}
 
 	public String getNombre() {
-		return nombre;
+		return Nombre;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.Nombre = nombre;
 	}
 
 	public String getApellido() {
-		return apellido;
+		return Apellido;
 	}
 
 	public void setApellido(String apellido) {
-		this.apellido = apellido;
+		this.Apellido = apellido;
 	}
 
 	public String getSexo() {
@@ -157,11 +157,11 @@ public class Cliente implements Serializable{
 	}
 
 	public String getDni() {
-		return dni;
+		return Dni;
 	}
 
 	public void setDni(String dni) {
-		this.dni = dni;
+		this.Dni = dni;
 	}
 	
 	
@@ -169,9 +169,9 @@ public class Cliente implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Nombre"+ nombre + " Apellido " + apellido + " Sexo " + Sexo + "  Nacimiento " + Nacimiento
+		return "Nombre"+ Nombre + " Apellido " + Apellido + " Sexo " + Sexo + "  Nacimiento " + Nacimiento
 				+ " Nacionalidad " + Nacionalidad + " Provincia " + Provincia + "  Localidad " + Localidad + "  Dni "
-				+ dni + "";
+				+ Dni + "";
 	}
 	
 

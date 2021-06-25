@@ -55,15 +55,15 @@ background:white;
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Agregar Cliente</h4>
-	<p align="center">Nombre: <input class="controls" type="text" name="nombre" ></p>
-    <p align="center">Apellido: <input class="controls" type="text" name="apellido"  ></p>
+	<p align="center">Nombre: <input class="controls" type="text" name="Nombre" ></p>
+    <p align="center">Apellido: <input class="controls" type="text" name="Apellido"  ></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
     <input type="radio" name="Sexo" value="Hombre"> Hombre
     <input type="radio" name="Sexo" value="Mujer"> Mujer
   		</p>
      <p align="center" >Dni: <input class="controls" type="number" name="Dni" ></p>
-     <p align="center">Año de nacimiento:<input class="controls" type="date" name="date">
+     <p align="center">Año de nacimiento:<input class="controls" type="date" name="Date">
        <p align="center">Nacionalidad: <input class="controls" type="text" name="Nacionalidad" ></p>
         <p>Provincia: <select class="controls" name='Provincia'>
         <option>Argentina</option>
@@ -76,8 +76,8 @@ background:white;
          <option>Virreyes</option>
         
          </select> </p>    
-         <p align="center">Usuario: <input class="controls" type="text" name="usuario" ></p>
-    <p align="center">Contraseña: <input class="controls" type="text" name="contraseña" ></p>
+         <p align="center">Usuario: <input class="controls" type="text" name="Usuario" ></p>
+    <p align="center">Contraseña: <input class="controls" type="text" name="Contraseña" ></p>
         
 	  <input class="botons"type="submit" value="Agregar">
 	</div>
