@@ -16,8 +16,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import antlr.collections.List;
+import banco.utn.dao.Conexion;
 import banco.utn.entidad.Cliente;
 import banco.utn.negocio.NegPersona;
+import org.hibernate.Session;
 
 @Controller
 public class ControladorCliente {
@@ -28,7 +30,17 @@ public class ControladorCliente {
 	@Autowired
 	private Cliente cliente;
 	
-	
+	@RequestMapping("mainCliente.html")
+	public void eventoRedireccionarMainCliente(String txtUsuario, String txtPass) {
+		ModelAndView MV = new ModelAndView();
+		Conexion conexion = new Conexion();
+		Session session = conexion.abrirConexion();
+		Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE dni='123'").uniqueResult();
+		conexion.cerrarSession();
+		MV.addObject("clienteLogueado", cliente);
+		MV.setViewName("mainCliente");
+	}
+
 	@RequestMapping("agregarPersona.html")
 	public ModelAndView eventoRedireccionarPag1(String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario)
 	{
@@ -93,7 +105,6 @@ public class ControladorCliente {
 		return MV;
 	}
 	
-	
 	@RequestMapping("/Eliminar.html")
 	public ModelAndView eventoeliminar(HttpServletRequest request)
 	{
@@ -132,8 +143,6 @@ public class ControladorCliente {
 		return MV;
 	}
 	
-	
-	
 	@RequestMapping("/Editar.html")
 	public ModelAndView eventoeditar(HttpServletRequest request)
 	{
@@ -147,8 +156,6 @@ public class ControladorCliente {
 		MV.setViewName("Editar_Cliente");
 		return MV;
 	}
-	
-	
 	
 	@RequestMapping("/verificardni.html")
 	public ModelAndView eventoverificardni(HttpServletRequest request)
@@ -169,13 +176,10 @@ public class ControladorCliente {
 		String Dniduplicado="asd";
 		if(aux!=null) {
 			Dniduplicado="El dni ya existe";
-		
 		}
 		
 		MV.addObject("Dniduplicado",Dniduplicado);
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
-	
-	
 }

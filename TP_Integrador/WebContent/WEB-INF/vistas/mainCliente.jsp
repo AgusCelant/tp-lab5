@@ -18,11 +18,11 @@
 			<th>DOMICILIO</th>
 		</tr>
 		<tr>
-			<td>matias1994</td>
-			<td>Matias</td>
-			<td>Alvarado</td>
-			<td>38.666.666</td>
-			<td>Av. Corrientes 123</td>
+			<td>${clienteLogueado.usuario}</td>
+			<td>${clienteLogueado.nombre}</td>
+			<td>${clienteLogueado.apellido}</td>
+			<td>${clienteLogueado.dni}</td>
+			<td>${clienteLogueado.localidad}</td>
 		</tr>
 	</table>
 	

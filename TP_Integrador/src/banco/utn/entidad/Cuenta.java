@@ -1,22 +1,29 @@
 package banco.utn.entidad;
 
-public class Cuenta {
-	private int IdCuenta;
-	private Cliente Persona;
-	private String Fecha;
-	private String TipoCuenta;
+import java.io.Serializable;
+import javax.persistence.*;
+
+import javax.persistence.GenerationType;
+
+public class Cuenta implements Serializable {
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int NumCuenta;
+	@OneToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "persona", nullable = true)
+	private Cliente Persona;
+	@Column(name = "fecha")
+	private String Fecha;
+	@Column(name = "tipo")
+	private String TipoCuenta;
+	@Column(name = "cbu")
 	private int Cbu;
+	@Column(name = "saldo")
 	private float Saldo;
 	
-	
-	
-	
-	
-	public Cuenta(int idCuenta, banco.utn.entidad.Cliente persona, String fecha, String tipoCuenta, int numCuenta,
-			int cbu, float saldo) {
+	public Cuenta(Cliente persona, String fecha, String tipoCuenta, int numCuenta, int cbu, float saldo) {
 		super();
-		IdCuenta = idCuenta;
 		Persona = persona;
 		Fecha = fecha;
 		TipoCuenta = tipoCuenta;
@@ -25,15 +32,8 @@ public class Cuenta {
 		Saldo = saldo;
 	}
 
-	public Cuenta() {
-		
-	}
-	public int getIdCuenta() {
-		return IdCuenta;
-	}
-	public void setIdCuenta(int idCuenta) {
-		IdCuenta = idCuenta;
-	}
+	public Cuenta() {}
+
 	public Cliente getPersona() {
 		return Persona;
 	}
@@ -72,8 +72,7 @@ public class Cuenta {
 	}
 	@Override
 	public String toString() {
-		return "Cuenta [IdCuenta=" + IdCuenta + ", Persona=" + Persona + ", Fecha=" + Fecha + ", TipoCuenta="
-				+ TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo + "]";
+		return "Persona=" + Persona + ", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo;
 	}
 	
 	

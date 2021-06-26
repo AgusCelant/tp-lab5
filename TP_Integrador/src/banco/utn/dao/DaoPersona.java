@@ -22,10 +22,6 @@ public class DaoPersona {
 		Session session = conexion.abrirConexion();
 		session.beginTransaction();
 		List<Cliente> ListarClientes=(List<Cliente>) session.createQuery("From Cliente where estado=true").list();
-		
-		
-		
-		
 		//session.close();
 		conexion.cerrarSession();
 		return ListarClientes;
@@ -75,8 +71,6 @@ public class DaoPersona {
 		
 		conexion.cerrarSession();
 		return true;
-		
-
 	}
 	
 	public List VerificarDni(String Dni) {
@@ -104,15 +98,5 @@ public class DaoPersona {
 		conexion.cerrarSession();
 		return result;
 			
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

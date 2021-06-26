@@ -8,29 +8,23 @@ import banco.utn.entidad.Cliente;
 public class Main {
 
 	public static void main(String[] args) {
-
-	/*	ApplicationContext appContext = new 
-				ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/beans1.xml");
-		Persona m1 = (Persona) appContext.getBean("PersonaPepe");
-		//Mundo m = (Mundo)appContext.getBean(Mundo.class);
-		System.out.println( m1.toString());
-		*/
 		Conexion DAO = new Conexion();
-		Cliente persona = new Cliente();
-		
+		Cliente persona = new Cliente("222",
+				"password2",
+				"localidad2",
+				"nacimineto2",
+				"nacionalidad2",
+				"provincia2",
+				"sexo2",
+				"usuario2",
+				"apellido2",
+				"nombre2",
+				true);
 		
 		Session session = DAO.abrirConexion();
-	
 		session.beginTransaction();
-		/*
-		Cliente.setNombre("Prueba1");
-		Cliente.setApellido("Prueba1");
-		Cliente.setDni(1234);
-	*/
 		session.save(persona);
-		
 		session.getTransaction().commit();
-		
 		session.close();
 	}
 }

@@ -1,7 +1,6 @@
 package banco.utn.entidad;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,10 +12,6 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="Cliente")
 public class Cliente implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="Nombre")
@@ -39,31 +34,26 @@ public class Cliente implements Serializable{
 	private String Contraseña;
 	@Column(name="Estado")
 	private Boolean Estado;
-	@Column(name="IdCliente")
-	private static int IdCliente;
 	@Id
 	@Column(name="DNI")
 	private String Dni;
 	
-	public Cliente()
-	{
-		
-	}
+	public Cliente() {}
 
 	public Cliente(String nombre, String apellido, String sexo, String nacimiento, String nacionalidad,
-			String provincia, String localidad, String dni, String usuario, String contraseña,Boolean Estado) {
+			String provincia, String localidad, String dni, String usuario, String contraseña,Boolean estado) {
 		super();
-		this.Nombre = nombre;
-		this.Apellido = apellido;
+		Nombre = nombre;
+		Apellido = apellido;
 		Sexo = sexo;
 		Nacimiento = nacimiento;
 		Nacionalidad = nacionalidad;
 		Provincia = provincia;
 		Localidad = localidad;
-		Usuario=usuario;
-		Contraseña=contraseña;
-		this.Dni = dni;
-		Estado=Estado;
+		Usuario = usuario;
+		Contraseña = contraseña;
+		Dni = dni;
+		Estado = estado;
 	}
 
 	public String getNombre() {
@@ -125,37 +115,25 @@ public class Cliente implements Serializable{
 		return Usuario;
 	}
 
-	public void setUsuario(String Usuario) {
-		this.Usuario = Usuario;
+	public void setUsuario(String usuario) {
+		this.Usuario = usuario;
 	}
 	public String getContraseña() {
 		return Contraseña;
 	}
 
-	public void setContraseña(String Contraseña) {
-		this.Contraseña = Contraseña;
+	public void setContraseña(String contraseña) {
+		this.Contraseña = contraseña;
 	}
-	
-	
 	
 	public Boolean getEstado() {
 		return Estado;
 	}
 
-	public void setEstado(Boolean Estado) {
-		this.Estado = Estado;
+	public void setEstado(Boolean estado) {
+		this.Estado = estado;
 	}
 	
-
-	public static int getIdCliente() {
-		return IdCliente;
-	}
-
-	public static void setIdCliente() {
-		
-		IdCliente = IdCliente++;
-	}
-
 	public String getDni() {
 		return Dni;
 	}
@@ -164,16 +142,10 @@ public class Cliente implements Serializable{
 		this.Dni = dni;
 	}
 	
-	
-
-
 	@Override
 	public String toString() {
-		return "Nombre"+ Nombre + " Apellido " + Apellido + " Sexo " + Sexo + "  Nacimiento " + Nacimiento
-				+ " Nacionalidad " + Nacionalidad + " Provincia " + Provincia + "  Localidad " + Localidad + "  Dni "
-				+ Dni + "";
+		return "Nombre: "+ Nombre + ", Apellido: " + Apellido + ", Sexo: " + Sexo + ",  Nacimiento: " + Nacimiento
+				+ ", Nacionalidad: " + Nacionalidad + ", Provincia: " + Provincia + ",  Localidad: " + Localidad + ",  Dni: "
+				+ Dni;
 	}
-	
-
-	
 }
