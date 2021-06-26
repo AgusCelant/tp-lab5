@@ -21,7 +21,7 @@
   
  <div>
     <a class="logo">
-    <span class="nav-text">BIENVENIDO CLIENTE :</span>
+	<header>BIENVENIDO CLIENTE :</header>    
     </a> 
   </div> 
 <div class="settings"></div>
@@ -292,7 +292,15 @@ box-shadow:         inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
 }
 
 /* Darker element side menu End*/
+.logo header{
 
+font-size:22px;
+color:white:
+text-align: center;
+line-height:70px;
+background:#063146;
+user-select:nonel:
+}
 
 
 

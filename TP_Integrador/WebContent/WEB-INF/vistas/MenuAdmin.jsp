@@ -20,7 +20,7 @@
   
  <div>
     <a class="logo">
-    <span class="nav-text">BIENVENIDO ADMIN</span>
+   <header>BIENVENIDO ADMIN</header>   
     </a> 
   </div> 
 <div class="settings"></div>
@@ -276,6 +276,15 @@ text-transform: uppercase;
 
 /* Darker element side menu Start*/
 
+.logo header{
+
+font-size:22px;
+color:white:
+text-align: center;
+line-height:70px;
+background:#063146;
+user-select:nonel:
+}
 
 .darkerli
 {
