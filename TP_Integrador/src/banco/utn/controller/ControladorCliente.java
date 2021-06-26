@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import antlr.collections.List;
 import banco.utn.dao.Conexion;
 import banco.utn.entidad.Cliente;
+import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.negocio.NegPersona;
 import org.hibernate.Session;
 
@@ -29,6 +30,8 @@ public class ControladorCliente {
 	private NegPersona negocioPersona;
 	@Autowired
 	private Cliente cliente;
+	@Autowired
+	private ClientesxCuentas C;
 	
 	@RequestMapping("mainCliente.html")
 	public void eventoRedireccionarMainCliente(String txtUsuario, String txtPass) {
@@ -40,15 +43,20 @@ public class ControladorCliente {
 		MV.addObject("clienteLogueado", cliente);
 		MV.setViewName("mainCliente");
 	}
-
+	
 	@RequestMapping("agregarPersona.html")
-	public ModelAndView eventoRedireccionarPag1(String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario)
+	public ModelAndView eventoRedireccionarPag1(/*String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario*/)
 	{
 		ModelAndView MV = new ModelAndView();
 		int c=0;
 		String cartel=" ";
 	
-		cliente.setNombre(Nombre);
+		C.setDni("1");
+		C.setIdCuenta(1);
+	
+	
+	
+	/*	cliente.setNombre(Nombre);
 		cliente.setApellido(Apellido);
 		cliente.setSexo(Sexo);
 		cliente.setDni(Dni);
@@ -83,7 +91,7 @@ public class ControladorCliente {
 			
 		}
 		
-		
+		*/
 		
 
 		MV.addObject("estadoAgregarPersona",cartel);
@@ -110,16 +118,14 @@ public class ControladorCliente {
 	{
 		ModelAndView MV = new ModelAndView();
 		String id=request.getParameter("id");
-		System.out.println(id);
-		boolean aux = true;
-		
-		cliente=negocioPersona.BuscarPersonaID(id);
-		
-		//aux=negocioPersona.BuscarPersonaID("2");
+		java.util.List Dni = null;
+	
+		Dni=negocioPersona.BuscarPersonaID(id);
+			/*		
 		System.out.println(cliente.toString());
 		cliente.setDni(cliente.getDni());
-		cliente.setNombre("asdadsa");
-		cliente.setApellido("sadsadsadsadsadsa");
+		cliente.setNombre(cliente.getNombre());
+		cliente.setApellido(cliente.getApellido());
 		cliente.setContraseña(cliente.getContraseña());
 		cliente.setLocalidad(cliente.getLocalidad());
 		cliente.setProvincia(cliente.getProvincia());
@@ -128,6 +134,9 @@ public class ControladorCliente {
 		cliente.setUsuario(cliente.getUsuario());
 		cliente.setNacionalidad(cliente.getNacionalidad());
 		cliente.setEstado(cliente.getEstado());
+		
+		*/
+		
 		//negocioPersona.EliminarPersona(cliente);
 		/*String cartel="No se pudo eliminar la persona";
 		if(estado)
@@ -135,51 +144,51 @@ public class ControladorCliente {
 			cartel="La persona ha sido Eliminada exitosamente";
 		}*/
 		
-		
-		//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
+		/*
+		 * 
+		 * Listar personas
+		 * 
+		 * 	//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		//ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		//MV.addObject("ListaClientes",ListaClientes);
+		 * 
+		 */
+	
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
 	
+
 	@RequestMapping("/Editar.html")
 	public ModelAndView eventoeditar(HttpServletRequest request)
 	{
 		ModelAndView MV = new ModelAndView();
 		String id=request.getParameter("id");
-			System.out.println(id);
+		java.util.List Dni = null;
+	
+		Dni=negocioPersona.BuscarPersonaID(id);
 		
 			
 		//cliente=negocioPersona.BuscarPersonaID("2");		
 		//MV.addObject("Cliente",cliente);
 		MV.setViewName("Editar_Cliente");
 		return MV;
-	}
+	}	
 	
-	@RequestMapping("/verificardni.html")
-	public ModelAndView eventoverificardni(HttpServletRequest request)
-	{
-		ModelAndView MV = new ModelAndView();
-		String dni=request.getParameter("id");
+	@RequestMapping("/MostrarClientes.html")
+	public ModelAndView EventoVerClientes(HttpServletRequest request)
+	{		
+		ModelAndView MV = new ModelAndView();	
+
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
+	
 		
-		java.util.List aux = null;
-		String Usuario="asdsadsa";	
+		ListaClientes=negocioPersona.TraerClientes();
 		
-		java.util.List Usu=null;
-		//aux=negocioPersona.VerificarDni(dni);
-		Usu=negocioPersona.VerificarUsuario(Usuario);
-		
-		System.out.println(Usu.toString());
-		
-		
-		String Dniduplicado="asd";
-		if(aux!=null) {
-			Dniduplicado="El dni ya existe";
-		}
-		
-		MV.addObject("Dniduplicado",Dniduplicado);
-		MV.setViewName("Ver_Clientes");
+			
+			
+		MV.addObject("ListaClientes",ListaClientes);
+		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
 }
