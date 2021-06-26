@@ -17,7 +17,7 @@ public class ControladorInicio {
 	{
 		ModelAndView MV = new ModelAndView();
 		
-		MV.setViewName("Ver_Cuentas");
+		MV.setViewName("mainCliente");
 		return MV;
 	}
 	

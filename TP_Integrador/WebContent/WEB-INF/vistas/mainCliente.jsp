@@ -7,7 +7,8 @@
 <title>Main Cliente</title>
 </head>
 <body>
-
+<jsp:include page="MenuCliente.jsp"></jsp:include>
+<center>
 	<h1>Bienvenido/a Matias!</h1>
 	<table>
 		<tr>
@@ -33,5 +34,6 @@
 	<h2>ACCIONES</h2>
 	<button>VER HISOTRIAL DE CUENTAS</button>
 	<button>TRANSFERENCIAS</button>
+	</center>
 </body>
 </html>
