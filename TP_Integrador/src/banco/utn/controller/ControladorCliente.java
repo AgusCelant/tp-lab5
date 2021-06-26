@@ -19,6 +19,7 @@ import antlr.collections.List;
 import banco.utn.dao.Conexion;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
+import banco.utn.entidad.Cuenta;
 import banco.utn.negocio.NegPersona;
 import org.hibernate.Session;
 
@@ -191,4 +192,32 @@ public class ControladorCliente {
 		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
+	
+	@RequestMapping("/EliminarCuenta.html")
+	public ModelAndView EventoEliminarCuenta(HttpServletRequest request)
+	{		
+		ModelAndView MV = new ModelAndView();	
+		String Dni=request.getParameter("id");		
+		Cuenta cuenta = new Cuenta();
+		ClientesxCuentas cli = new ClientesxCuentas();
+		cuenta=negocioPersona.BuscarCuentaDni(Dni);
+		cli=negocioPersona.BuscarCuentaxCliente(Dni);
+		cuenta.setEstado(false);
+		cli.setEstado(1);
+		negocioPersona.EliminarCuenta(cuenta);
+		negocioPersona.EliminarCuentaxcliente(cli);
+		//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
+		//ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
+		//MV.addObject("ListaClientes",ListaClientes);
+		
+		MV.setViewName("Ver_Cuentas");
+		return MV;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -18,14 +18,26 @@ public class ClientesxCuentas implements Serializable{
 	@Column(name="DNI")
 	private String Dni;
 	
-	
+	@Id
 	@Column(name="IdCuenta")
 	private int IdCuenta;
 	
+	@Column(name="Estado")
+	private int Estado;
 	
 	public ClientesxCuentas()
 	{
 		
+	}
+
+
+	public int getEstado() {
+		return Estado;
+	}
+
+
+	public void setEstado(int estado) {
+		Estado = estado;
 	}
 
 
@@ -49,11 +61,21 @@ public class ClientesxCuentas implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "ClientesxCuentas [Dni=" + Dni + ", IdCuenta=" + IdCuenta + "]";
+	public ClientesxCuentas(String dni, int idCuenta, int estado) {
+		super();
+		Dni = dni;
+		IdCuenta = idCuenta;
+		Estado = estado;
 	}
 
+
+	@Override
+	public String toString() {
+		return "ClientesxCuentas [Dni=" + Dni + ", IdCuenta=" + IdCuenta + ", Estado=" + Estado + "]";
+	}
+
+
+	
 	
 	
 

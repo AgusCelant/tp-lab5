@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
+import banco.utn.entidad.Cuenta;
 
 @Service("servicioPersona")
 public class NegPersona {
@@ -69,5 +70,22 @@ public boolean agregarClientesxcuentas(ClientesxCuentas p) {
 	return daoPersona.agregarClientesxcuentas(p);
 }
 
+public Cuenta BuscarCuentaDni(String Dni) {
+	
+	return daoPersona.BuscarCuentaDni(Dni);
+}
 
+public ClientesxCuentas BuscarCuentaxCliente(String Dni) {
+	
+	return daoPersona.BuscarCuentaxCliente(Dni);
+}
+
+public boolean EliminarCuenta(Cuenta cuenta) {
+	
+	return daoPersona.EliminarCuenta(cuenta);
+}
+public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {
+	
+	return daoPersona.EliminarCuentaxcliente(cli);
+}
 }

@@ -21,8 +21,10 @@ public class Cuenta implements Serializable {
 	private int Cbu;
 	@Column(name = "saldo")
 	private float Saldo;
+	@Column(name = "estado")
+	private boolean Estado;
 	
-	public Cuenta(Cliente persona, String fecha, String tipoCuenta, int numCuenta, int cbu, float saldo) {
+	public Cuenta(Cliente persona, String fecha, String tipoCuenta, int numCuenta, int cbu, float saldo,boolean estado) {
 		super();
 		Persona = persona;
 		Fecha = fecha;
@@ -30,6 +32,7 @@ public class Cuenta implements Serializable {
 		NumCuenta = numCuenta;
 		Cbu = cbu;
 		Saldo = saldo;
+		Estado=estado;
 	}
 
 	public Cuenta() {}
@@ -70,9 +73,15 @@ public class Cuenta implements Serializable {
 	public void setSaldo(float saldo) {
 		Saldo = saldo;
 	}
+	public Boolean getEstado() {
+		return Estado;
+	}
+	public void setEstado(Boolean estado) {
+		Estado =  estado;
+	}
 	@Override
 	public String toString() {
-		return "Persona=" + Persona + ", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo;
+		return "Persona=" + Persona + ", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo+", Estado="+Estado;
 	}
 	
 	
