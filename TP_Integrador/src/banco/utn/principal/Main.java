@@ -8,7 +8,7 @@ import banco.utn.entidad.Cliente;
 public class Main {
 
 	public static void main(String[] args) {
-		Conexion DAO = new Conexion();
+		/* Conexion DAO = new Conexion();
 		Cliente persona = new Cliente("222",
 				"password2",
 				"localidad2",
@@ -21,10 +21,10 @@ public class Main {
 				"nombre2",
 				true);
 		
-		Session session = DAO.abrirConexion();
-		session.beginTransaction();
-		session.save(persona);
-		session.getTransaction().commit();
-		session.close();
+		Session sessionPersona = DAO.abrirConexion();
+		sessionPersona.beginTransaction();
+		sessionPersona.save(persona);
+		sessionPersona.getTransaction().commit();
+		DAO.cerrarSession(); */
 	}
 }
