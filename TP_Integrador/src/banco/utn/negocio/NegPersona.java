@@ -44,7 +44,10 @@ public List VerificarUsuario(String Usuario) {
 	return  daoPersona.VerificarUsuario(Usuario);
 }
 
-
+public List VerificarLogin(String Usuario,String Contraseña) {
+	
+	return  daoPersona.VerificarLogin(Usuario,Contraseña);
+}
 
 
 /*

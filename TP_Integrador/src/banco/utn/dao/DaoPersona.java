@@ -98,7 +98,19 @@ public class DaoPersona {
 			
 	}
 	
-	
+	public List VerificarLogin(String Usuario,String Contraseña) {
+		Session session = conexion.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="select c.Usuario From Cliente as c WHERE c.Usuario=:usuario and c.Contraseña=:contraseña and c.Estado=true ";
+		Query query=session.createQuery(hql);
+		query.setParameter("usuario", Usuario);
+		query.setParameter("contraseña", Contraseña);
+		List result=query.list();
+		tx.commit();
+		conexion.cerrarSession();
+		return result;
+			
+	}
 	
 
 	
