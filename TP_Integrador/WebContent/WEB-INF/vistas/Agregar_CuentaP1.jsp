@@ -59,20 +59,19 @@ color:white;
     <th>Localidad</th>
     <th>Usuario</th> 
     <th></th>
-    <th></th>
   </tr>
     <c:forEach var="cliente" items="${ ListaClientes }"  >
   <tr>
-  <td>${cliente.Nombre}</td>
-      <td>${cliente.Apellido} </td>
-      <td>${cliente.Sexo} </td>
-      <td>${cliente.Dni} </td>
-      <td>${cliente.Nacimiento} </td>
-      <td>${cliente.Nacionalidad} </td>
-      <td>${cliente.Provincia} </td>
-      <td>${cliente.Localidad} </td>
-      <td>${cliente.Usuario} </td>
-    	<td><a href="AgregarCuentaP1.html?id=${cliente.dni}" >Agregar Cuenta </a> </td>
+  	  <td>${cliente.nombre}</td>
+      <td>${cliente.apellido} </td>
+      <td>${cliente.sexo} </td>
+      <td>${cliente.dni} </td>
+      <td>${cliente.nacimiento} </td>
+      <td>${cliente.nacionalidad} </td>
+      <td>${cliente.provincia} </td>
+      <td>${cliente.localidad} </td>
+      <td>${cliente.usuario} </td>
+      <td><a href="AgregarCuentaP1.html?id=${cliente.dni}" >Agregar Cuenta </a> </td>
 
 
    

@@ -198,14 +198,16 @@ public class ControladorCliente {
 	public ModelAndView EventoVerClientes(HttpServletRequest request)
 	{		
 		ModelAndView MV = new ModelAndView();	
-		java.util.List Dni = null;
-		Dni=negocioPersona.TraerClientes();
-		System.out.println(Dni.toString());
+
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
+	
+		
+		ListaClientes=negocioPersona.TraerClientes();
 		
 			
 			
-		//MV.addObject("ListaClientes",Dni);
-		//MV.setViewName("Agregar_CuentaP1");
+		MV.addObject("ListaClientes",ListaClientes);
+		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
 	

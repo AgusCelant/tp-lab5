@@ -1,5 +1,6 @@
 package banco.utn.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -120,21 +121,31 @@ public class DaoPersona {
 	 */
 	
 	
-	public List TraerClientes() {
+	public ArrayList<Cliente> TraerClientes() {
 		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		//String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  )";
-		String hql="select c.Nombre,c.Apellido,c.Sexo From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  )";
+		String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  ) or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b)";
 		
-		//String hql="select C.Nombre,C.Apellido From Cliente as C";
-			
-		Query query=session.createQuery(hql);
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
+		List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+		for(Object[] obj : result) {
+			Cliente cli = new Cliente();
+			cli.setNombre((String)obj[0]);
+			cli.setApellido((String)obj[1]);
+			cli.setSexo((String)obj[2]);
+			cli.setNacimiento((String)obj[3]);
+			cli.setNacionalidad((String)obj[4]);
+			cli.setProvincia((String)obj[5]);
+			cli.setLocalidad((String)obj[6]);
+			cli.setUsuario((String)obj[7]);	
+			cli.setDni((String)obj[8]);			
+			ListaClientes.add(cli);
+		}
 
-		List result=query.list();
-		tx.commit();
+	
 		conexion.cerrarSession();
-		System.out.println(result.toString());
-		return result;
+		
+		return ListaClientes;
 			
 	}
 	

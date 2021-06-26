@@ -1,5 +1,6 @@
 package banco.utn.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public List VerificarLogin(String Usuario,String Contraseña) {
 
 
 
-public List TraerClientes() {
+public ArrayList<Cliente> TraerClientes() {
 	
 	return  daoPersona.TraerClientes();
 }

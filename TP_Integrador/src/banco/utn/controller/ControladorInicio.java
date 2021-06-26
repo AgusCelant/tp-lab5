@@ -23,7 +23,7 @@ public class ControladorInicio {
 	{
 		ModelAndView MV = new ModelAndView();
 		
-		MV.setViewName("Login");
+		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
 	
@@ -33,21 +33,25 @@ public class ControladorInicio {
 		ModelAndView MV = new ModelAndView();
 		DaoPersona lista = new DaoPersona(); 
 		java.util.List Verificacion = null;
-		
+		Verificacion=negocioPersona.VerificarLogin(txtUsuario, txtPass);
 		
 		if(txtUsuario.equals("admin") && txtPass.equals("admin")){
 			
 			MV.setViewName("PerfilAdmin");
-		}			
-			Verificacion=negocioPersona.VerificarLogin(txtUsuario, txtPass);
+		}else if(Verificacion!=null){
+			System.out.println(Verificacion);
+			MV.setViewName("mainCliente");
 			
-			if(Verificacion!=null) {
-				System.out.println(Verificacion);
-				MV.setViewName("mainCliente");
-			}else {
-				MV.setViewName("Login");
-			
+				
 			}
+		else {
+			
+			MV.setViewName("Login");
+		}
+			
+		
+			
+			
 			
 		
 		
