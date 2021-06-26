@@ -94,6 +94,8 @@ color:white;
                     
 <a href="verificardni.html?id=10">Eliminar </a>
 
+<a href="Editar.html?id=10">Editar </a>
+
 <h4>${Dniduplicado}</h4>
 
 </body>
