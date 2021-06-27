@@ -151,6 +151,16 @@ public class DaoPersona {
 			
 	}
 	
+
+	public List<Cuenta> listarCuentas() {
+		Session session = conexion.abrirConexion();
+		session.beginTransaction();
+		List<Cuenta> listarCuentas=(List<Cuenta>) session.createQuery("From Cuenta where Estado=true").list();
+		conexion.cerrarSession();
+		return listarCuentas;
+	}
+	
+
 	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
 		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();
@@ -237,7 +247,9 @@ public class DaoPersona {
 	public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {	
 		System.out.println(cli.toString());
 		Session session = conexion.abrirConexion();		
-		String hql="Update  ClientesxCuentas set Estado=false where Dni="+cli.getDni()+"";
+		//String hql="Update  ClientesxCuentas  set Dni=5 where IdCuenta=2";
+		String hql="Update  ClientesxCuentas c set Estado=false where Dni="+cli.getDni()+"";
+		
 		Query query=session.createQuery(hql);
 		int result=query.executeUpdate();					
 			conexion.cerrarSession();
@@ -246,8 +258,10 @@ public class DaoPersona {
 	public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {	
 		System.out.println(cli.toString());
 		Session session = conexion.abrirConexion();		
-		String hql="Update  ClientesxCuentas set Estado=false where Dni="+cli.getDni()+" and NumCuenta="+cli.getIdCuenta()+"";
+		String hql="Update  ClientesxCuentas c set c.Estado=false where c.Dni="+cli.getDni()+" and c.IdCuenta="+cli.getIdCuenta()+"";
+
 		Query query=session.createQuery(hql);
+
 		int result=query.executeUpdate();					
 			conexion.cerrarSession();
 			return true;

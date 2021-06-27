@@ -188,15 +188,24 @@ public class ControladorCliente {
 	public ModelAndView EventoVerClientes(HttpServletRequest request)
 	{		
 		ModelAndView MV = new ModelAndView();	
-		
+		/*
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 	
 		//NegPersona negP=new NegPersona();
 		ListaClientes=negocioPersona.TraerClientes();
 		
 			
-			
-		MV.addObject("ListaClientes",ListaClientes);
+			*/
+		
+		
+		ClientesxCuentas cli = new ClientesxCuentas();
+		cli.setDni("2");
+		cli.setIdCuenta(2);
+	
+		
+		System.out.println(cli.toString());
+		negocioPersona.Eliminar1Cuentaxcliente(cli);
+		//MV.addObject("ListaClientes",ListaClientes);
 		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
@@ -211,7 +220,7 @@ public class ControladorCliente {
 		cuenta=negocioPersona.BuscarCuentaDni(Dni);
 		cli=negocioPersona.BuscarCuentaxCliente(Dni);
 		cuenta.setEstado(false);
-		cli.setEstado(1);
+		//cli.setEstado(1);
 		negocioPersona.Eliminar1Cuenta(cuenta);
 		negocioPersona.Eliminar1Cuentaxcliente(cli);
 		//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			

@@ -67,6 +67,11 @@ public ArrayList<Cliente> TraerClientes() {
 }
 
 
+public List<Cuenta> listarCuentas() {
+	
+return  daoPersona.listarCuentas();
+}
+
 public boolean agregarClientesxcuentas(ClientesxCuentas p) {
 	return daoPersona.agregarClientesxcuentas(p);
 }

@@ -23,7 +23,7 @@ public class ClientesxCuentas implements Serializable{
 	private int IdCuenta;
 	
 	@Column(name="Estado")
-	private int Estado;
+	private boolean Estado;
 	
 	public ClientesxCuentas()
 	{
@@ -31,12 +31,12 @@ public class ClientesxCuentas implements Serializable{
 	}
 
 
-	public int getEstado() {
+	public boolean getEstado() {
 		return Estado;
 	}
 
 
-	public void setEstado(int estado) {
+	public void setEstado(boolean estado) {
 		Estado = estado;
 	}
 
@@ -61,7 +61,7 @@ public class ClientesxCuentas implements Serializable{
 	}
 
 
-	public ClientesxCuentas(String dni, int idCuenta, int estado) {
+	public ClientesxCuentas(String dni, int idCuenta, boolean estado) {
 		super();
 		Dni = dni;
 		IdCuenta = idCuenta;
