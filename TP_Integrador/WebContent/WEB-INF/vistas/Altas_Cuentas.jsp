@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Cuenta</title>
+<title>Alta Cuenta</title>
 <style>
 .Formulario{
 width: 400px;
@@ -52,7 +52,7 @@ background:black;
 		<form class="Formulario" action="AsociarCuenta.html" method="post">
 			<h1 align="center">Bienvenido Admin</h1>
 			<h4 align="center">Agregar Cuenta</h4>
-				<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${dni}" ></p>
+				<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${dni}" readonly="readonly"  ></p>
 				<p align="center">Nro Cuenta:<input class="controls"id="date" name="nroCuenta">
 			    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31">
 			    <p align="center"> Tipo Cuenta:</p>

@@ -3,9 +3,11 @@ package banco.utn.negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
@@ -25,9 +27,9 @@ public class NegPersona {
 	public boolean agregarPersona(Cliente p) {
 		return daoPersona.agregarPersona(p);
 	}
-	public List BuscarPersonaID(String id) {
+	public Cliente BuscarPersonaDni(String id) {
 		
-		return daoPersona.BuscarPersonaID(id);
+		return daoPersona.BuscarPersonaDni(id);
 	}
 	
 	
@@ -37,12 +39,12 @@ public boolean EliminarPersona(Cliente cliente) {
 		return daoPersona.EliminarPersona(cliente);
 	}
 
-public List VerificarDni(String Dni) {
+public List<Object[]> VerificarDni(String Dni) {
 	
 	return  daoPersona.VerificarDni(Dni);
 }
 
-public List VerificarUsuario(String Usuario) {
+public List<Object[]> VerificarUsuario(String Usuario) {
 	
 	return  daoPersona.VerificarUsuario(Usuario);
 }
@@ -67,14 +69,14 @@ public List<Cuenta> listarCuentas() {
 	
 return  daoPersona.listarCuentas();
 }
-
+/*
 public boolean agregarClientesxcuentas(ClientesxCuentas p) {
 	return daoPersona.agregarClientesxcuentas(p);
 }
-
-public Cuenta BuscarCuentaDni(String Dni) {
+*/
+public Cuenta BuscarCuentaDni(String Dni, int numCuenta) {
 	
-	return daoPersona.BuscarCuentaDni(Dni);
+	return daoPersona.BuscarCuentaDni(Dni,numCuenta);
 }
 
 public ClientesxCuentas BuscarCuentaxCliente(String Dni) {
@@ -116,5 +118,10 @@ public List<Historial>ListarHistorialxCuenta(int nroCuenta) {
 	
 	return daoPersona.ListarHistorialxCuenta( nroCuenta);
 }
+
+
+
+
+
 
 }

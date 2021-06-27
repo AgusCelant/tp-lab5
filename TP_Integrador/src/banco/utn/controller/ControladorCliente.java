@@ -35,6 +35,8 @@ public class ControladorCliente {
 	private Cliente cliente;
 	@Autowired
 	private ClientesxCuentas C;
+	@Autowired
+	private Cuenta Cuen;
 	
 	@RequestMapping("mainCliente.html")
 	public void eventoRedireccionarMainCliente(String txtUsuario, String txtPass) {
@@ -46,18 +48,17 @@ public class ControladorCliente {
 		MV.addObject("clienteLogueado", cliente);
 		MV.setViewName("mainCliente");
 	}
-	
+	//anda
 	@RequestMapping("agregarPersona.html")
-	public ModelAndView eventoRedireccionarPag1(/*String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario*/)
+	public ModelAndView eventoRedireccionarPag1(String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario)
 	{
 		ModelAndView MV = new ModelAndView();
+
 		int c=0;
+		List<Object[]> dniverificar=null;
+		List<Object[]> Usu=null;
 		String cartel=" ";
-	
-		C.setDni("1");
-		C.setIdCuenta(1);
-	
-	/*	cliente.setNombre(Nombre);
+		cliente.setNombre(Nombre);
 		cliente.setApellido(Apellido);
 		cliente.setSexo(Sexo);
 		cliente.setDni(Dni);
@@ -70,37 +71,37 @@ public class ControladorCliente {
 		cliente.setEstado(true);
 		String dni=cliente.getDni();
 		String Usuarioo=cliente.getUsuario();
-		java.util.List verifDni = null;
-		java.util.List Usu=null;
-		verifDni=negocioPersona.VerificarDni(dni);
-		System.out.println(verifDni.toString());
-		System.out.println(Usuarioo);
+		dniverificar=negocioPersona.VerificarDni(dni);
 		Usu=negocioPersona.VerificarUsuario(Usuarioo);
-		if(Usu!=null) {c++;}
+
+		
+
+		if(dniverificar.isEmpty()) {
+			
+		}else {
+			c++;
+		}
+		if(Usu.isEmpty()) {
+			
+		}else {
+			c++;
+		}
+		System.out.println(c);
 		
 		if(c==0) {
-		//boolean estado= negocioPersona.agregarPersona(cliente);
-			boolean estado=true;
-		if(estado)
-		{
-		cartel = "La persona ha sido agregada exitosamente";
-		
-		}
-		}
-		else {
-		cartel="No se pudo agregar la persona el dni o el usuario ya existen";
+			boolean estado= negocioPersona.agregarPersona(cliente);
+			cartel="Cliente agregado Correctamente";
+		}else {
+			cartel="Usuario Repetido o dni repetido";
 			
 		}
-		
-		*/
-		
 
 		MV.addObject("estadoAgregarPersona",cartel);
 		MV.setViewName("Alta_Cliente");
 		
 		return MV;
 	}
-	
+	//anda
 	@RequestMapping("verCliente.html")
 	public ModelAndView eventovercliente()
 	{
@@ -113,61 +114,25 @@ public class ControladorCliente {
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
-	
+	//anda
 	@RequestMapping("/Eliminar.html")
 	public ModelAndView eventoeliminar(HttpServletRequest request)
 	{
 		ModelAndView MV = new ModelAndView();
 		String id=request.getParameter("id");
 		java.util.List Dni = null;
-	
-		Dni=negocioPersona.BuscarPersonaID(id);
-			/*		
-			 * Cuenta cuenta = new Cuenta();
-		ClientesxCuentas cli = new ClientesxCuentas();
-		cuenta=negocioPersona.BuscarCuentaDni(Dni);
-		cli=negocioPersona.BuscarCuentaxCliente(Dni);
-		cuenta.setEstado(false);
-		cli.setEstado(1);
-		negocioPersona.EliminarCuenta(cuenta);
-		negocioPersona.EliminarCuentaxcliente(cli);
-		System.out.println(cliente.toString());
-		cliente.setDni(cliente.getDni());
-		cliente.setNombre(cliente.getNombre());
-		cliente.setApellido(cliente.getApellido());
-		cliente.setContraseña(cliente.getContraseña());
-		cliente.setLocalidad(cliente.getLocalidad());
-		cliente.setProvincia(cliente.getProvincia());
-		cliente.setNacimiento(cliente.getNacimiento());
-		cliente.setSexo(cliente.getSexo());
-		cliente.setUsuario(cliente.getUsuario());
-		cliente.setNacionalidad(cliente.getNacionalidad());
-		cliente.setEstado(cliente.getEstado());
-		
-		*/
-		
-		//negocioPersona.EliminarPersona(cliente);
-		/*String cartel="No se pudo eliminar la persona";
-		if(estado)
-		{
-			cartel="La persona ha sido Eliminada exitosamente";
-		}*/
-		
-		/*
-		 * 
-		 * Listar personas
-		 * 
-		 * 	//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
-		//ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
-		//MV.addObject("ListaClientes",ListaClientes);
-		 * 
-		 */
-	
+		Cliente cli=negocioPersona.BuscarPersonaDni(id);
+		cli.setEstado(false);
+		negocioPersona.EliminarPersona(cli);
+	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
+		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
+		MV.addObject("ListaClientes",ListaClientes);
+
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
 	
-
+/*
 	@RequestMapping("/Editar.html")
 	public ModelAndView eventoeditar(HttpServletRequest request)
 	{
@@ -175,28 +140,31 @@ public class ControladorCliente {
 		String id=request.getParameter("id");
 		java.util.List Dni = null;
 	
-		Dni=negocioPersona.BuscarPersonaID(id);
+		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		
 		MV.setViewName("Editar_Cliente");
 		return MV;
 	}	
-	
+	*/
+		
+		//anda
 	@RequestMapping("/MostrarClientes.html")
 	public ModelAndView EventoVerClientes(HttpServletRequest request)
 	{		
 		ModelAndView MV = new ModelAndView();
+
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();	
+		NegPersona negP=new NegPersona();
+		ListaClientes=negocioPersona.TraerClientes();
 		
-		ClientesxCuentas cli = new ClientesxCuentas();
-		cli.setDni("2");
-		cli.setIdCuenta(2);
-	
 		
-		System.out.println(cli.toString());
-		negocioPersona.Eliminar1Cuentaxcliente(cli);
+		
+		
+		MV.addObject("ListaClientes", ListaClientes);
 		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
-	
+	//anda
 	@RequestMapping("AgregarCuentaP1.html")
 	public ModelAndView EventoIrAltaCuenta(HttpServletRequest request)
 	{
@@ -208,33 +176,91 @@ public class ControladorCliente {
 		
 		return MV;
 	}
-	
+	//falta 
 	@RequestMapping("AsociarCuenta.html")
-	public ModelAndView EventoAsociarCuenta(String dni, String nroCuenta, String fechaCreacion, String tipoCuenta, String cbu, String saldo)
+	public ModelAndView EventoAsociarCuenta(String dni, String nroCuenta, String fechaCreacion, String tipoCuenta, int cbu, float saldo)
 	{
+		
+	
 		DaoCuenta DAOCuenta = new DaoCuenta();
-		DAOCuenta.asociarCuenta(dni, nroCuenta, fechaCreacion, tipoCuenta, cbu, saldo);
+		int contador=DAOCuenta.ContadordeCuentasxclientes();
+	
+	
+		
+
+		if(nroCuenta.isEmpty()) {
+			Cuen.setDni(dni);
+			Cuen.setNumCuenta(1);
+			Cuen.setCbu(cbu);	
+			Cuen.setFecha(fechaCreacion);
+			Cuen.setSaldo(saldo);
+			Cuen.setTipoCuenta(tipoCuenta);
+			Cuen.setEstado(true);
+			DAOCuenta.AgregarCuenta(Cuen);
+			C.setDni(dni);
+			C.setIdCuenta(1);
+			C.setEstado(true);
+			DAOCuenta.agregarClientesxcuentas(C);
+		}else {
+		
+			
+		}
+		//si esta vacio hace sun new 
+	
+	
+		//asume que ya existe
+		//DAOCuenta.asociarCuenta(dni, nroCuenta, fechaCreacion, tipoCuenta, cbu, saldo);
 		
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("Agregar_CuentaP1");
 		
 		return MV;
 	}
-	
+	//falta
 	@RequestMapping("/EliminarCuenta.html")
 	public ModelAndView EventoEliminarCuenta(HttpServletRequest request)
-	{		
-		ModelAndView MV = new ModelAndView();	
-		String Dni=request.getParameter("id");		
+	{	DaoCuenta DAOCuenta = new DaoCuenta();
 		Cuenta cuenta = new Cuenta();
-		ClientesxCuentas cli = new ClientesxCuentas();
-		cuenta=negocioPersona.BuscarCuentaDni(Dni);
-		cli=negocioPersona.BuscarCuentaxCliente(Dni);
-		cuenta.setEstado(false);
-		negocioPersona.Eliminar1Cuenta(cuenta);
-		negocioPersona.Eliminar1Cuentaxcliente(cli);
+		ModelAndView MV = new ModelAndView();	
+		String Dni=request.getParameter("id");	
 		
+		String[] parts = Dni.split(",");
+		String Dnii = parts[0]; 
+		int numCuenta =Integer.parseInt(parts[1]);
+				 
+		
+		
+		  
+		ClientesxCuentas cli = new ClientesxCuentas();
+		cuenta=negocioPersona.BuscarCuentaDni(Dnii,numCuenta);
+		System.out.println(cuenta.toString());
+		System.out.print(cuenta.toString());
+		//i=negocioPersona.BuscarCuentaxCliente(Dni);
+		cuenta.setEstado(false);
+		//negocioPersona.Eliminar1Cuenta(cuenta);
+		//negocioPersona.Eliminar1Cuentaxcliente(cli);
+		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
+		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+		MV.addObject("ListaCuentas",ListaCuentas);
 		MV.setViewName("Ver_Cuentas");
 		return MV;
-	}	
+	}
+	
+	
+	//anda
+	@RequestMapping("verCuenta.html")
+	public ModelAndView eventovercuentas()
+	{
+		DaoCuenta DAOCuenta = new DaoCuenta();
+		ModelAndView MV = new ModelAndView();
+		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
+	
+		
+		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+		MV.addObject("ListaCuentas",ListaCuentas);
+		MV.setViewName("Ver_Cuentas");
+		return MV;
+	}
+	
+	
 }

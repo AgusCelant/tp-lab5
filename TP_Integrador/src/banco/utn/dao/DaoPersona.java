@@ -18,20 +18,21 @@ import banco.utn.entidad.Historial;
 @Repository("daoPersona")
 public class DaoPersona {
 	
-	@Autowired
-	private Conexion conexion;
-	
+
+	//anda
 	public List<Cliente> listarPersonas() {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();	
 		session.beginTransaction();
 		List<Cliente> ListarClientes=(List<Cliente>) session.createQuery("From Cliente where Estado=true").list();
 		//session.close();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return ListarClientes;
 	}
-
+//anda
 	public boolean agregarPersona(Cliente p) {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;
 		try
@@ -44,60 +45,74 @@ public class DaoPersona {
 			aux=false;
 			tx.rollback();
 		}
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return aux;
 	}
-	
-	public List BuscarPersonaID(String Dni) {
-		Session session = conexion.abrirConexion();
+	//anda
+	public Cliente BuscarPersonaDni(String Dni) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="select * From Cliente as c WHERE c.Dni=:usuarioID and c.Estado=true ";
-		Query query=session.createQuery(hql);
-		query.setParameter("usuarioID", Dni);
-		List result=query.list();
-		tx.commit();
-		conexion.cerrarSession();
-		return result;
+		String hql="Select c.Dni,c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Contraseña,c.Estado From Cliente as c  where c.Dni="+Dni+" and c.Estado=true ";		
+		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
+		Cliente cli = new Cliente();
+		for(Object[] obj : result) {		
+			cli.setDni((String)obj[0]);
+			cli.setNombre((String)obj[1]);
+			cli.setApellido((String)obj[2]);
+			cli.setSexo((String)obj[3]);
+			cli.setNacimiento((String)obj[4]);
+			cli.setNacionalidad((String)obj[5]);
+			cli.setProvincia((String)obj[6]);
+			cli.setLocalidad((String)obj[7]);
+			cli.setUsuario((String)obj[8]);	
+			cli.setContraseña((String)obj[9]);	
+			cli.setEstado((Boolean)obj[10]);
+		}
+		
+		DAO.cerrarSession();
+		
+		return cli;
 			
 	}
-	
+	//anda
 	public boolean EliminarPersona(Cliente cliente) {	
-		Session session = conexion.abrirConexion();		
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();	
 			session.beginTransaction();
 			session.update(cliente);
 			session.getTransaction().commit();					
-		conexion.cerrarSession();
+			DAO.cerrarSession();
 		return true;
 	}
 	
-	public List VerificarDni(String Dni) {
-		Session session = conexion.abrirConexion();
+	//anda
+	public List<Object[]> VerificarDni(String Dni) {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="select c.Dni From Cliente as c WHERE c.Dni=:usuarioID and c.Estado=true ";
-		Query query=session.createQuery(hql);
-		query.setParameter("usuarioID", Dni);
-		List result=query.list();
-		tx.commit();
-		System.out.println(result.toString());
-		conexion.cerrarSession();
+		String hql="Select c.Dni From Cliente as c  where c.Dni="+Dni+" and c.Estado=true ";		
+		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
+		
+		DAO.cerrarSession();
 		return result;
 			
 	}
-	
-	public List VerificarUsuario(String Usuario) {
-		Session session = conexion.abrirConexion();
+	//anda
+	public List<Object[]> VerificarUsuario(String Usuarioo) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		System.out.println(Usuarioo);
 		Transaction tx= session.beginTransaction();						
-		String hql="select c.Usuario From Cliente as c WHERE c.Usuario=:usuario and c.Estado=true ";
-		Query query=session.createQuery(hql);
-		query.setParameter("usuario", Usuario);
-		List result=query.list();
-		tx.commit();
-		conexion.cerrarSession();
+		String hql="Select c.Usuario From Cliente as c  where c.Usuario='"+Usuarioo+"' and c.Estado=true ";	
+		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
+		DAO.cerrarSession();
 		return result;
 	}
 	
 	public List VerificarLogin(String Usuario,String Contraseña) {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
 		String hql="select c.Usuario From Cliente as c WHERE c.Usuario=:usuario and c.Contraseña=:contraseña and c.Estado=true ";
 		Query query=session.createQuery(hql);
@@ -105,27 +120,27 @@ public class DaoPersona {
 		query.setParameter("contraseña", Contraseña);
 		List result=query.list();
 		tx.commit();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return result;
 			
 	}
 	
 	public Cliente obtenerDatosDeUsuario (String usuario) {
-		Conexion conexion = new Conexion();
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE Usuario='" + usuario + "'").uniqueResult();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return cliente;
 	}
 	/* 
 	 *Cuentas
 	 */
-	
+	//anda
 	public ArrayList<Cliente> TraerClientes() {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		session.beginTransaction();						
-		String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b) and c.Estado=true";
+		String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true";
 		
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
@@ -151,59 +166,46 @@ public class DaoPersona {
 	
 
 	public List<Cuenta> listarCuentas() {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		session.beginTransaction();
 		List<Cuenta> listarCuentas=(List<Cuenta>) session.createQuery("From Cuenta where Estado=true").list();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return listarCuentas;
 	}
 	
 
-	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
-		Session session = conexion.abrirConexion();
-		Transaction tx= session.beginTransaction();
-		boolean aux = true;
-		try
-		{
-			session.save(c); 
-			tx = session.getTransaction();
-			tx.commit();
-		}
-		catch (Exception e) {
-			aux=false;
-			tx.rollback();
-		}
-		conexion.cerrarSession();
-		return aux;
-	}
+
 	
-	public Cuenta BuscarCuentaDni(String Dni) {
-		Session session = conexion.abrirConexion();
+	public Cuenta BuscarCuentaDni(String Dni, int numCuenta) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="select * From Cliente as c WHERE c.Dni=:usuarioID and c.Estado=true ";
+		String hql="Select c.NumCuenta,c.Dni,c.Fecha,c.TipoCuenta,c.Cbu,c.Saldo,c.Estado From Cuenta as c  where c.Dni="+Dni+" and c.NumCuenta="+numCuenta+"and  c.Estado=true ";		
 		Query query=session.createQuery(hql);
-		query.setParameter("usuarioID", Dni);	
 		List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
 		Cuenta cuenta = new Cuenta();
 		for(Object[] obj : result) {
 			
 			cuenta.setNumCuenta((int) obj[0]);
-			cuenta.setFecha((String)obj[1]);
-			cuenta.setTipoCuenta((String)obj[2]);
-			cuenta.setCbu((int)obj[3]);
-			cuenta.setSaldo((float)obj[4]);
-			cuenta.setDni((String)obj[5]);
+			cuenta.setDni((String)obj[1]);
+			cuenta.setFecha((String)obj[2]);
+			cuenta.setTipoCuenta((String)obj[3]);
+			cuenta.setCbu((int)obj[4]);
+			cuenta.setSaldo((float)obj[5]);
+			cuenta.setEstado((boolean)obj[6]);
 			
 		}
 		tx.commit();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 
 		return cuenta;
 			
 	}
 	
 	public ClientesxCuentas BuscarCuentaxCliente(String Dni) {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
 		String hql="select * From Cliente as c WHERE c.Dni=:usuarioID and c.Estado=true ";
 		Query query=session.createQuery(hql);
@@ -217,51 +219,52 @@ public class DaoPersona {
 
 		}
 		tx.commit();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 
 		return cli;
 			
 	}
 	
 	public boolean EliminarCuenta(Cuenta cuenta) {	
-		Session session = conexion.abrirConexion();	
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		String Dni="a";
 		String hql="Update  Cuenta set Estado=false where Dni="+Dni+" ";
 		Query query=session.createQuery(hql);
 		int result=query.executeUpdate();					
-			conexion.cerrarSession();
+		DAO.cerrarSession();
 			return true;
 	}
 
 	public boolean Eliminar1Cuenta(Cuenta cuenta) {	
-		Session session = conexion.abrirConexion();
-		String Dni="a";
-			String hql="Update  Cuenta set Estado=false where Dni="+Dni+" and NumCuenta="+cuenta.getNumCuenta()+"";
-			Query query=session.createQuery(hql);
-			int result=query.executeUpdate();						
-			conexion.cerrarSession();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		session.beginTransaction();
+		session.update(cuenta);
+		session.getTransaction().commit();					
+			DAO.cerrarSession();
 			return true;
 	}
 	public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {	
-		System.out.println(cli.toString());
-		Session session = conexion.abrirConexion();		
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		//String hql="Update  ClientesxCuentas  set Dni=5 where IdCuenta=2";
 		String hql="Update  ClientesxCuentas c set Estado=false where Dni="+cli.getDni()+"";
 		
 		Query query=session.createQuery(hql);
 		int result=query.executeUpdate();					
-			conexion.cerrarSession();
+		DAO.cerrarSession();
 			return true;
 	}
 	public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {	
-		System.out.println(cli.toString());
-		Session session = conexion.abrirConexion();		
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		String hql="Update  ClientesxCuentas c set c.Estado=false where c.Dni="+cli.getDni()+" and c.IdCuenta="+cli.getIdCuenta()+"";
 
 		Query query=session.createQuery(hql);
 
 		int result=query.executeUpdate();					
-			conexion.cerrarSession();
+		DAO.cerrarSession();
 			return true;
 	}
 /*
@@ -270,7 +273,8 @@ public class DaoPersona {
  * 	
  */
 	public boolean AgregarenHistorial(Historial histo) {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;
 		try
@@ -283,23 +287,31 @@ public class DaoPersona {
 			aux=false;
 			tx.rollback();
 		}
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return aux;
 	}
 	
 	public List<Historial> ListarHistorial() {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		session.beginTransaction();
 		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial ").list();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return ListarHistorial;
 	}
 	
 	public List<Historial> ListarHistorialxCuenta(int nroCuenta) {
-		Session session = conexion.abrirConexion();
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
 		session.beginTransaction();
 		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial where nrocuentaorigen="+nroCuenta+"").list();
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		return ListarHistorial;
 	}	
+	
+
+	
+	
+	
+	
 }

@@ -35,10 +35,6 @@ public class Cuenta implements Serializable {
 		Estado = estado;
 	}
 
-	public void setEstado(boolean estado) {
-		Estado = estado;
-	}
-
 	public Cuenta() {}
 
 	public String getFecha() {

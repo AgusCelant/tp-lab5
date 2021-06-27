@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,13 +38,14 @@ color:white;
 }
 
 </style>
-
+<form action="verCuenta.html" method="get">
 <center>
 	<div class="AltaCuenta" align="center">	
 	<h2 class="h2" align="center">Bienvenido Admin<h2>
+		<input type="submit" value="Agregar Cuenta">
 	</div >
 	</center>
-	
+</form>
 <table style="text-align:center;">
   <tr>
     <th>Cliente Asignado</th>
@@ -50,28 +53,27 @@ color:white;
     <th>Tipo Cuenta</th>
     <th>Numero de cuenta</th>
     <th>CBU</th>
-    <th>Nombre</th>
     <th>Saldo</th>
  
     <th></th>
     <th></th>
   </tr>
+   <c:forEach var="cuenta" items="${ ListaCuentas }"  >
   <tr>
-    <td>1</td>
-    <td>23/05/2000</td>
-    <td>Corriente</td>
-    <td>00010001000200010001000000000000</td>
-    <td>2850590940090410000000</td>
-    <td>David</td>
-    <td>15000.00</td>
-  
-    <td>  <input type="submit" value="Editar"></td>
-    <td> <input type="submit" value="Eliminar"> </td>
+  	  <td>${cuenta.dni}</td>
+      <td>${cuenta.fecha} </td>
+      <td>${cuenta.tipoCuenta} </td>
+      <td>${cuenta.numCuenta} </td>
+      <td>${cuenta.cbu} </td>
+      <td>${cuenta.saldo} </td>
+
+   	  <td><a href="Editar.html?id=${cuenta.dni}" >Editar </a> </td>
+   	  <td><a href="EliminarCuenta.html?id=${cuenta.dni},${cuenta.numCuenta}">Eliminar </a> </td>
 
 
    
   </tr>
-  
+    	</c:forEach>
 </table>
 <form action="EliminarCuenta.html" method="post">
 <input type="submit" value="Eliminar">

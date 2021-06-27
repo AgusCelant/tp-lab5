@@ -1,10 +1,13 @@
 package banco.utn.dao;
 
+import banco.utn.entidad.Cliente;
+import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.metamodel.source.annotations.UnknownInheritanceTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,4 +43,70 @@ public class DaoCuenta {
 		session.getTransaction().commit();
 		DAO.cerrarSession();
 	}
+	//anda
+	public boolean AgregarCuenta(Cuenta c) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();
+		boolean aux = true;
+		try
+		{
+			session.save(c); 
+			tx = session.getTransaction();
+			tx.commit();
+		}
+		catch (Exception e) {
+			aux=false;
+			tx.rollback();
+		}
+		DAO.cerrarSession();
+		return aux;
+	}
+	//anda
+	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();
+		boolean aux = true;
+		try
+		{
+			session.save(c); 
+			tx = session.getTransaction();
+			tx.commit();
+		}
+		catch (Exception e) {
+			aux=false;
+			tx.rollback();
+		}
+		DAO.cerrarSession();
+		return aux;
+	}
+	//anda
+	public int ContadordeCuentasxclientes() {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
+		int resultado=0;
+		Transaction tx= session.beginTransaction();						
+		String hql="Select count(*) From ClientesxCuentas";		
+		List<Long> result= session.createQuery(hql).list();
+		
+		resultado=result.get(0).intValue();
+
+		
+		System.out.println(resultado);
+
+		DAO.cerrarSession();
+		return resultado;
+	}
+
+	public List<Cuenta> listarCuentas() {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();	
+		session.beginTransaction();
+		List<Cuenta> listarCuentas=(List<Cuenta>) session.createQuery("From Cuenta where Estado=true").list();
+		DAO.cerrarSession();
+		return listarCuentas;
+	}
+	
+	
 }

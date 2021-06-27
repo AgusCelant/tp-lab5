@@ -30,7 +30,7 @@ public class ControladorInicio {
 		DAO.cerrarSession();*/
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Agregar_CuentaP1");
+		MV.setViewName("Ver_Cuentas");
 		return MV;
 	}
 	
