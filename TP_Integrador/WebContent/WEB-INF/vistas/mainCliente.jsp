@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +30,7 @@
 	</table>
 	
 	<h2>ESTADO DE CUENTA</h2>
-	<div><b>Caja de ahorro en pesos (Nro. 00001): </b>$1000</div>
-	<div><b>Caja de ahorro en dolares (Nro. 00002): </b>$1000</div>
+	${cuentasCliente}
 	
 	<h2>ACCIONES</h2>
 	<button>VER HISOTRIAL DE CUENTAS</button>

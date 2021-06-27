@@ -2,19 +2,20 @@ package banco.utn.entidad;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.GenerationType;
-
+@Component
+@Entity
+@Table(name="Cuentas")
 public class Cuenta implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int NumCuenta;
-	@OneToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "persona", nullable = true)
-	private Cliente Persona;
 	@Column(name = "fecha")
 	private String Fecha;
+	@Column(name = "dni", nullable = true)
+	private String Dni;
 	@Column(name = "tipo")
 	private String TipoCuenta;
 	@Column(name = "cbu")
@@ -24,25 +25,22 @@ public class Cuenta implements Serializable {
 	@Column(name = "estado")
 	private boolean Estado;
 	
-	public Cuenta(Cliente persona, String fecha, String tipoCuenta, int numCuenta, int cbu, float saldo,boolean estado) {
+	public Cuenta(String fecha, String tipoCuenta, int cbu, float saldo, boolean estado) {
+	// public Cuenta(String fecha, String tipoCuenta, int cbu, float saldo) {
 		super();
-		Persona = persona;
 		Fecha = fecha;
 		TipoCuenta = tipoCuenta;
-		NumCuenta = numCuenta;
 		Cbu = cbu;
 		Saldo = saldo;
-		Estado=estado;
+		Estado = estado;
+	}
+
+	public void setEstado(boolean estado) {
+		Estado = estado;
 	}
 
 	public Cuenta() {}
 
-	public Cliente getPersona() {
-		return Persona;
-	}
-	public void setPersona(Cliente persona) {
-		Persona = persona;
-	}
 	public String getFecha() {
 		return Fecha;
 	}
@@ -79,12 +77,16 @@ public class Cuenta implements Serializable {
 	public void setEstado(Boolean estado) {
 		Estado =  estado;
 	}
+	public String getDni() {
+		return Dni;
+	}
+
+	public void setDni(String dni) {
+		Dni = dni;
+	}
 	@Override
 	public String toString() {
-		return "Persona=" + Persona + ", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo+", Estado="+Estado;
+		return "Dni=" + Dni +", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo + ", Estado=" + Estado;
+		// return "Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo;
 	}
-	
-	
-	
-	
 }

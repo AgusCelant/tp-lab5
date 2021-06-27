@@ -1,9 +1,8 @@
 package banco.utn.principal;
-
 import org.hibernate.Session;
-
 import banco.utn.dao.Conexion;
 import banco.utn.entidad.Cliente;
+import banco.utn.entidad.Cuenta;
 
 public class Main {
 
@@ -26,5 +25,16 @@ public class Main {
 		sessionPersona.save(persona);
 		sessionPersona.getTransaction().commit();
 		DAO.cerrarSession(); */
+
+		/*Conexion DAO = new Conexion();
+		Cuenta cuenta1= new Cuenta("26/06/21", "Dolar", 0001, 10500, true);
+		Cuenta cuenta2= new Cuenta("27/06/21", "Peso", 0002, 10000, true);
+		
+		Session session = DAO.abrirConexion();
+		session.beginTransaction();
+		session.save(cuenta1);
+		session.save(cuenta2);
+		session.getTransaction().commit();
+		DAO.cerrarSession();*/
 	}
 }

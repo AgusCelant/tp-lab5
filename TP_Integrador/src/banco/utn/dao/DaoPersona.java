@@ -110,13 +110,16 @@ public class DaoPersona {
 			
 	}
 	
-
-	
+	public Cliente obtenerDatosDeUsuario (String usuario) {
+		Conexion conexion = new Conexion();
+		Session session = conexion.abrirConexion();
+		Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE Usuario='" + usuario + "'").uniqueResult();
+		conexion.cerrarSession();
+		return cliente;
+	}
 	/* 
-	 *Cuentasss 
-	 *
+	 *Cuentas
 	 */
-	
 	
 	public ArrayList<Cliente> TraerClientes() {
 		Session session = conexion.abrirConexion();
@@ -147,8 +150,6 @@ public class DaoPersona {
 		return ListaClientes;
 			
 	}
-	
-	
 	
 	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
 		Session session = conexion.abrirConexion();
