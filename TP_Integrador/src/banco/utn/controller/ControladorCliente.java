@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import antlr.collections.List;
+import java.util.List;
 import banco.utn.dao.Conexion;
+import banco.utn.dao.DaoCuenta;
+import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
@@ -54,8 +56,6 @@ public class ControladorCliente {
 	
 		C.setDni("1");
 		C.setIdCuenta(1);
-	
-	
 	
 	/*	cliente.setNombre(Nombre);
 		cliente.setApellido(Apellido);
@@ -177,9 +177,6 @@ public class ControladorCliente {
 	
 		Dni=negocioPersona.BuscarPersonaID(id);
 		
-			
-		//cliente=negocioPersona.BuscarPersonaID("2");		
-		//MV.addObject("Cliente",cliente);
 		MV.setViewName("Editar_Cliente");
 		return MV;
 	}	
@@ -187,16 +184,7 @@ public class ControladorCliente {
 	@RequestMapping("/MostrarClientes.html")
 	public ModelAndView EventoVerClientes(HttpServletRequest request)
 	{		
-		ModelAndView MV = new ModelAndView();	
-		/*
-		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
-	
-		//NegPersona negP=new NegPersona();
-		ListaClientes=negocioPersona.TraerClientes();
-		
-			
-			*/
-		
+		ModelAndView MV = new ModelAndView();
 		
 		ClientesxCuentas cli = new ClientesxCuentas();
 		cli.setDni("2");
@@ -205,8 +193,31 @@ public class ControladorCliente {
 		
 		System.out.println(cli.toString());
 		negocioPersona.Eliminar1Cuentaxcliente(cli);
-		//MV.addObject("ListaClientes",ListaClientes);
 		MV.setViewName("Agregar_CuentaP1");
+		return MV;
+	}
+	
+	@RequestMapping("AgregarCuentaP1.html")
+	public ModelAndView EventoIrAltaCuenta(HttpServletRequest request)
+	{
+		String Dni = request.getParameter("dni");
+		
+		ModelAndView MV = new ModelAndView();
+		MV.addObject("dni", Dni);
+		MV.setViewName("Altas_Cuentas");
+		
+		return MV;
+	}
+	
+	@RequestMapping("AsociarCuenta.html")
+	public ModelAndView EventoAsociarCuenta(String dni, String nroCuenta, String fechaCreacion, String tipoCuenta, String cbu, String saldo)
+	{
+		DaoCuenta DAOCuenta = new DaoCuenta();
+		DAOCuenta.asociarCuenta(dni, nroCuenta, fechaCreacion, tipoCuenta, cbu, saldo);
+		
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("Agregar_CuentaP1");
+		
 		return MV;
 	}
 	
@@ -220,21 +231,10 @@ public class ControladorCliente {
 		cuenta=negocioPersona.BuscarCuentaDni(Dni);
 		cli=negocioPersona.BuscarCuentaxCliente(Dni);
 		cuenta.setEstado(false);
-		//cli.setEstado(1);
 		negocioPersona.Eliminar1Cuenta(cuenta);
 		negocioPersona.Eliminar1Cuentaxcliente(cli);
-		//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
-		//ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
-		//MV.addObject("ListaClientes",ListaClientes);
 		
 		MV.setViewName("Ver_Cuentas");
 		return MV;
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

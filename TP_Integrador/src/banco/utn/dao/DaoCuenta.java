@@ -5,6 +5,7 @@ import banco.utn.entidad.Cuenta;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.metamodel.source.annotations.UnknownInheritanceTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +21,23 @@ public class DaoCuenta {
 		DAO.cerrarSession();
 
 		return cuentasDeUsuario;
+	}
+	
+	public void asociarCuenta (String dni, String nroCuenta, String fechaCreacion, String tipoCuenta, String cbu, String saldo) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		session.beginTransaction();
+		
+		Cuenta cuenta = (Cuenta)session.get(Cuenta.class, Integer.parseInt(nroCuenta));
+		System.out.println(cuenta.toString());
+		cuenta.setDni(dni);
+		cuenta.setFecha(fechaCreacion);
+		cuenta.setTipoCuenta(tipoCuenta);
+		cuenta.setCbu(Integer.parseInt(cbu));
+		cuenta.setSaldo(Float.parseFloat(saldo));
+		
+		session.update(cuenta);
+		session.getTransaction().commit();
+		DAO.cerrarSession();
 	}
 }

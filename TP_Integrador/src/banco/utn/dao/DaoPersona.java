@@ -122,10 +122,10 @@ public class DaoPersona {
 	 */
 	
 	public ArrayList<Cliente> TraerClientes() {
-		Session session = conexion.abrirConexion();
-		Transaction tx= session.beginTransaction();						
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		session.beginTransaction();						
 		String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b) and c.Estado=true";
-		//String hql="From Cliente  ";
 		
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
@@ -143,9 +143,7 @@ public class DaoPersona {
 			System.out.println(cli.toString());
 			ListaClientes.add(cli);
 		}
-
-	
-		conexion.cerrarSession();
+		DAO.cerrarSession();
 		
 		return ListaClientes;
 			
@@ -303,9 +301,5 @@ public class DaoPersona {
 		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial where nrocuentaorigen="+nroCuenta+"").list();
 		conexion.cerrarSession();
 		return ListarHistorial;
-	}
-	
-	
-	
-	
+	}	
 }

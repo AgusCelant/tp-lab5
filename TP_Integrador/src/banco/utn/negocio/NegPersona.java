@@ -52,17 +52,13 @@ public List VerificarLogin(String Usuario,String Contraseña) {
 	return  daoPersona.VerificarLogin(Usuario,Contraseña);
 }
 
-
 /*
  * 
  * Cuentass
  * 
  */
 
-
-
 public ArrayList<Cliente> TraerClientes() {
-	
 	return  daoPersona.TraerClientes();
 }
 

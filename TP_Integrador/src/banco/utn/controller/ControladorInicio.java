@@ -29,11 +29,8 @@ public class ControladorInicio {
 		session.getTransaction().commit();
 		DAO.cerrarSession();*/
 		
-
 		ModelAndView MV = new ModelAndView();
-
 		MV.setViewName("Agregar_CuentaP1");
-
 		return MV;
 	}
 	

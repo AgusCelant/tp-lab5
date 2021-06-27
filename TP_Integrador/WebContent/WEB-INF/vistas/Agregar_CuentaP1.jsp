@@ -71,7 +71,7 @@ color:white;
       <td>${cliente.provincia} </td>
       <td>${cliente.localidad} </td>
       <td>${cliente.usuario} </td>
-      <td><a href="AgregarCuentaP1.html?id=${cliente.dni}" >Agregar Cuenta </a> </td>
+      <td><a href="AgregarCuentaP1.html?dni=${cliente.dni}" >Agregar Cuenta </a> </td>
 
 
    
