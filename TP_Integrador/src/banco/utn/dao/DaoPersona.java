@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
+import banco.utn.entidad.Historial;
 @Repository("daoPersona")
 public class DaoPersona {
 	
@@ -249,6 +250,46 @@ public class DaoPersona {
 			conexion.cerrarSession();
 			return true;
 	}
+/*
+ * 
+ * Historial
+ * 	
+ */
+	public boolean AgregarenHistorial(Historial histo) {
+		Session session = conexion.abrirConexion();
+		Transaction tx= session.beginTransaction();
+		boolean aux = true;
+		try
+		{
+			session.save(histo); 
+			tx = session.getTransaction();
+			tx.commit();
+		}
+		catch (Exception e) {
+			aux=false;
+			tx.rollback();
+		}
+		conexion.cerrarSession();
+		return aux;
+	}
+	
+	public List<Historial> ListarHistorial() {
+		Session session = conexion.abrirConexion();
+		session.beginTransaction();
+		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial ").list();
+		conexion.cerrarSession();
+		return ListarHistorial;
+	}
+	
+	public List<Historial> ListarHistorialxCuenta(int nroCuenta) {
+		Session session = conexion.abrirConexion();
+		session.beginTransaction();
+		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial where nrocuentaorigen="+nroCuenta+"").list();
+		conexion.cerrarSession();
+		return ListarHistorial;
+	}
+	
+	
 	
 	
 }
