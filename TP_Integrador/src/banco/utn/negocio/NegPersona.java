@@ -84,8 +84,17 @@ public boolean EliminarCuenta(Cuenta cuenta) {
 	
 	return daoPersona.EliminarCuenta(cuenta);
 }
+public boolean Eliminar1Cuenta(Cuenta cuenta) {
+	
+	return daoPersona.Eliminar1Cuenta(cuenta);
+}
 public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {
 	
 	return daoPersona.EliminarCuentaxcliente(cli);
 }
+public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {
+	
+	return daoPersona.Eliminar1Cuentaxcliente(cli);
+}
+
 }

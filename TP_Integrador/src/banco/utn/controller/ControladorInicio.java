@@ -17,7 +17,7 @@ public class ControladorInicio {
 	{
 		ModelAndView MV = new ModelAndView();
 		
-		MV.setViewName("mainCliente");
+		MV.setViewName("PerfilAdmin");
 		return MV;
 	}
 	

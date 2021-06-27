@@ -120,8 +120,8 @@ public class DaoPersona {
 	public ArrayList<Cliente> TraerClientes() {
 		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		//String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  ) or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b)";
-		String hql="From Cliente  ";
+		String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b) and c.Estado=true";
+		//String hql="From Cliente  ";
 		
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
@@ -136,7 +136,7 @@ public class DaoPersona {
 			cli.setLocalidad((String)obj[6]);
 			cli.setUsuario((String)obj[7]);	
 			cli.setDni((String)obj[8]);	
-			
+			System.out.println(cli.toString());
 			ListaClientes.add(cli);
 		}
 
@@ -213,23 +213,42 @@ public class DaoPersona {
 	}
 	
 	public boolean EliminarCuenta(Cuenta cuenta) {	
-		Session session = conexion.abrirConexion();		
-			session.beginTransaction();
-			session.update(cuenta);
-			session.getTransaction().commit();					
+		Session session = conexion.abrirConexion();	
+		String Dni="a";
+		String hql="Update  Cuenta set Estado=false where Dni="+Dni+" ";
+		Query query=session.createQuery(hql);
+		int result=query.executeUpdate();					
+			conexion.cerrarSession();
+			return true;
+	}
+
+	public boolean Eliminar1Cuenta(Cuenta cuenta) {	
+		Session session = conexion.abrirConexion();
+		String Dni="a";
+			String hql="Update  Cuenta set Estado=false where Dni="+Dni+" and NumCuenta="+cuenta.getNumCuenta()+"";
+			Query query=session.createQuery(hql);
+			int result=query.executeUpdate();						
 			conexion.cerrarSession();
 			return true;
 	}
 	public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {	
 		System.out.println(cli.toString());
 		Session session = conexion.abrirConexion();		
-			session.beginTransaction();
-			session.update(cli);
-			session.getTransaction().commit();					
+		String hql="Update  ClientesxCuentas set Estado=false where Dni="+cli.getDni()+"";
+		Query query=session.createQuery(hql);
+		int result=query.executeUpdate();					
 			conexion.cerrarSession();
 			return true;
 	}
-	
+	public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {	
+		System.out.println(cli.toString());
+		Session session = conexion.abrirConexion();		
+		String hql="Update  ClientesxCuentas set Estado=false where Dni="+cli.getDni()+" and NumCuenta="+cli.getIdCuenta()+"";
+		Query query=session.createQuery(hql);
+		int result=query.executeUpdate();					
+			conexion.cerrarSession();
+			return true;
+	}
 	
 	
 }

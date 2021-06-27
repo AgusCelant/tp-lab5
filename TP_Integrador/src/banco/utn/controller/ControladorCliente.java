@@ -123,6 +123,14 @@ public class ControladorCliente {
 	
 		Dni=negocioPersona.BuscarPersonaID(id);
 			/*		
+			 * Cuenta cuenta = new Cuenta();
+		ClientesxCuentas cli = new ClientesxCuentas();
+		cuenta=negocioPersona.BuscarCuentaDni(Dni);
+		cli=negocioPersona.BuscarCuentaxCliente(Dni);
+		cuenta.setEstado(false);
+		cli.setEstado(1);
+		negocioPersona.EliminarCuenta(cuenta);
+		negocioPersona.EliminarCuentaxcliente(cli);
 		System.out.println(cliente.toString());
 		cliente.setDni(cliente.getDni());
 		cliente.setNombre(cliente.getNombre());
@@ -180,10 +188,10 @@ public class ControladorCliente {
 	public ModelAndView EventoVerClientes(HttpServletRequest request)
 	{		
 		ModelAndView MV = new ModelAndView();	
-
+		
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 	
-		
+		//NegPersona negP=new NegPersona();
 		ListaClientes=negocioPersona.TraerClientes();
 		
 			
@@ -204,8 +212,8 @@ public class ControladorCliente {
 		cli=negocioPersona.BuscarCuentaxCliente(Dni);
 		cuenta.setEstado(false);
 		cli.setEstado(1);
-		negocioPersona.EliminarCuenta(cuenta);
-		negocioPersona.EliminarCuentaxcliente(cli);
+		negocioPersona.Eliminar1Cuenta(cuenta);
+		negocioPersona.Eliminar1Cuentaxcliente(cli);
 		//ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		//ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		//MV.addObject("ListaClientes",ListaClientes);
