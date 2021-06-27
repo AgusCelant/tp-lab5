@@ -184,7 +184,8 @@ public class DaoPersona {
 			cuenta.setTipoCuenta((String)obj[2]);
 			cuenta.setCbu((int)obj[3]);
 			cuenta.setSaldo((float)obj[4]);
-			cuenta.setPersona((Cliente)obj[5]);
+			cuenta.setDni((String)obj[5]);
+			
 		}
 		tx.commit();
 		conexion.cerrarSession();
