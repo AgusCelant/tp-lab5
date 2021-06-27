@@ -10,6 +10,7 @@ import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
+import banco.utn.entidad.Historial;
 
 @Service("servicioPersona")
 public class NegPersona {
@@ -95,6 +96,24 @@ public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {
 public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {
 	
 	return daoPersona.Eliminar1Cuentaxcliente(cli);
+}
+/*
+ * 
+ * Historial
+ * 
+ */
+
+public boolean AgregarenHistorial(Historial histo) {
+	
+	return daoPersona.AgregarenHistorial(histo);
+}
+public List<Historial> ListarHistorial() {
+	
+	return daoPersona.ListarHistorial();
+}
+public List<Historial>ListarHistorialxCuenta(int nroCuenta) {
+	
+	return daoPersona.ListarHistorialxCuenta( nroCuenta);
 }
 
 }
