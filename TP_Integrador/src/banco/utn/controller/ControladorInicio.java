@@ -31,7 +31,7 @@ public class ControladorInicio {
 		DAO.cerrarSession();*/
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Login");
+		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
 	

@@ -86,6 +86,26 @@ public class DaoPersona {
 		return true;
 	}
 	
+	public boolean EditarPersona(Cliente p) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();
+		boolean aux = true;
+		try
+		{
+			session.update(p); 
+			tx = session.getTransaction();
+			tx.commit();
+		}
+		catch (Exception e) {
+			aux=false;
+			tx.rollback();
+		}
+		DAO.cerrarSession();
+		return aux;
+	}
+	
+	
 	//anda
 	public List<Object[]> VerificarDni(String Dni) {
 		Conexion DAO = new Conexion();	

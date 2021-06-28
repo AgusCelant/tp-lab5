@@ -39,6 +39,11 @@ public boolean EliminarPersona(Cliente cliente) {
 		return daoPersona.EliminarPersona(cliente);
 	}
 
+public boolean EditarPersona(Cliente cliente) {
+	
+	return daoPersona.EditarPersona(cliente);
+}
+
 public List<Object[]> VerificarDni(String Dni) {
 	
 	return  daoPersona.VerificarDni(Dni);

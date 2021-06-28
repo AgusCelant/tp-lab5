@@ -139,6 +139,23 @@ public class ControladorCliente {
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		cli.setEstado(false);
 		negocioPersona.EliminarPersona(cli);
+		ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
+		ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioPersona.BuscarTODASCuentaxCliente(id);
+		
+		for(ClientesxCuentas obj : ListaClientesxcuentas) {
+			obj.setEstado(false);
+			negocioPersona.Eliminar1Cuentaxcliente(obj);
+			
+		}
+		
+		ArrayList<Cuenta> Listatodascuentas= new ArrayList<Cuenta>();
+		Listatodascuentas = (ArrayList<Cuenta>) negocioPersona.BuscarTODASCuenta(id);
+		
+		for(Cuenta obj2 : Listatodascuentas) {
+			obj2.setEstado(false);
+			negocioPersona.Eliminar1Cuenta(obj2);
+			
+		}
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
@@ -147,7 +164,7 @@ public class ControladorCliente {
 		return MV;
 	}
 	
-/*
+
 	@RequestMapping("/Editar.html")
 	public ModelAndView eventoeditar(HttpServletRequest request)
 	{
@@ -157,10 +174,39 @@ public class ControladorCliente {
 	
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
+		ListaClientes.add(cli);
+		MV.addObject("ListaClientes",ListaClientes);		
 		MV.setViewName("Editar_Cliente");
 		return MV;
 	}	
-	*/
+	@RequestMapping("ActualizarCliente.html")
+	public ModelAndView EventoActualizarCliente(String nombre,String apellido,String Sexo,String dni,String date, String nacionalidad, String Provincia,String Localidad,String usuario,String contraseña)
+	{
+		ModelAndView MV = new ModelAndView();
+		
+		Cliente cli= new Cliente();
+		cli.setNombre(nombre);
+		cli.setApellido(apellido);
+		cli.setSexo(Sexo);
+		cli.setDni(dni);
+		cli.setNacimiento(date);
+		cli.setNacionalidad(nacionalidad);
+		cli.setProvincia(Provincia);
+		cli.setLocalidad(Localidad);
+		cli.setUsuario(usuario);
+		cli.setContraseña(contraseña);
+		cli.setEstado(true);
+		System.out.println(cli.toString());
+		
+		
+		negocioPersona.EditarPersona(cli);
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
+		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
+		MV.addObject("ListaClientes",ListaClientes);
+		MV.setViewName("Ver_Clientes");
+		return MV;
+	}
 		
 		//anda
 	@RequestMapping("/MostrarClientes.html")
@@ -244,7 +290,6 @@ public class ControladorCliente {
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);
 				 
-		//eliminar 1 cuenta
 		
 		cuenta=negocioPersona.BuscarCuentaDni(Dnii,numCuenta);
 		cli=negocioPersona.BuscarCuentaxCliente(Dnii,numCuenta); 
@@ -253,27 +298,7 @@ public class ControladorCliente {
 		negocioPersona.Eliminar1Cuentaxcliente(cli);
 		negocioPersona.Eliminar1Cuenta(cuenta);
 
-		
-		//Eliminar todas las cuentas, ponerlo desp en eliminar cliente
-		/*
-		ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
-		ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioPersona.BuscarTODASCuentaxCliente(Dnii);
-		
-		for(ClientesxCuentas obj : ListaClientesxcuentas) {
-			obj.setEstado(false);
-			negocioPersona.Eliminar1Cuentaxcliente(obj);
-			
-		}
-		
-		ArrayList<Cuenta> Listatodascuentas= new ArrayList<Cuenta>();
-		Listatodascuentas = (ArrayList<Cuenta>) negocioPersona.BuscarTODASCuenta(Dnii);
-		
-		for(Cuenta obj2 : Listatodascuentas) {
-			obj2.setEstado(false);
-			negocioPersona.Eliminar1Cuenta(obj2);
-			
-		}
-		*/
+
 		
 	
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
