@@ -59,8 +59,8 @@ background:black;
   <c:forEach var="cliente" items="${ ListaClientes }"  >
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Editar Cliente</h4>
-	<p align="center">Nombre: <input class="controls" type="text" name="nombre" value="${cliente.nombre}"></p>
-    <p align="center">Apellido: <input class="controls" type="text" name="apellido" value="${cliente.apellido}"></p>
+	<p align="center">Nombre: <input class="controls" type="text" name="nombre" value="${cliente.nombre}" required onkeypress="return (event.charCode ==32 || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90))"></p>
+    <p align="center">Apellido: <input class="controls" type="text" name="apellido" value="${cliente.apellido}" required onkeypress="return (event.charCode ==32 || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90))"></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
    	<input type="radio" name="Sexo" value="${cliente.sexo}" checked="checked" />
