@@ -10,31 +10,33 @@
 </head>
 <body>
 <jsp:include page="MenuCliente.jsp"></jsp:include>
-<center>
-	<h1>Bienvenido/a Matias!</h1>
-	<table>
-		<tr>
-			<th>USUARIO</th>
-			<th>NOMBRE</th>
-			<th>APELLIDO</th>
-			<th>DNI</th>
-			<th>DOMICILIO</th>
-		</tr>
-		<tr>
-			<td>${clienteLogueado.usuario}</td>
-			<td>${clienteLogueado.nombre}</td>
-			<td>${clienteLogueado.apellido}</td>
-			<td>${clienteLogueado.dni}</td>
-			<td>${clienteLogueado.localidad}</td>
-		</tr>
-	</table>
-	
-	<h2>ESTADO DE CUENTA</h2>
-	${cuentasCliente}
-	
-	<h2>ACCIONES</h2>
-	<button>VER HISOTRIAL DE CUENTAS</button>
-	<button>TRANSFERENCIAS</button>
+	<center>
+		<form method="post">
+			<h1>Bienvenido/a Matias!</h1>
+			<table>
+				<tr>
+					<th>USUARIO</th>
+					<th>NOMBRE</th>
+					<th>APELLIDO</th>
+					<th>DNI</th>
+					<th>DOMICILIO</th>
+				</tr>
+				<tr>
+					<td>${clienteLogueado.usuario}</td>
+					<td>${clienteLogueado.nombre}</td>
+					<td>${clienteLogueado.apellido}</td>
+					<td>${clienteLogueado.dni}</td><input type="hidden" name="dni" value="${clienteLogueado.dni}">
+					<td>${clienteLogueado.localidad}</td>
+				</tr>
+			</table>
+			
+			<h2>ESTADO DE CUENTA</h2>
+			${cuentasCliente}
+			
+			<h2>ACCIONES</h2>
+			<button formaction="mostrarHistorial.html" type="submit">VER HISOTRIAL DE CUENTAS</button>
+			<button formaction="action1" type="submit">TRANSFERENCIAS</button>
+		</form>
 	</center>
 </body>
 </html>
