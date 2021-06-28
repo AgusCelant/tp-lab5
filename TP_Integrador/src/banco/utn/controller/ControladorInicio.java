@@ -12,6 +12,7 @@ import banco.utn.dao.DaoCuenta;
 import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
+import banco.utn.negocio.NegPersona;
 
 @Controller
 public class ControladorInicio {
@@ -30,7 +31,7 @@ public class ControladorInicio {
 		DAO.cerrarSession();*/
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Ver_Cuentas");
+		MV.setViewName("Login");
 		return MV;
 	}
 	
@@ -41,8 +42,27 @@ public class ControladorInicio {
 
 		if(txtUsuario.equals("admin") && txtPass.equals("admin")){
 			MV.setViewName("PerfilAdmin");
-		}			
-		else {
+		}else {						
+			List<Object[]> verificarlogin=null;
+			NegPersona negocioPersona = new NegPersona();
+			DaoPersona DAOPersona = new DaoPersona();
+			verificarlogin=negocioPersona.VerificarLogin(txtUsuario,txtPass);
+			
+			if(verificarlogin.isEmpty()) {		
+			MV.setViewName("Login");
+			return MV;		
+			}else {
+				
+				
+				MV.setViewName("mainCliente");
+				return MV;
+			}
+			
+			
+			
+		}	
+		
+		/*else {
 			DaoPersona DAOPersona = new DaoPersona();
 			DaoCuenta DAOCuenta = new DaoCuenta();
 			Cliente cliente = DAOPersona.obtenerDatosDeUsuario(txtUsuario);
@@ -57,7 +77,21 @@ public class ControladorInicio {
 			MV.addObject("clienteLogueado", cliente);
 			MV.addObject("cuentasCliente", resumenCuentas);
 			MV.setViewName("mainCliente");
-		}
+		}*/
+		
+		MV.setViewName("mainCliente");
 		return MV;
 	}
+	
+	
+	
+	@RequestMapping("logout.html")
+	public ModelAndView CerrarSession()
+	{
+		ModelAndView MV = new ModelAndView();			
+			MV.setViewName("Login");
+		return MV;
+	}
+	
+	
 }

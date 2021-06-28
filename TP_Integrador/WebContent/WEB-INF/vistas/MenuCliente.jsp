@@ -48,7 +48,7 @@
 </li>   
 
 <li>                                 
-<a href="">
+<a href="logout.html">
 <i class="fas fa-sign-out-alt fa-lg"></i>
 <span class="nav-text">LOG OUT</span>
 </a>

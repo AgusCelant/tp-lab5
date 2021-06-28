@@ -26,41 +26,41 @@
 <div class="settings"></div>
   
   <li>                                   
-<a href="">
+<a href="irMenuAdmin.html">
 <i class="fas fa-home fa-lg"></i>
 <span class="nav-text">MENU PRINCIPAL</span>
 </a>
 </li>  
   
 <li>                                   
-<a href="">
+<a href="verCliente.html">
 <i class="fa fa-user fa-lg"></i>
 <span class="nav-text">VER CLIENTES</span>
 </a>
 </li>   
 
 <li>                                 
-<a href="">
+<a href="verCuenta.html">
 <i class="fa fa-desktop fa-lg"></i>
 <span class="nav-text">VER CUENTAS</span>
 </a>
 </li>   
 
 <li>                                 
-<a href="">
+<a href="irAgregarCliente.html">
 <i class="far fa-address-card fa-lg"></i>
 <span class="nav-text">AGREGAR CLIENTE</span>
 </a>
 </li>  
 
 <li>                                 
-<a href="">
+<a href="MostrarClientes.html">
 <i class="fas fa-laptop fa-lg"></i>
 <span class="nav-text">AGREGAR CUENTA</span>
 </a>
 </li> 
 <li>                                 
-<a href="">
+<a href="logout.html">
 <i class="fas fa-sign-out-alt fa-lg"></i>
 <span class="nav-text">LOG OUT</span>
 </a>

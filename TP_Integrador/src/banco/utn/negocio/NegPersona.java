@@ -49,7 +49,7 @@ public List<Object[]> VerificarUsuario(String Usuario) {
 	return  daoPersona.VerificarUsuario(Usuario);
 }
 
-public List VerificarLogin(String Usuario,String Contraseña) {
+public List<Object[]> VerificarLogin(String Usuario,String Contraseña) {
 	
 	return  daoPersona.VerificarLogin(Usuario,Contraseña);
 }
@@ -78,24 +78,23 @@ public Cuenta BuscarCuentaDni(String Dni, int numCuenta) {
 	
 	return daoPersona.BuscarCuentaDni(Dni,numCuenta);
 }
-
-public ClientesxCuentas BuscarCuentaxCliente(String Dni) {
+public ArrayList<Cuenta> BuscarTODASCuenta(String Dni) {
+	return  daoPersona.BuscarTODASCuenta(Dni);
+}
+public ClientesxCuentas BuscarCuentaxCliente(String Dni,int NumCuenta) {
 	
-	return daoPersona.BuscarCuentaxCliente(Dni);
+	return daoPersona.BuscarCuentaxCliente(Dni,NumCuenta);
 }
 
-public boolean EliminarCuenta(Cuenta cuenta) {
-	
-	return daoPersona.EliminarCuenta(cuenta);
+public ArrayList<ClientesxCuentas> BuscarTODASCuentaxCliente(String Dni) {
+	return  daoPersona.BuscarTODASCuentaxCliente(Dni);
 }
+
 public boolean Eliminar1Cuenta(Cuenta cuenta) {
 	
 	return daoPersona.Eliminar1Cuenta(cuenta);
 }
-public boolean EliminarCuentaxcliente(ClientesxCuentas cli) {
-	
-	return daoPersona.EliminarCuentaxcliente(cli);
-}
+
 public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {
 	
 	return daoPersona.Eliminar1Cuentaxcliente(cli);

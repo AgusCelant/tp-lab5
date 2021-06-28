@@ -48,6 +48,21 @@ public class ControladorCliente {
 		MV.addObject("clienteLogueado", cliente);
 		MV.setViewName("mainCliente");
 	}
+//anda
+	@RequestMapping("irAgregarCliente.html")
+	public ModelAndView IrpagAgregarCliente() {
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("Alta_Cliente");
+		return MV;
+	}
+	//anda
+	@RequestMapping("irMenuAdmin.html")
+	public ModelAndView irMenuAdmin() {
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("PerfilAdmin");
+		return MV;
+	}
+	
 	//anda
 	@RequestMapping("agregarPersona.html")
 	public ModelAndView eventoRedireccionarPag1(String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario)
@@ -216,11 +231,12 @@ public class ControladorCliente {
 		
 		return MV;
 	}
-	//falta
+	//anda
 	@RequestMapping("/EliminarCuenta.html")
 	public ModelAndView EventoEliminarCuenta(HttpServletRequest request)
 	{	DaoCuenta DAOCuenta = new DaoCuenta();
 		Cuenta cuenta = new Cuenta();
+		ClientesxCuentas cli = new ClientesxCuentas();
 		ModelAndView MV = new ModelAndView();	
 		String Dni=request.getParameter("id");	
 		
@@ -228,17 +244,38 @@ public class ControladorCliente {
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);
 				 
+		//eliminar 1 cuenta
 		
-		
-		  
-		ClientesxCuentas cli = new ClientesxCuentas();
 		cuenta=negocioPersona.BuscarCuentaDni(Dnii,numCuenta);
-		System.out.println(cuenta.toString());
-		System.out.print(cuenta.toString());
-		//i=negocioPersona.BuscarCuentaxCliente(Dni);
+		cli=negocioPersona.BuscarCuentaxCliente(Dnii,numCuenta); 
 		cuenta.setEstado(false);
-		//negocioPersona.Eliminar1Cuenta(cuenta);
-		//negocioPersona.Eliminar1Cuentaxcliente(cli);
+		cli.setEstado(false);
+		negocioPersona.Eliminar1Cuentaxcliente(cli);
+		negocioPersona.Eliminar1Cuenta(cuenta);
+
+		
+		//Eliminar todas las cuentas, ponerlo desp en eliminar cliente
+		/*
+		ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
+		ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioPersona.BuscarTODASCuentaxCliente(Dnii);
+		
+		for(ClientesxCuentas obj : ListaClientesxcuentas) {
+			obj.setEstado(false);
+			negocioPersona.Eliminar1Cuentaxcliente(obj);
+			
+		}
+		
+		ArrayList<Cuenta> Listatodascuentas= new ArrayList<Cuenta>();
+		Listatodascuentas = (ArrayList<Cuenta>) negocioPersona.BuscarTODASCuenta(Dnii);
+		
+		for(Cuenta obj2 : Listatodascuentas) {
+			obj2.setEstado(false);
+			negocioPersona.Eliminar1Cuenta(obj2);
+			
+		}
+		*/
+		
+	
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
 		MV.addObject("ListaCuentas",ListaCuentas);
