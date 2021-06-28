@@ -85,7 +85,7 @@ public class DaoPersona {
 			DAO.cerrarSession();
 		return true;
 	}
-	
+	//anda
 	public boolean EditarPersona(Cliente p) {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();

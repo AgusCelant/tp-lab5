@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoPersona;
+import banco.utn.dao.DaoCuenta;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
@@ -19,6 +20,8 @@ public class NegPersona {
 
 	@Autowired
 	private DaoPersona daoPersona;
+	@Autowired
+	private DaoCuenta daoCuenta;
 	
 	public List<Cliente> listarPersonas() {
 		return daoPersona.listarPersonas();
@@ -42,6 +45,12 @@ public boolean EliminarPersona(Cliente cliente) {
 public boolean EditarPersona(Cliente cliente) {
 	
 	return daoPersona.EditarPersona(cliente);
+}
+public boolean Editarcuenta(Cuenta cuenta) {
+	
+	
+	return daoCuenta.Editarcuenta(cuenta);
+	
 }
 
 public List<Object[]> VerificarDni(String Dni) {

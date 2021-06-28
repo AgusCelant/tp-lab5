@@ -58,23 +58,26 @@ background:black;
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Editar Cuenta</h4>
-	<p align="center">Cliente: <input class="controls" type="text" name="nombre" ></p>
+<form action="ActualizarCuenta.html" method="post">
+ <c:forEach var="cuenta" items="${ ListaCuentas }"  >
+	<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${cuenta.dni}"readonly="readonly" ></p>
 
     <p align="center"> Tipo Cuenta:</p> 
     <p align="center" class="controls">
-    <input type="radio" name="TipoCuenta" value="corriente"> Corriente
-    <input type="radio" name="TipoCuenta" value="ahorro"> 
-  		Ahorro</p>
+    <input type="radio" name="TipoCuenta" value="${cuenta.tipoCuenta}" checked="checked" />
+    <input type="radio" name="TipoCuenta" value="Peso"> Peso
+    <input type="radio" name="TipoCuenta" value="Dolares"> Dolares
+  		</p>
 
-     <p align="center">Nº Cuenta:<input class="controls"id="date" type="date">
-       <p align="center">CBU: <input class="controls" type="text" name="apellido" ></p>
-        <p align="center">Nombre: <input class="controls" type="text" name="apellido" ></p>
-            <p align="center">SALDO: <input class="controls" type="text" name="apellido" ></p>
+    <p align="center">Nº Cuenta:<input class="controls"name="nrocuenta"value="${cuenta.numCuenta}" readonly="readonly" >
+    <p align="center">CBU: <input class="controls" type="text" name="cbu" value="${cuenta.cbu}"></p>
+    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31" value="${cuenta.fecha}">
+    <p align="center">SALDO: <input class="controls" type="text" name="saldo"  value="${cuenta.saldo}"></p>
        
 	  <input class="botons"type="submit" value="Aceptar">
 	</div>
-
-
+	</c:forEach>
+</form>
 
 </body>
 </html>

@@ -67,7 +67,7 @@ color:white;
       <td>${cuenta.cbu} </td>
       <td>${cuenta.saldo} </td>
 
-   	  <td><a href="Editar.html?id=${cuenta.dni}" >Editar </a> </td>
+   	  <td><a href="EditarCuentas.html?id=${cuenta.dni},${cuenta.numCuenta}" >Editar </a> </td>
    	  <td><a href="EliminarCuenta.html?id=${cuenta.dni},${cuenta.numCuenta}">Eliminar </a> </td>
 
 

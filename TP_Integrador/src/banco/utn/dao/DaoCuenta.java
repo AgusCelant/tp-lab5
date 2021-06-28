@@ -63,6 +63,25 @@ public class DaoCuenta {
 		return aux;
 	}
 	//anda
+	public boolean Editarcuenta(Cuenta c) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();
+		boolean aux = true;
+		try
+		{
+			session.update(c); 
+			tx = session.getTransaction();
+			tx.commit();
+		}
+		catch (Exception e) {
+			aux=false;
+			tx.rollback();
+		}
+		DAO.cerrarSession();
+		return aux;
+	}
+	//anda
 	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
@@ -98,7 +117,7 @@ public class DaoCuenta {
 		DAO.cerrarSession();
 		return resultado;
 	}
-
+//anda
 	public List<Cuenta> listarCuentas() {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();	

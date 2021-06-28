@@ -37,6 +37,8 @@ public class ControladorCliente {
 	private ClientesxCuentas C;
 	@Autowired
 	private Cuenta Cuen;
+	@Autowired
+	private DaoCuenta DaoCuen;
 	
 	@RequestMapping("mainCliente.html")
 	public void eventoRedireccionarMainCliente(String txtUsuario, String txtPass) {
@@ -164,7 +166,7 @@ public class ControladorCliente {
 		return MV;
 	}
 	
-
+//anda
 	@RequestMapping("/Editar.html")
 	public ModelAndView eventoeditar(HttpServletRequest request)
 	{
@@ -180,6 +182,7 @@ public class ControladorCliente {
 		MV.setViewName("Editar_Cliente");
 		return MV;
 	}	
+	//anda
 	@RequestMapping("ActualizarCliente.html")
 	public ModelAndView EventoActualizarCliente(String nombre,String apellido,String Sexo,String dni,String date, String nacionalidad, String Provincia,String Localidad,String usuario,String contraseña)
 	{
@@ -197,7 +200,7 @@ public class ControladorCliente {
 		cli.setUsuario(usuario);
 		cli.setContraseña(contraseña);
 		cli.setEstado(true);
-		System.out.println(cli.toString());
+;
 		
 		
 		negocioPersona.EditarPersona(cli);
@@ -207,6 +210,51 @@ public class ControladorCliente {
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
+//anda
+	@RequestMapping("/EditarCuentas.html")
+	public ModelAndView EventoeditarCuentas(HttpServletRequest request)
+	{
+		ModelAndView MV = new ModelAndView();
+		String id=request.getParameter("id");
+		
+		String[] parts = id.split(",");
+		String Dnii = parts[0]; 
+		int numCuenta =Integer.parseInt(parts[1]);
+	
+		Cuenta Cuen=negocioPersona.BuscarCuentaDni(Dnii, numCuenta);
+		
+		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
+		ListaCuentas.add(Cuen);
+		MV.addObject("ListaCuentas",ListaCuentas);		
+		MV.setViewName("Editar_Cuenta");
+		return MV;
+	}
+	//anda
+	@RequestMapping("ActualizarCuenta.html")
+	public ModelAndView EventoActualizarCuenta(String dni,String TipoCuenta,int nrocuenta,int cbu,String fechaCreacion, float saldo)
+	{
+		ModelAndView MV = new ModelAndView();
+		
+		Cuenta cuen= new Cuenta();
+		cuen.setDni(dni);
+		cuen.setTipoCuenta(TipoCuenta);
+		System.out.println(cuen.getTipoCuenta()+"asdasa");
+		cuen.setNumCuenta(nrocuenta);
+		cuen.setCbu(cbu);
+		cuen.setFecha(fechaCreacion);
+		cuen.setSaldo(saldo);
+		cuen.setEstado(true);
+		negocioPersona.Editarcuenta(cuen);
+		DaoCuenta DAOCuenta = new DaoCuenta();
+		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
+	
+		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas();
+		MV.addObject("ListaCuentas",ListaCuentas);
+		MV.setViewName("Ver_Cuentas");
+		return MV;
+	}
+	
+	
 		
 		//anda
 	@RequestMapping("/MostrarClientes.html")
