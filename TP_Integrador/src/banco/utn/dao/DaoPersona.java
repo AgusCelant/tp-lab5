@@ -133,9 +133,8 @@ public class DaoPersona {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select c.Usuario From Cliente as c  where c.Usuario='"+Usuario+"' and c.Contraseña='"+Contraseña+"' and c.Estado=true";		
+		String hql="Select c.Usuario From Cliente as c  where c.Usuario='"+Usuario+"' and c.Contraseña='"+Contraseña+"' and c.Estado=true";
 		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
-		System.out.println(result.toString());
 		DAO.cerrarSession();
 		return result;
 			

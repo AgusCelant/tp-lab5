@@ -19,7 +19,7 @@ import banco.utn.entidad.Historial;
 public class NegPersona {
 
 	@Autowired
-	private DaoPersona daoPersona;
+	private DaoPersona daoPersona = new DaoPersona();
 	@Autowired
 	private DaoCuenta daoCuenta;
 	

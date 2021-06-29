@@ -35,7 +35,7 @@
 			
 			<h2>ACCIONES</h2>
 			<button formaction="mostrarHistorial.html" type="submit">VER HISOTRIAL DE CUENTAS</button>
-			<button formaction="action1" type="submit">TRANSFERENCIAS</button>
+			<button formaction="mostrarTransferencia.html" type="submit">TRANSFERENCIAS</button>
 		</form>
 	</center>
 </body>

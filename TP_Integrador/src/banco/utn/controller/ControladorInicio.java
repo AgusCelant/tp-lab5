@@ -31,7 +31,7 @@ public class ControladorInicio {
 		DAO.cerrarSession();*/
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Alta_Cliente");
+		MV.setViewName("Login");
 		return MV;
 	}
 	
@@ -45,15 +45,24 @@ public class ControladorInicio {
 		}else {						
 			List<Object[]> verificarlogin=null;
 			NegPersona negocioPersona = new NegPersona();
-			DaoPersona DAOPersona = new DaoPersona();
 			verificarlogin=negocioPersona.VerificarLogin(txtUsuario,txtPass);
 			
 			if(verificarlogin.isEmpty()) {		
 			MV.setViewName("Login");
 			return MV;		
 			}else {
+				DaoPersona DAOPersona = new DaoPersona();
+				DaoCuenta DAOCuenta = new DaoCuenta();
+				Cliente cliente = DAOPersona.obtenerDatosDeUsuario(txtUsuario);
+				List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(cliente.getDni());
+				String resumenCuentas = "";
 				
+				for(Cuenta cuenta : cuentas) {
+					resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
+				}
 				
+				MV.addObject("clienteLogueado", cliente);
+				MV.addObject("cuentasCliente", resumenCuentas);
 				MV.setViewName("mainCliente");
 				return MV;
 			}

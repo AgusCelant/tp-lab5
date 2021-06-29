@@ -30,7 +30,6 @@ public class controladorHistorial {
 		String listaCuentas = "";
 		for(Cuenta cuenta : cuentas) {
 			if (cuentaSeleccionada != null && cuentaSeleccionada.equals(String.valueOf(cuenta.getNumCuenta()))) {
-				System.out.println("<option selected>");
 				listaCuentas = listaCuentas + "<option selected>" + cuenta.getNumCuenta() + "</option>";
 			} else {
 				listaCuentas = listaCuentas + "<option>" + cuenta.getNumCuenta() + "</option>";

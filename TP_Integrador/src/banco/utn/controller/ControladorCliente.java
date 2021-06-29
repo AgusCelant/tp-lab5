@@ -91,11 +91,9 @@ public class ControladorCliente {
 		dniverificar=negocioPersona.VerificarDni(dni);
 		Usu=negocioPersona.VerificarUsuario(Usuarioo);
 
-		
-
 		if(dniverificar.isEmpty()) {
 			
-		}else {
+		} else {
 			c++;
 		}
 		if(Usu.isEmpty()) {
@@ -105,10 +103,10 @@ public class ControladorCliente {
 		}
 		System.out.println(c);
 		
-		if(c==0) {
+		if (c==0) {
 			boolean estado= negocioPersona.agregarPersona(cliente);
 			cartel="Cliente agregado Correctamente";
-		}else {
+		} else {
 			cartel="Usuario Repetido o dni repetido";
 			
 		}
@@ -124,8 +122,7 @@ public class ControladorCliente {
 	{
 		ModelAndView MV = new ModelAndView();
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
-	
-		
+
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
 		MV.setViewName("Ver_Clientes");

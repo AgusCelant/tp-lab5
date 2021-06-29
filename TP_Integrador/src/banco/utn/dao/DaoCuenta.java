@@ -127,5 +127,33 @@ public class DaoCuenta {
 		return listarCuentas;
 	}
 	
+	public Cuenta obtenerCuentaPorNroCuenta (int nroCuenta) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();	
+		session.beginTransaction();
+		Cuenta cuenta = (Cuenta) session.createQuery("FROM Cuenta WHERE Estado=true AND NumCuenta=" + nroCuenta).uniqueResult();
+		DAO.cerrarSession();
+		return cuenta;
+	}
 	
+	public Cuenta obtenerCuentaPorCbu (int cbu) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();	
+		session.beginTransaction();
+		Cuenta cuenta = (Cuenta) session.createQuery("FROM Cuenta WHERE Estado=true AND Cbu=" + cbu).uniqueResult();
+		DAO.cerrarSession();
+		return cuenta;
+	}
+	
+	public void actualizarCuentas(Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - monto);
+		cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);
+		session.beginTransaction();
+		session.update(cuentaOrigen);
+		session.update(cuentaDestino);
+		session.getTransaction().commit();		
+		DAO.cerrarSession();
+	}
 }
