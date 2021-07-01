@@ -31,7 +31,7 @@ public class ControladorInicio {
 		DAO.cerrarSession();*/
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Login");
+		MV.setViewName("Agregar_CuentaP1");
 		return MV;
 	}
 	
@@ -47,7 +47,9 @@ public class ControladorInicio {
 			NegPersona negocioPersona = new NegPersona();
 			verificarlogin=negocioPersona.VerificarLogin(txtUsuario,txtPass);
 			
-			if(verificarlogin.isEmpty()) {		
+			if(verificarlogin.isEmpty()) {
+				String cartel="El usuario o contraseña son incorrecto, intentelo de nuevo";
+			MV.addObject("Errordeconexcion", cartel);
 			MV.setViewName("Login");
 			return MV;		
 			}else {
@@ -60,7 +62,7 @@ public class ControladorInicio {
 				for(Cuenta cuenta : cuentas) {
 					resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
 				}
-				
+				MV.addObject("NombreCliente", cliente.getNombre());
 				MV.addObject("clienteLogueado", cliente);
 				MV.addObject("cuentasCliente", resumenCuentas);
 				MV.setViewName("mainCliente");

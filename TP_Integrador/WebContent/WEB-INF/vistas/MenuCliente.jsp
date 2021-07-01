@@ -21,7 +21,7 @@
   
  <div>
     <a class="logo">
-	<header>BIENVENIDO CLIENTE :</header>    
+	<header>BIENVENIDO CLIENTE :${NombreCliente}</</header>    
     </a> 
   </div> 
 <div class="settings"></div>

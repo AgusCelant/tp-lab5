@@ -43,25 +43,24 @@ font-size: 16px;
 animation: shadow-pulse 1000ms 1;
 background-color:#434343;
 }
-body{
-background:black;
-}
+
 </style>
 </head>
 	<body>
+	<h4>${CbuExistente}</h4><h4>${Cuentayaexiste}</h4>
 		<form class="Formulario" action="AsociarCuenta.html" method="post">
 			<h1 align="center">Bienvenido Admin</h1>
 			<h4 align="center">Agregar Cuenta</h4>
 				<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${dni}" readonly="readonly"  ></p>
-				<p align="center">Nro Cuenta:<input class="controls"id="date" name="nroCuenta" required  min="1" max="4" pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
+				<p align="center">Nro Cuenta:<input class="controls"type="text" name="nroCuenta"   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
 			    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31">
 			    <p align="center"> Tipo Cuenta:</p>
 			    <p align="center" class="controls">
 				    <input type="radio" name="tipoCuenta" value="corriente"> Peso
 				    <input type="radio" name="tipoCuenta" value="ahorro"> Dolar
 			    </p>
-			    <p align="center">CBU: <input class="controls" type="text" name="cbu" pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))" ></p>
-			    <p align="center">SALDO: <input class="controls" type="text" name="saldo"min="10000"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
+			    <p align="center">CBU: <input class="controls" type="text" name="cbu"  onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))" ></p>
+			    <p align="center">SALDO: <input class="controls" type="text" name="saldo"   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
 			       
 				<input class="botons"type="submit" value="Aceptar">
 		</form>

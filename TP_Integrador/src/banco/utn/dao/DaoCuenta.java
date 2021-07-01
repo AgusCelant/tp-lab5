@@ -81,6 +81,24 @@ public class DaoCuenta {
 		DAO.cerrarSession();
 		return aux;
 	}
+	public boolean EditarcuentaxClientes(ClientesxCuentas cxc) {
+		Conexion DAO = new Conexion();
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();
+		boolean aux = true;
+		try
+		{
+			session.update(cxc); 
+			tx = session.getTransaction();
+			tx.commit();
+		}
+		catch (Exception e) {
+			aux=false;
+			tx.rollback();
+		}
+		DAO.cerrarSession();
+		return aux;
+	}
 	//anda
 	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
 		Conexion DAO = new Conexion();
@@ -156,4 +174,58 @@ public class DaoCuenta {
 		session.getTransaction().commit();		
 		DAO.cerrarSession();
 	}
+	
+	
+	
+	//anda
+	public List<Object[]> Verificarcbu(int Cbu) {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="Select c.Cbu From Cuenta as c  where c.Cbu="+Cbu+" and c.Estado=true ";		
+		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();		
+		DAO.cerrarSession();
+		return result;
+			
+	}
+	//anda
+	public List<Object[]> CuentaVerificar(int nroCuenta,String dni) {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="Select c.NumCuenta From Cuenta as c  where c.NumCuenta="+nroCuenta+" and c.Dni="+dni+"and c.Estado=true ";		
+		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();		
+		DAO.cerrarSession();
+		return result;
+			
+	}
+	//anda
+	public List<Object[]> CuentaVerificarEstado0(int nroCuenta,String dni) {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="Select c.NumCuenta From Cuenta as c  where c.NumCuenta="+nroCuenta+" and c.Dni="+dni+"and c.Estado=false ";		
+		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();		
+		DAO.cerrarSession();
+		return result;
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

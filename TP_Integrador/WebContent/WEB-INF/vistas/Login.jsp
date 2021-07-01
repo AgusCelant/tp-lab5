@@ -8,7 +8,7 @@
 <title>LOGIN</title>
 </head>
 <body>
-
+<h4>${Errordeconexcion}</h4>
   <div class="login">
 	<h1>Login</h1>
     <form action="login.html" method="post">
