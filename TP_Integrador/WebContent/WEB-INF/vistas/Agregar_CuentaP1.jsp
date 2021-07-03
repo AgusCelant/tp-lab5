@@ -4,6 +4,22 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	
+	
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>
+
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -47,7 +63,8 @@ color:white;
 	<form action="MostrarClientes.html" method="get">
 	<input type="submit" value="Agregar Cliente">
 	</form>
-<table>
+<table id="table_id" class="display">
+<thead>
   <tr>
     <th>Nombre</th>
     <th>Apellido</th>
@@ -60,6 +77,7 @@ color:white;
     <th>Usuario</th> 
     <th></th>
   </tr>
+  </thead>
     <c:forEach var="cliente" items="${ ListaClientes }"  >
   <tr>
   	  <td>${cliente.nombre}</td>

@@ -489,6 +489,7 @@ public class ControladorCliente {
 		
 		cuenta=negocioPersona.BuscarCuentaDni(Dnii,numCuenta);
 		cli=negocioPersona.BuscarCuentaxCliente(Dnii,numCuenta); 
+	
 		cuenta.setEstado(false);
 		cli.setEstado(false);
 		negocioPersona.Eliminar1Cuentaxcliente(cli);

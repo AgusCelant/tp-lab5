@@ -72,7 +72,7 @@ background:black;
     <p align="center">Nº Cuenta:<input class="controls"name="nrocuenta"value="${cuenta.numCuenta}" readonly="readonly" >
     <p align="center">CBU: <input class="controls" type="text" name="cbu" value="${cuenta.cbu}" pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
     <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31" value="${cuenta.fecha}">
-    <p align="center">SALDO: <input class="controls" type="text" name="saldo"  value="${cuenta.saldo}" min="10000"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
+    <p align="center">SALDO: <input class="controls" type="text" name="saldo"  value="${cuenta.saldo}" min="10000"   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
        
 	  <input class="botons"type="submit" value="Aceptar">
 	</div>

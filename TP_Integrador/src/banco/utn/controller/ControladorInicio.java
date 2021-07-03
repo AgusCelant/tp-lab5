@@ -51,6 +51,7 @@ public class ControladorInicio {
 			int cuenta4=0;
 
 			if(cuentaspesos.size()==0) {
+			
 				cuenta1=0;
 				cuenta2=0;
 				cuenta3=0;
@@ -83,7 +84,7 @@ public class ControladorInicio {
 					}
 					else {
 						if(cuentaspesos.size()==1) {
-							
+						
 							MV2.addObject("Cuenta1", cuentaspesos.get(0));
 							MV2.addObject("Cuenta2", cuenta2);
 							MV2.addObject("Cuenta3", cuenta3);
@@ -97,6 +98,8 @@ public class ControladorInicio {
 				
 			}
 			List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();
+			
+	
 			int cuenta1d=0;
 			int cuenta2d=0;
 			int cuenta3d=0;

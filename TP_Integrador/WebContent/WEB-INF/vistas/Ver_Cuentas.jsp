@@ -4,6 +4,24 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
+
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	
+	
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>	
+	
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -46,7 +64,8 @@ color:white;
 	</div >
 	</center>
 </form>
-<table style="text-align:center;">
+<table style="text-align:center;" id="table_id" class="display">
+<thead>
   <tr>
     <th>Cliente Asignado</th>
     <th>Fecha Creacion</th>
@@ -58,6 +77,7 @@ color:white;
     <th></th>
     <th></th>
   </tr>
+  </thead>
    <c:forEach var="cuenta" items="${ ListaCuentas }"  >
   <tr>
   	  <td>${cuenta.dni}</td>
@@ -75,8 +95,6 @@ color:white;
   </tr>
     	</c:forEach>
 </table>
-<form action="EliminarCuenta.html" method="post">
-<input type="submit" value="Eliminar">
-</form>
+
 </body>
 </html>
