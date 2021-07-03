@@ -31,7 +31,7 @@ public class ControladorInicio {
 		DAO.cerrarSession();*/
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Agregar_CuentaP1");
+		MV.setViewName("Login");
 		return MV;
 	}
 	
@@ -41,7 +41,118 @@ public class ControladorInicio {
 		ModelAndView MV = new ModelAndView();
 
 		if(txtUsuario.equals("admin") && txtPass.equals("admin")){
-			MV.setViewName("PerfilAdmin");
+
+			ModelAndView MV2 = new ModelAndView();
+			DaoCuenta DAOCuenta = new DaoCuenta();
+			List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
+			int cuenta1=0;
+			int cuenta2=0;
+			int cuenta3=0;
+			int cuenta4=0;
+
+			if(cuentaspesos.size()==0) {
+				cuenta1=0;
+				cuenta2=0;
+				cuenta3=0;
+				cuenta4=0;
+				MV2.addObject("Cuenta1", cuenta1);
+				MV2.addObject("Cuenta2", cuenta2);
+				MV2.addObject("Cuenta3", cuenta3);
+				MV2.addObject("Cuenta4", cuenta4);
+			}
+			if(cuentaspesos.size()==4) {
+				MV2.addObject("Cuenta1", cuentaspesos.get(0));
+				MV2.addObject("Cuenta2", cuentaspesos.get(1));
+				MV2.addObject("Cuenta3", cuentaspesos.get(2));
+				MV2.addObject("Cuenta4", cuentaspesos.get(3));						
+			}else {
+				if(cuentaspesos.size()==3) {					
+					MV2.addObject("Cuenta1", cuentaspesos.get(0));
+					MV2.addObject("Cuenta2", cuentaspesos.get(1));
+					MV2.addObject("Cuenta3", cuentaspesos.get(2));
+					MV2.addObject("Cuenta4", cuenta4);		
+					
+				}else {
+					if(cuentaspesos.size()==2) {
+						
+						MV2.addObject("Cuenta1", cuentaspesos.get(0));
+						MV2.addObject("Cuenta2", cuentaspesos.get(1));
+						MV2.addObject("Cuenta3", cuenta3);
+						MV2.addObject("Cuenta4", cuenta4);	
+						
+					}
+					else {
+						if(cuentaspesos.size()==1) {
+							
+							MV2.addObject("Cuenta1", cuentaspesos.get(0));
+							MV2.addObject("Cuenta2", cuenta2);
+							MV2.addObject("Cuenta3", cuenta3);
+							MV2.addObject("Cuenta4", cuenta4);	
+						}
+						
+						
+					}
+					
+				}
+				
+			}
+			List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();
+			int cuenta1d=0;
+			int cuenta2d=0;
+			int cuenta3d=0;
+			int cuenta4d=0;
+			if(cuentasdolar.size()==0) {
+				cuenta1d=0;
+				cuenta2d=0;
+				cuenta3d=0;
+				cuenta4d=0;
+				MV2.addObject("Cuenta1d", cuenta1d);
+				MV2.addObject("Cuenta2d", cuenta2d);
+				MV2.addObject("Cuenta3d", cuenta3d);
+				MV2.addObject("Cuenta4d", cuenta4d);
+			}
+			if(cuentasdolar.size()==4) {
+				MV2.addObject("Cuenta1d", cuentaspesos.get(0));
+				MV2.addObject("Cuenta2d", cuentaspesos.get(1));
+				MV2.addObject("Cuenta3d", cuentaspesos.get(2));
+				MV2.addObject("Cuenta4d", cuentaspesos.get(3));						
+			}else {
+				if(cuentasdolar.size()==3) {					
+					MV2.addObject("Cuenta1d", cuentaspesos.get(0));
+					MV2.addObject("Cuenta2d", cuentaspesos.get(1));
+					MV2.addObject("Cuenta3d", cuentaspesos.get(2));
+					MV2.addObject("Cuenta4d", cuenta4d);		
+					
+				}else {
+					if(cuentasdolar.size()==2) {
+						
+						MV2.addObject("Cuenta1d", cuentaspesos.get(0));
+						MV2.addObject("Cuenta2d", cuentaspesos.get(1));
+						MV2.addObject("Cuenta3d", cuenta3d);
+						MV2.addObject("Cuenta4d", cuenta4d);	
+						
+					}
+					else {
+						if(cuentasdolar.size()==1) {
+							
+							MV2.addObject("Cuenta1d", cuentaspesos.get(0));
+							MV2.addObject("Cuenta2d", cuenta2d);
+							MV2.addObject("Cuenta3d", cuenta3d);
+							MV2.addObject("Cuenta4d", cuenta4d);	
+						}
+						
+						
+					}
+					
+				}
+				
+			}
+			
+			
+			
+			
+			MV2.setViewName("PerfilAdmin");
+			return MV2;
 		}else {						
 			List<Object[]> verificarlogin=null;
 			NegPersona negocioPersona = new NegPersona();
@@ -90,8 +201,8 @@ public class ControladorInicio {
 			MV.setViewName("mainCliente");
 		}*/
 		
-		MV.setViewName("mainCliente");
-		return MV;
+	//	MV.setViewName("mainCliente");
+		//return MV;
 	}
 	
 	

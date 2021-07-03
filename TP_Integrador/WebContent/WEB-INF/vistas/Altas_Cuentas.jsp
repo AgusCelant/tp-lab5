@@ -56,8 +56,8 @@ background-color:#434343;
 			    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31">
 			    <p align="center"> Tipo Cuenta:</p>
 			    <p align="center" class="controls">
-				    <input type="radio" name="tipoCuenta" value="corriente"> Peso
-				    <input type="radio" name="tipoCuenta" value="ahorro"> Dolar
+				    <input type="radio" name="tipoCuenta" value="Pesos"> Peso
+				    <input type="radio" name="tipoCuenta" value="Dolar"> Dolar
 			    </p>
 			    <p align="center">CBU: <input class="controls" type="text" name="cbu"  onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))" ></p>
 			    <p align="center">SALDO: <input class="controls" type="text" name="saldo"   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>

@@ -210,9 +210,32 @@ public class DaoCuenta {
 		return result;
 			
 	}
+//anda
+	public List<Integer> ObtenerPorcentajedeCuentasPesos() {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='pesos' group by c.NumCuenta ";	
+		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
 	
+		
+		DAO.cerrarSession();
+		return result;
+			
+	}
+	//anda
+	public List<Integer> ObtenerPorcentajedeCuentasDolar() {
+		Conexion DAO = new Conexion();	
+		Session session = DAO.abrirConexion();
+		Transaction tx= session.beginTransaction();						
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Dolar' group by c.NumCuenta ";	
+		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
 	
-	
+		
+		DAO.cerrarSession();
+		return result;
+			
+	}
 	
 	
 	
