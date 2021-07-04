@@ -54,10 +54,11 @@ background:black;
 }
 </style>
 
-
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
 <h4 align="center">Editar Cuenta</h4>
+
 <form action="ActualizarCuenta.html" method="post">
  <c:forEach var="cuenta" items="${ ListaCuentas }"  >
 	<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${cuenta.dni}"readonly="readonly" ></p>

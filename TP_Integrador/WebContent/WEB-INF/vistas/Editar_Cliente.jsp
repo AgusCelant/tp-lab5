@@ -53,7 +53,7 @@ body{
 background:black;
 }
 </style>
-
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
 <form action="ActualizarCliente.html" method="post">
 <div class="Formulario">
   <c:forEach var="cliente" items="${ ListaClientes }"  >

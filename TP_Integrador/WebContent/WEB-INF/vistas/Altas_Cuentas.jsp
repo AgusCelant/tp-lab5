@@ -46,7 +46,9 @@ background-color:#434343;
 
 </style>
 </head>
+<h4>${estadoAgregarCuenta}</h4>
 	<body>
+	<jsp:include page="MenuAdmin.jsp"></jsp:include>
 	<h4>${CbuExistente}</h4><h4>${Cuentayaexiste}</h4>
 		<form class="Formulario" action="AsociarCuenta.html" method="post">
 			<h1 align="center">Bienvenido Admin</h1>

@@ -217,7 +217,7 @@ public class DaoCuenta {
 		Transaction tx= session.beginTransaction();						
 		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Pesos' group by c.NumCuenta ";	
 		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
-	
+
 		
 		DAO.cerrarSession();
 		return result;

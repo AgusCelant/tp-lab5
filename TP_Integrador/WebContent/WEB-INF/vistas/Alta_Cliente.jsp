@@ -50,7 +50,10 @@ body{
 background:white;
 }
 </style>
-
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
+<center>
+<h4>${estadoAgregarPersona}</h4>
+</center>
 <form action="agregarPersona.html" method="post">
 <div class="Formulario">
 <h1 align="center">Bienvenido Admin</h1>
@@ -83,7 +86,7 @@ background:white;
 	</div>
 	</form>
 	
-<h4>${estadoAgregarPersona}</h4>
+
 	
 </body>
 </html>

@@ -54,7 +54,7 @@ color:white;
 }
 
 </style>
-
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
 <center>
 	<div class="AltaCuenta" align="center">	
 	<h2 class="h2" align="center">Bienvenido Admin<h2>

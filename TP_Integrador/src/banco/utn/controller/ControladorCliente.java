@@ -62,7 +62,7 @@ public class ControladorCliente {
 	public ModelAndView irMenuAdmin() {
 		ModelAndView MV = new ModelAndView();
 		DaoCuenta DAOCuenta = new DaoCuenta();
-		List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
+		/*List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
 		int cuenta1=0;
 		int cuenta2=0;
 		int cuenta3=0;
@@ -166,7 +166,7 @@ public class ControladorCliente {
 			
 		}
 		
-		
+		*/
 		
 		
 		
@@ -267,7 +267,8 @@ public class ControladorCliente {
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
-
+		String EstadoeliminarCliente="El cliente "+cli.getNombre()+" "+cli.getApellido() +" con dni "+cli.getDni()+" se elimino correctamente";
+		MV.addObject("EstadoeliminarCliente",EstadoeliminarCliente);
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
@@ -284,7 +285,8 @@ public class ControladorCliente {
 		
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		ListaClientes.add(cli);
-		MV.addObject("ListaClientes",ListaClientes);		
+		MV.addObject("ListaClientes",ListaClientes);
+		
 		MV.setViewName("Editar_Cliente");
 		return MV;
 	}	
@@ -313,6 +315,8 @@ public class ControladorCliente {
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
+		String EstadoActualizarCliente="El cliente "+nombre+" "+apellido +" con dni "+dni+" se actualizo";
+		MV.addObject("EstadoActualizarCliente",EstadoActualizarCliente);
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
@@ -356,6 +360,8 @@ public class ControladorCliente {
 	
 		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas();
 		MV.addObject("ListaCuentas",ListaCuentas);
+		String estadoEditarCuenta="la cuenta nro "+nrocuenta+" y el Dni: "+dni+" se actualizaron correctamente";
+		MV.addObject("estadoEditarCuenta",estadoEditarCuenta);
 		MV.setViewName("Ver_Cuentas");
 		return MV;
 	}
@@ -400,6 +406,7 @@ public class ControladorCliente {
 			//luego verificar si existe el nro de cuenta pero con el estado true, si existe no lo agrega ni lo modifica
 			//luego verificar si existe pero con el estado 0, si existe haces un set, sino le haces un new
 			*/	
+		
 		String CbuExistente="El cbuExiste";
 		String CuentaExistente="La cuenta ya fue creada";
 		DaoCuenta DAOCuenta = new DaoCuenta();
@@ -449,6 +456,8 @@ public class ControladorCliente {
 			C.setEstado(true);
 			DAOCuenta.agregarClientesxcuentas(C);
 			ModelAndView MV = new ModelAndView();
+			String AgregoCorrectamente="La cuenta se agrego Correctamente";
+			MV.addObject("estadoAgregarCuenta", AgregoCorrectamente);
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
 			
@@ -467,6 +476,8 @@ public class ControladorCliente {
 			C.setEstado(true);
 			DAOCuenta.EditarcuentaxClientes(C);
 			ModelAndView MV = new ModelAndView();
+			String AgregoCorrectamente="La cuenta se agrego Correctamente";
+			MV.addObject("estadoAgregarCuenta", AgregoCorrectamente);
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
 		}
@@ -500,6 +511,8 @@ public class ControladorCliente {
 	
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+		String EliminoCorrectamente="La cuenta nro: "+numCuenta+" y dni: "+Dnii+" se elimino correctamente";
+		MV.addObject("estadoeliminarCuenta", EliminoCorrectamente);
 		MV.addObject("ListaCuentas",ListaCuentas);
 		MV.setViewName("Ver_Cuentas");
 		return MV;

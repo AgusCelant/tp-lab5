@@ -1,7 +1,12 @@
 package banco.utn.controller;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
@@ -36,31 +41,35 @@ public class ControladorInicio {
 	}
 	
 	@RequestMapping("login.html")
-	public ModelAndView ingresar(String txtUsuario, String txtPass)
+	public ModelAndView ingresar(String txtUsuario, String txtPass,HttpServletRequest request)
 	{
 		ModelAndView MV = new ModelAndView();
-
+		
+		
 		if(txtUsuario.equals("admin") && txtPass.equals("admin")){
 
 			ModelAndView MV2 = new ModelAndView();
 			DaoCuenta DAOCuenta = new DaoCuenta();
-			List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
+			//arreglar
+			List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();			
+			
+	
+		
+		
 			int cuenta1=0;
 			int cuenta2=0;
 			int cuenta3=0;
 			int cuenta4=0;
-
-			if(cuentaspesos.size()==0) {
-			
-				cuenta1=0;
-				cuenta2=0;
-				cuenta3=0;
-				cuenta4=0;
+			if(cuentaspesos.size()==1) {			
+				cuenta1=100;
+				cuenta2=200;
+				cuenta3=300;
+				cuenta4=400;
 				MV2.addObject("Cuenta1", cuenta1);
 				MV2.addObject("Cuenta2", cuenta2);
 				MV2.addObject("Cuenta3", cuenta3);
 				MV2.addObject("Cuenta4", cuenta4);
-			}
+			}/*
 			if(cuentaspesos.size()==4) {
 				MV2.addObject("Cuenta1", cuentaspesos.get(0));
 				MV2.addObject("Cuenta2", cuentaspesos.get(1));
@@ -150,7 +159,7 @@ public class ControladorInicio {
 				}
 				
 			}
-			
+			*/
 			
 			
 			
@@ -176,7 +185,7 @@ public class ControladorInicio {
 				for(Cuenta cuenta : cuentas) {
 					resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
 				}
-				MV.addObject("NombreCliente", cliente.getNombre());
+				request.getSession().setAttribute("Usuario", cliente.getNombre());	
 				MV.addObject("clienteLogueado", cliente);
 				MV.addObject("cuentasCliente", resumenCuentas);
 				MV.setViewName("mainCliente");
@@ -210,6 +219,11 @@ public class ControladorInicio {
 	
 	
 	
+	private NumberFormat DecimalFormat(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@RequestMapping("logout.html")
 	public ModelAndView CerrarSession()
 	{

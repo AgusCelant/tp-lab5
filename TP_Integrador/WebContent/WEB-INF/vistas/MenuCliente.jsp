@@ -21,7 +21,7 @@
   
  <div>
     <a class="logo">
-	<header>BIENVENIDO CLIENTE :${NombreCliente}</</header>    
+	<header>BIENVENIDO CLIENTE <%=session.getAttribute("Usuario")%></h1></</header>    
     </a> 
   </div> 
 <div class="settings"></div>
@@ -34,14 +34,14 @@
 </li>  
  
 <li>                                   
-<a href="">
+<a href="mostrarHistorial.html">
 <i class="fas fa-landmark fa-lg"></i>
 <span class="nav-text"> HISTORIAL</span>
 </a>
 </li>   
 
 <li>                                 
-<a href="">
+<a href="mostrarTransferencia.html">
 <i class="fas fa-money-check-alt fa-lg"></i>
 <span class="nav-text">HACER TRANSFERENCIA</span>
 </a>

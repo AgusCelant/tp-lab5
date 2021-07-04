@@ -22,6 +22,7 @@ function checkSelection (value) {
 <title>Transferencia</title>
 </head>
 <body>
+<h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
 	<form action="confirmarTransferencia.html" method="post">
 		<input type="hidden" name="dni" value="${dni}">
 		<h2>TRANSFERENCIA</h2>

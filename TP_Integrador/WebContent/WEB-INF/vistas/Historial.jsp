@@ -24,6 +24,7 @@
 <title>Hisotrial</title>
 </head>
 <body>
+<h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
 	<form action="mostrarHistorial.html" method="post">
 		<h2>HISTORIAL</h2>
 		<input type="hidden" name="dni" value="${dni}">

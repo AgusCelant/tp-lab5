@@ -56,6 +56,9 @@ color:white;
 }
 
 </style>
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
+<h4>${estadoeliminarCuenta}</h4>
+<h4>${estadoEditarCuenta}</h4>
 <form action="verCuenta.html" method="get">
 <center>
 	<div class="AltaCuenta" align="center">	

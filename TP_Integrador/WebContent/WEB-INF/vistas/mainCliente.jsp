@@ -28,7 +28,7 @@
 <jsp:include page="MenuCliente.jsp"></jsp:include>
 	<center>
 		<form method="post">
-			<h1>Bienvenido/a Matias!</h1>
+			<h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
 			<table id="table_id" class="display">
 			<thead>
 				<tr class="w3-red">

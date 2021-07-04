@@ -4,6 +4,8 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
+
+
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
@@ -60,7 +62,9 @@ color:white;
 
 
 
-
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
+<h4>${EstadoActualizarCliente}</h4>
+<h4>${EstadoeliminarCliente}</h4>
 <form action="verCliente.html" method="get">
 
 	<center>
