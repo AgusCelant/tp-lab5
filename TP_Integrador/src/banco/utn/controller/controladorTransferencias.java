@@ -40,14 +40,14 @@ public class controladorTransferencias {
 		
 		Cuenta cuentaOrigen = DAOCuenta.obtenerCuentaPorNroCuenta(Integer.parseInt(nroCuentaOrigen));
 		Cuenta cuentaDestino = new Cuenta();
-		if (cbu != null) {
+		if (cbu != null && nroCuentaDestino.equals("cuentaNoPropia")) {
 			cuentaDestino = DAOCuenta.obtenerCuentaPorCbu(Integer.parseInt(cbu));
 		} else {
 			cuentaDestino = DAOCuenta.obtenerCuentaPorNroCuenta(Integer.parseInt(nroCuentaDestino));
 		}
 		
 		if (cuentaDestino == null) {
-			MV.addObject("mensajeError", "<h2>La cuenta origien inidcada no existe!</h2>");
+			MV.addObject("mensajeError", "<h2>La cuenta desino inidcada no existe!</h2>");
 		} else if (cuentaOrigen.getSaldo() < Float.parseFloat(monto)) {
 			MV.addObject("mensajeError", "<h2>El monto indicado es mayor al disponible!</h2>");
 		} else {

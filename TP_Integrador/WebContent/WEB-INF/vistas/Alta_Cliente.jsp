@@ -3,6 +3,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+	const provincias = ['Buenos Aires', 'Buenos Aires-GBA','Capital Federal'];
+	const  ciudades = [
+		['25 de Mayo','Bahía Blanca','Capilla del Señor','Chascomús','Luján'],
+		['Banfield', 'Grand Bourg', 'San Miguel', 'San Fernando', 'Don Torcuato'],
+		['Retiro', 'Palermo', 'Constitucion', 'Nuñez', 'Liniers']
+	];
+	function onProvinciaChange(seleccion) {
+		let localidades;
+		let opciones = '';
+		if (seleccion.value == 'Buenos Aires') localidades = ciudades[0]; 
+		if (seleccion.value == 'Buenos Aires-GBA') localidades = ciudades[1]; 
+		if (seleccion.value == 'Capital Federal') localidades = ciudades[2]; 
+		
+		localidades.forEach(function(ciudad) {
+			opciones = opciones + '<option>' + ciudad + '</option>';
+		});
+		document.getElementById('ddLocalidad').innerHTML = opciones;
+	}
+	
+</script>
 <meta charset="ISO-8859-1">
 <title>Agregar Clientes</title>
 </head>
@@ -62,31 +83,27 @@ background:white;
     <p align="center">Apellido: <input class="controls" type="text" name="Apellido" required onkeypress="return (event.charCode ==32 || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90))" ></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
-    <input type="radio" name="Sexo" value="Hombre"> Hombre
-    <input type="radio" name="Sexo" value="Mujer"> Mujer
-  		</p>
-     <p align="center" >Dni: <input class="controls" type="text" name="Dni" required minlength="7" maxlength="8" placeholder="Ej:42469737"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
-     <p align="center">Año de nacimiento:<input class="controls" type="date" name="Date">
-       <p align="center">Nacionalidad: <input class="controls" type="text" name="Nacionalidad" ></p>
-        <p>Provincia: <select class="controls" name='Provincia'>
-        <option>Argentina</option>
-         <option>Guatemala</option>
-        
-         </select> </p>      
-      <p>Localidad: <select class="controls" name='Localidad'>
-
-        <option>San Fernando</option>
-         <option>Virreyes</option>
-        
-         </select> </p>    
-         <p align="center">Usuario: <input class="controls" type="text" name="Usuario" required ></p>
+	    <input type="radio" name="Sexo" value="Hombre"> Hombre
+	    <input type="radio" name="Sexo" value="Mujer"> Mujer
+  	</p>
+    <p align="center" >Dni: <input class="controls" type="text" name="Dni" required minlength="7" maxlength="8" placeholder="Ej:42469737"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
+    <p align="center">Año de nacimiento:<input class="controls" type="date" name="Date">
+    <p align="center">Nacionalidad: <input class="controls" type="text" name="Nacionalidad" ></p>
+	<p>Provincia:</p>
+        <select class="controls" name='Provincia' onchange="onProvinciaChange(this)">
+	        <option>Buenos Aires</option>
+	        <option>Buenos Aires-GBA</option>
+	        <option>Capital Federal</option>
+        </select>       
+    <p>Localidad:</p>
+    	<select id="ddLocalidad" class="controls" name='Localidad'>
+        	<option>San Fernando</option>
+			<option>Virreyes</option>
+        </select>     
+    <p align="center">Usuario: <input class="controls" type="text" name="Usuario" required ></p>
     <p align="center">Contraseña: <input class="controls" type="text" name="Contraseña" required ></p>
-        
-	  <input class="botons"type="submit" value="Agregar">
+		<input class="botons"type="submit" value="Agregar">
 	</div>
 	</form>
-	
-
-	
 </body>
 </html>

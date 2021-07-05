@@ -6,7 +6,6 @@
 <meta charset="ISO-8859-1">
 <script>
 function checkSelection (value) {
-	console.log('value',value);
 	if (document.getElementById('selectCuentaOrigen').value === document.getElementById('selectCuentaDestino').value) {
 		document.getElementById('botonConfirmar').disabled = true;
 	} else {
@@ -35,7 +34,7 @@ function checkSelection (value) {
 		
 		<lablel>Cuenta destino:</lablel>
 		<select id="selectCuentaDestino" name="nroCuentaDestino" onchange="checkSelection()">
-			<option>Transferir a cuenta no propia...</option>
+			<option value="cuentaNoPropia">Transferir a cuenta no propia...</option>
 		    ${listaCuentas}
 		</select>
 		<br><br>

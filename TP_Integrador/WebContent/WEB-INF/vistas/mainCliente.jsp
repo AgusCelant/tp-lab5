@@ -20,6 +20,12 @@
 		$('#table_id').DataTable();
 	});
 </script>
+<style>
+#table_id {
+	color: black;
+    width: 80%;
+}
+</style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Main Cliente</title>
