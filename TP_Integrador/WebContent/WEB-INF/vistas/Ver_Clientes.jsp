@@ -69,15 +69,16 @@ color:white;
 
 
 <jsp:include page="MenuAdmin.jsp"></jsp:include>
-<h4>${EstadoActualizarCliente}</h4>
-<h4>${EstadoeliminarCliente}</h4>
+
 <form action="verCliente.html" method="get">
 
 	<center>
+	<h4>${EstadoActualizarCliente}</h4>
+	<h4>${EstadoeliminarCliente}</h4>
 	<div class="AltaCliente" align="center">	
 	<h2 class="h2">Bienvenido admin<h2>
 	<h2 class="h2">Clientes<h2>
-	<input type="submit" value="Agregar Cliente">
+<a href="irAgregarCliente.html?" >Agregar Cliente </a>
 	</div >
 	</center>
 	</form>

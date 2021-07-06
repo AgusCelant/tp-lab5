@@ -2,25 +2,43 @@ package banco.utn.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import banco.utn.dao.DaoCuenta;
 import banco.utn.dao.DaoHistorial;
+import banco.utn.dao.DaoPersona;
+import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
 
 @Controller
 public class controladorTransferencias {
 
 	@RequestMapping("mostrarTransferencia.html")
-	public ModelAndView mostrarTransferencia(String dni) {
+	public ModelAndView mostrarTransferencia(String dni, HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
 		DaoCuenta DAOCuenta = new DaoCuenta();
 		String Cartel="Este cliente no tiene ninguna cuenta asociada";
 		List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(dni);
 		if(cuentas.size()==0) {
 			MV.addObject("Cartel", Cartel);
+		
+			DaoPersona DAOPersona = new DaoPersona();
+			String Dnii=(String) request.getSession().getAttribute("Dni");
+			String Clientelogueado=(String) request.getSession().getAttribute("Clienteelogueado");
+			List<Cuenta> cuentas1 = DAOCuenta.obtenerCuentasDeUsuario(Dnii);
+			Cliente cliente = DAOPersona.obtenerDatosDeUsuario(Clientelogueado);
+			String resumenCuentas = "";
+			
+			for(Cuenta cuenta : cuentas1) {
+				resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
+			}
+			System.out.println(resumenCuentas);
+			MV.addObject("clienteLogueado", cliente);
+			MV.addObject("cuentasCliente", resumenCuentas);
 			MV.setViewName("mainCliente");
 			return MV;
 		}

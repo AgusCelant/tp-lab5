@@ -41,6 +41,7 @@ center {
 	<center>
 		<form method="post">
 			<h4>${Cartel}</h4>
+			<h4>${Cartel2}</h4>
 			<h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
 			<table id="table_id" class="display">
 			<thead>

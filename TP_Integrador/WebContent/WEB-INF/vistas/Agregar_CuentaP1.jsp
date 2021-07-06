@@ -66,9 +66,10 @@ center {
 	<div class="AltaCuenta" align="center">	
 	<h2 class="h2" align="center">Bienvenido Admin<h2>
 	</div >
+		<a href="irAgregarCliente.html?" >Agregar Cliente </a>
 	</center>
 	<form action="MostrarClientes.html" method="get">
-	<input type="submit" value="Agregar Cliente">
+
 	</form>
 <table id="table_id" class="display">
 <thead>

@@ -80,26 +80,17 @@ public class ControladorCliente {
 		List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();			
 		List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();		
 		int cuenta1=0;
-		int cuenta2d=0;
-
-		if(cuentaspesos.size()==0) {			
-			cuenta1=0;		
+		int cuenta2=0;
+		if (cuentaspesos.get(0)==null) {				
 			MV.addObject("Cuenta1", cuenta1);
-		}else {
-			if(cuentaspesos.size()==1) {					
-				MV.addObject("Cuenta1", cuentaspesos.get(0));					
-			}			
+		} else {
+			MV.addObject("Cuenta1", cuentaspesos.get(0));
 		}
-		if(cuentasdolar.size()==0) {			
-			cuenta2d=0;		
-			MV.addObject("Cuenta2", cuenta2d);
-		}else {
-			if(cuentasdolar.size()==1) {					
-				MV.addObject("Cuenta2", cuentasdolar.get(0));					
-			}			
+		if (cuentasdolar.get(0)==null) {				
+			MV.addObject("Cuenta2", cuenta2);
+		} else {
+			MV.addObject("Cuenta2", cuentasdolar.get(0));
 		}
-		
-		
 		
 		MV.setViewName("PerfilAdmin");
 		return MV;

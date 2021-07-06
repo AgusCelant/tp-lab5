@@ -61,7 +61,7 @@ background-color:#434343;
 				    <input type="radio" name="tipoCuenta" value="Dolares"> Dolares
 			    </p>
 			    <p align="center">CBU: <input class="controls" type="text" name="cbu"  onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))" ></p>
-			    <p align="center">SALDO: <input class="controls" type="text" name="saldo"   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
+			    <p align="center">SALDO: <input class="controls" type="text" name="saldo" value="10000"  onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
 			       
 				<input class="botons"type="submit" value="Aceptar">
 		</form>

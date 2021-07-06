@@ -64,14 +64,15 @@ center {
 }
 </style>
 <jsp:include page="MenuAdmin.jsp"></jsp:include>
+
+<form action="verCuenta.html" method="get">
+<center>
 <h4>${estadoeliminarCuenta}</h4>
 <h4>${estadoEditarCuenta}</h4>
 <h4>${estadoAgregarCuenta}</h4>
-<form action="verCuenta.html" method="get">
-<center>
 	<div class="AltaCuenta" align="center">	
 	<h2 class="h2" align="center">Bienvenido Admin<h2>
-		<input type="submit" value="Agregar Cuenta">
+		<a href="MostrarClientes.html?" >Agregar Cuenta </a>
 	</div >
 	</center>
 </form>
