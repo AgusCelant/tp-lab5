@@ -28,12 +28,18 @@ public class controladorTransferencias {
 		
 		
 		String listaCuentas = "";
+		float DineroDisponible = 0;
+		int c=0;
 		for(Cuenta cuenta : cuentas) {
+			c++;
 			listaCuentas = listaCuentas + "<option>" + cuenta.getNumCuenta() + "</option>";
+			if(c==1) {DineroDisponible=cuenta.getSaldo();}
+			
 		}
 		
 		MV.addObject("listaCuentas", listaCuentas);
 		MV.addObject("dni", dni);
+		MV.addObject("DineroDisponible", DineroDisponible);
 		MV.setViewName("Transferencia");
 		
 		return MV;

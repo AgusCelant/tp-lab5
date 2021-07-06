@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoCuenta;
@@ -44,14 +46,24 @@ public class ControladorCliente {
 	private NegCuentas negocioCuentas;
 	
 	@RequestMapping("mainCliente.html")
-	public void eventoRedireccionarMainCliente(String txtUsuario, String txtPass) {
+	public ModelAndView eventoRedireccionarMainCliente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-		Conexion conexion = new Conexion();
-		Session session = conexion.abrirConexion();
-		Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE dni='123'").uniqueResult();
-		conexion.cerrarSession();
+		DaoCuenta DAOCuenta = new DaoCuenta();
+		DaoPersona DAOPersona = new DaoPersona();
+		String Dnii=(String) request.getSession().getAttribute("Dni");
+		String Clientelogueado=(String) request.getSession().getAttribute("Clienteelogueado");
+		List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(Dnii);
+		Cliente cliente = DAOPersona.obtenerDatosDeUsuario(Clientelogueado);
+		String resumenCuentas = "";
+		
+		for(Cuenta cuenta : cuentas) {
+			resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
+		}
+		System.out.println(resumenCuentas);
 		MV.addObject("clienteLogueado", cliente);
+		MV.addObject("cuentasCliente", resumenCuentas);
 		MV.setViewName("mainCliente");
+		return MV;
 	}
 //anda
 	@RequestMapping("irAgregarCliente.html")

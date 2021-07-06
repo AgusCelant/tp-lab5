@@ -27,7 +27,7 @@
 <div class="settings"></div>
   
   <li>                                   
-<a href="">
+<a href="mainCliente.html">
 <i class="fas fa-home fa-lg"></i>
 <span class="nav-text">MENU PRINCIPAL</span>
 </a>

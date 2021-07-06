@@ -23,6 +23,7 @@ function checkSelection (value) {
 <body>
 <center>
 <h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
+<jsp:include page="MenuCliente.jsp"></jsp:include>
 	<form action="confirmarTransferencia.html" method="post">
 		<input type="hidden" name="dni" value="${dni}">
 		<h2>TRANSFERENCIA</h2>
@@ -41,11 +42,11 @@ function checkSelection (value) {
 		<br><br>
 		<label>CBU destino:</label><input id="cbuDestino" name="cbu" type="number" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
 		<br><br>
-		<label>Dinero disponible: $xxxx</label>
+		<label>Dinero disponible:  ${DineroDisponible}</label>
 		<br>
 		<label>Monto a transferir:</label><input name="monto" type="number" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
 		<br><br>
-		<button>CANCELAR</button> <button id="botonConfirmar" type="submit">CONFIRMAR</button>
+		 <button id="botonConfirmar" type="submit">CONFIRMAR</button>
 	</form>
 	</center>
 </body>

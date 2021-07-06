@@ -90,6 +90,8 @@ public class ControladorInicio {
 					resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
 				}
 				request.getSession().setAttribute("Usuario", cliente.getNombre());	
+				request.getSession().setAttribute("Dni", cliente.getDni());
+				request.getSession().setAttribute("Clienteelogueado", txtUsuario);	
 				MV.addObject("clienteLogueado", cliente);
 				MV.addObject("cuentasCliente", resumenCuentas);
 				MV.setViewName("mainCliente");

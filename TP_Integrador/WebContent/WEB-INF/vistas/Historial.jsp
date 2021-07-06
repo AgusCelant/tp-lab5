@@ -19,12 +19,28 @@
 		$('#table_id').DataTable();
 	});
 </script>
+<style>
+nav {
+z-index: 2;
+}
+center {
+	margin-left: 80px;
+}
+
+#table_id {
+	color: black;
+}
+#table_id_wrapper {
+	margin-left: 80px;
+}
+</style>
 <head>
 <meta charset="ISO-8859-1">
 <title>Hisotrial</title>
 </head>
 <body>
 <h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
+<jsp:include page="MenuCliente.jsp"></jsp:include>
 	<form action="mostrarHistorial.html" method="post">
 		<h2>HISTORIAL</h2>
 		<input type="hidden" name="dni" value="${dni}">
@@ -53,15 +69,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="pagination">
-		  <input type="button" value="|<"/>
-		  <input type="button" value="<"/>
-		  <span>0</span>
-		  <input type="button" value=">"/>
-		  <input type="button" value=">|"/>
-		</div>
 		<br>
-		<button>VOLVER</button>
 	</form>
 </body>
 </html>
