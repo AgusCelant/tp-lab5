@@ -65,7 +65,6 @@ background:black;
 
     <p align="center"> Tipo Cuenta:</p> 
     <p align="center" class="controls">
-    ${cuenta.tipoCuenta == "Pesos" ? "la cuenta es pesos" : "la cuenta NOOO es pesos"}
     <input type="radio" name="TipoCuenta" value="Pesos" ${cuenta.tipoCuenta == "Pesos" ? "checked" : ""} > Pesos
     <input type="radio" name="TipoCuenta" value="Dolares" ${cuenta.tipoCuenta == "Dolares" ? "checked" : ""} > Dolares
   		</p>
