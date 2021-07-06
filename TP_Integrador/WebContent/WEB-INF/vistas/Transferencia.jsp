@@ -11,7 +11,7 @@ function checkSelection (value) {
 	} else {
 		document.getElementById('botonConfirmar').disabled = false;
 	}
-	if (document.getElementById('selectCuentaDestino').value === 'Transferir a cuenta no propia...') {
+	if (document.getElementById('selectCuentaDestino').value === 'cuentaNoPropia') {
 		document.getElementById('cbuDestino').disabled = false;
 	} else {
 		document.getElementById('cbuDestino').disabled = true;

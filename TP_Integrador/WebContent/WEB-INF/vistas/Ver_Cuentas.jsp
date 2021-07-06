@@ -55,6 +55,13 @@ border:double;
 color:white;
 }
 
+center {
+	margin-left: 80px;
+}
+
+#table_id {
+	color: black;
+}
 </style>
 <jsp:include page="MenuAdmin.jsp"></jsp:include>
 <h4>${estadoeliminarCuenta}</h4>

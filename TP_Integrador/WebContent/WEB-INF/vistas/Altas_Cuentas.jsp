@@ -53,8 +53,7 @@ background-color:#434343;
 		<form class="Formulario" action="AsociarCuenta.html" method="post">
 			<h1 align="center">Bienvenido Admin</h1>
 			<h4 align="center">Agregar Cuenta</h4>
-				<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${dni}" readonly="readonly"  ></p>
-				<p align="center">Nro Cuenta:<input class="controls"type="text" name="nroCuenta"   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
+				<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${dni}" readonly="readonly"></p>
 			    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31">
 			    <p align="center"> Tipo Cuenta:</p>
 			    <p align="center" class="controls">

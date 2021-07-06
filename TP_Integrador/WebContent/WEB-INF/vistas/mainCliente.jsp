@@ -21,9 +21,12 @@
 	});
 </script>
 <style>
+center {
+	margin-left: 80px;
+}
+
 #table_id {
 	color: black;
-    width: 80%;
 }
 </style>
 <head>

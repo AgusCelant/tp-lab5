@@ -402,7 +402,7 @@ public class ControladorCliente {
 	}
 	//falta 
 	@RequestMapping("AsociarCuenta.html")
-	public ModelAndView EventoAsociarCuenta(String dni, int nroCuenta, String fechaCreacion, String tipoCuenta, int cbu, float saldo)
+	public ModelAndView EventoAsociarCuenta(String dni, String fechaCreacion, String tipoCuenta, int cbu, float saldo)
 	{
 		/*
 		//para mi seria que si o si tenga que poner el nro de cuenta, luego verificar si ese cbu existe con el estado true
@@ -410,44 +410,38 @@ public class ControladorCliente {
 			//luego verificar si existe pero con el estado 0, si existe haces un set, sino le haces un new
 			*/	
 		
-		String CbuExistente="El cbuExiste";
+		String CbuExistente="El CBU Existe";
 		String CuentaExistente="La cuenta ya fue creada";
 		DaoCuenta DAOCuenta = new DaoCuenta();
 		List<Object[]> CbuVerificar=null;
 		List<Object[]> CuentaVerificar=null;
 		List<Object[]> CuentaVerificarEstado0=null;
 		CbuVerificar=DAOCuenta.Verificarcbu(cbu);
-		CuentaVerificar=DAOCuenta.CuentaVerificar(nroCuenta, dni);
-		CuentaVerificarEstado0=DAOCuenta.CuentaVerificarEstado0(nroCuenta, dni);
+		// CuentaVerificar=DAOCuenta.CuentaVerificar(nroCuenta, dni);
+		// CuentaVerificarEstado0=DAOCuenta.CuentaVerificarEstado0(nroCuenta, dni);
 		
-		if(CbuVerificar.isEmpty()) {
-
-		} else {
-		
+		if(!CbuVerificar.isEmpty()) {
 			ModelAndView MV = new ModelAndView();
 			String Dni =dni; 
 			MV.addObject("dni", Dni);
 			MV.addObject("CbuExistente", CbuExistente);
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
-			
 		}
 		
-		if(CuentaVerificar.isEmpty()) {
-			
-		} else {
+		/*if(!CuentaVerificar.isEmpty()) {
 			ModelAndView MV = new ModelAndView();
 			String Dni =dni; 
 			MV.addObject("dni", Dni);
 			MV.addObject("Cuentayaexiste", CuentaExistente);
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
-		}
+		}*/
 		
-		if(CuentaVerificarEstado0.isEmpty()) {
+		//if(CuentaVerificarEstado0.isEmpty()) {
 			System.out.println("Entro a Agregar");
 			Cuen.setDni(dni);
-			Cuen.setNumCuenta(nroCuenta);
+			//Cuen.setNumCuenta(nroCuenta);
 			Cuen.setCbu(cbu);	
 			Cuen.setFecha(fechaCreacion);
 			Cuen.setSaldo(saldo);
@@ -455,7 +449,7 @@ public class ControladorCliente {
 			Cuen.setEstado(true);
 			DAOCuenta.AgregarCuenta(Cuen);
 			C.setDni(dni);
-			C.setIdCuenta(nroCuenta);
+			//C.setIdCuenta(nroCuenta);
 			C.setEstado(true);
 			DAOCuenta.agregarClientesxcuentas(C);
 			ModelAndView MV = new ModelAndView();
@@ -464,10 +458,10 @@ public class ControladorCliente {
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
 			
-		} else {
+		/*} else {
 			System.out.println("Entro a modificar");
 			Cuen.setDni(dni);
-			Cuen.setNumCuenta(nroCuenta);
+			//Cuen.setNumCuenta(nroCuenta);
 			Cuen.setCbu(cbu);	
 			Cuen.setFecha(fechaCreacion);
 			Cuen.setSaldo(saldo);
@@ -475,7 +469,7 @@ public class ControladorCliente {
 			Cuen.setEstado(true);
 			DAOCuenta.Editarcuenta(Cuen);
 			C.setDni(dni);
-			C.setIdCuenta(nroCuenta);
+			//C.setIdCuenta(nroCuenta);
 			C.setEstado(true);
 			DAOCuenta.EditarcuentaxClientes(C);
 			ModelAndView MV = new ModelAndView();
@@ -483,7 +477,7 @@ public class ControladorCliente {
 			MV.addObject("estadoAgregarCuenta", AgregoCorrectamente);
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
-		}
+		}*/
 
 		
 	}
