@@ -126,6 +126,7 @@ opacity:1;
 }
 
 .main-menu {
+z-index:2;
 background:#423F3E;
 position:absolute;
 top:0;

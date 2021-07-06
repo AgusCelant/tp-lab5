@@ -4,8 +4,10 @@ import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.metamodel.source.annotations.UnknownInheritanceTypeException;
@@ -238,6 +240,123 @@ public class DaoCuenta {
 	}
 	
 	
+		//anda
+		public Cuenta BuscarCuentaDni(String Dni, int numCuenta) {
+			Conexion DAO = new Conexion();
+			Session session = DAO.abrirConexion();
+			Transaction tx= session.beginTransaction();						
+			String hql="Select c.NumCuenta,c.Dni,c.Fecha,c.TipoCuenta,c.Cbu,c.Saldo,c.Estado From Cuenta as c  where c.Dni="+Dni+" and c.NumCuenta="+numCuenta+"and  c.Estado=true ";		
+			Query query=session.createQuery(hql);
+			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+			Cuenta cuenta = new Cuenta();
+			for(Object[] obj : result) {
+				
+				cuenta.setNumCuenta((int) obj[0]);
+				cuenta.setDni((String)obj[1]);
+				cuenta.setFecha((String)obj[2]);
+				cuenta.setTipoCuenta((String)obj[3]);
+				cuenta.setCbu((int)obj[4]);
+				cuenta.setSaldo((float)obj[5]);
+				cuenta.setEstado((boolean)obj[6]);
+				
+			}
+			tx.commit();
+			DAO.cerrarSession();
+
+			return cuenta;
+				
+		}
+		//anda
+		public ClientesxCuentas BuscarCuentaxCliente(String Dni,int NumCuenta) {
+			Conexion DAO = new Conexion();
+			Session session = DAO.abrirConexion();
+			Transaction tx= session.beginTransaction();						
+			String hql="select c.Dni,c.IdCuenta,c.Estado From ClientesxCuentas as c WHERE c.Dni="+Dni+"and c.IdCuenta="+NumCuenta+" and c.Estado=true ";
+			Query query=session.createQuery(hql);
+			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+			ClientesxCuentas cli = new ClientesxCuentas();
+			for(Object[] obj : result) {
+				
+				cli.setDni((String) obj[0]);
+				cli.setIdCuenta((int)obj[1]);
+				cli.setEstado((boolean)obj[2]);
+			}
+			tx.commit();
+			DAO.cerrarSession();
+
+			return cli;
+				
+		}
+		//anda
+		public ArrayList<ClientesxCuentas> BuscarTODASCuentaxCliente(String Dni) {
+			Conexion DAO = new Conexion();
+			Session session = DAO.abrirConexion();
+			Transaction tx= session.beginTransaction();						
+			String hql="select c.Dni,c.IdCuenta,c.Estado From ClientesxCuentas as c WHERE c.Dni="+Dni+" and c.Estado=true ";
+			Query query=session.createQuery(hql);
+			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+			
+			ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
+			for(Object[] obj : result) {
+				ClientesxCuentas cli = new ClientesxCuentas();
+				cli.setDni((String) obj[0]);
+				cli.setIdCuenta((int)obj[1]);
+				cli.setEstado((boolean)obj[2]);
+				ListaClientesxcuentas.add(cli);
+			}
+			tx.commit();
+			DAO.cerrarSession();
+
+			return ListaClientesxcuentas;
+				
+		}
+		//anda
+		public ArrayList<Cuenta> BuscarTODASCuenta(String Dni) {
+			Conexion DAO = new Conexion();
+			Session session = DAO.abrirConexion();
+			Transaction tx= session.beginTransaction();						
+			String hql="Select c.NumCuenta,c.Dni,c.Fecha,c.TipoCuenta,c.Cbu,c.Saldo,c.Estado From Cuenta as c  where c.Dni="+Dni+"and  c.Estado=true ";
+			Query query=session.createQuery(hql);
+			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+			
+			ArrayList<Cuenta> Listacuentas= new ArrayList<Cuenta>();
+		for(Object[] obj : result) {
+				Cuenta cuenta = new Cuenta();
+				cuenta.setNumCuenta((int) obj[0]);
+				cuenta.setDni((String)obj[1]);
+				cuenta.setFecha((String)obj[2]);
+				cuenta.setTipoCuenta((String)obj[3]);
+				cuenta.setCbu((int)obj[4]);
+				cuenta.setSaldo((float)obj[5]);
+				cuenta.setEstado((boolean)obj[6]);
+				Listacuentas.add(cuenta);
+			}
+			tx.commit();
+			DAO.cerrarSession();
+
+			return Listacuentas;
+				
+		}
+		//anda
+		public boolean Eliminar1Cuenta(Cuenta cuenta) {	
+			Conexion DAO = new Conexion();
+			Session session = DAO.abrirConexion();
+			session.beginTransaction();
+			session.update(cuenta);
+			session.getTransaction().commit();					
+				DAO.cerrarSession();
+				return true;
+		}
+		//anda
+		public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {	
+			Conexion DAO = new Conexion();
+			Session session = DAO.abrirConexion();
+			session.beginTransaction();
+			session.update(cli);
+			session.getTransaction().commit();					
+			DAO.cerrarSession();
+				return true;
+		}
 	
 	
 	

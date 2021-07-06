@@ -43,7 +43,13 @@ table {
 th {
   height: 70px;
 }
+#table_id_wrapper {
+	margin-left: 80px;
+}
 
+#table_id {
+	color: black;
+}
 
 
 .AltaCliente{

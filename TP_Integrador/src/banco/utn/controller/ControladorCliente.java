@@ -22,6 +22,7 @@ import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
+import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
 import org.hibernate.Session;
 
@@ -39,6 +40,8 @@ public class ControladorCliente {
 	private Cuenta Cuen;
 	@Autowired
 	private DaoCuenta DaoCuen;
+	@Autowired
+	private NegCuentas negocioCuentas;
 	
 	@RequestMapping("mainCliente.html")
 	public void eventoRedireccionarMainCliente(String txtUsuario, String txtPass) {
@@ -248,20 +251,20 @@ public class ControladorCliente {
 		cli.setEstado(false);
 		negocioPersona.EliminarPersona(cli);
 		ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
-		ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioPersona.BuscarTODASCuentaxCliente(id);
+		ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioCuentas.BuscarTODASCuentaxCliente(id);
 		
 		for(ClientesxCuentas obj : ListaClientesxcuentas) {
 			obj.setEstado(false);
-			negocioPersona.Eliminar1Cuentaxcliente(obj);
+			negocioCuentas.Eliminar1Cuentaxcliente(obj);
 			
 		}
 		
 		ArrayList<Cuenta> Listatodascuentas= new ArrayList<Cuenta>();
-		Listatodascuentas = (ArrayList<Cuenta>) negocioPersona.BuscarTODASCuenta(id);
+		Listatodascuentas = (ArrayList<Cuenta>) negocioCuentas.BuscarTODASCuenta(id);
 		
 		for(Cuenta obj2 : Listatodascuentas) {
 			obj2.setEstado(false);
-			negocioPersona.Eliminar1Cuenta(obj2);
+			negocioCuentas.Eliminar1Cuenta(obj2);
 			
 		}
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
@@ -331,7 +334,7 @@ public class ControladorCliente {
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);
 	
-		Cuenta Cuen=negocioPersona.BuscarCuentaDni(Dnii, numCuenta);
+		Cuenta Cuen=negocioCuentas.BuscarCuentaDni(Dnii, numCuenta);
 		
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 		ListaCuentas.add(Cuen);
@@ -354,7 +357,7 @@ public class ControladorCliente {
 		cuen.setFecha(fechaCreacion);
 		cuen.setSaldo(saldo);
 		cuen.setEstado(true);
-		negocioPersona.Editarcuenta(cuen);
+		negocioCuentas.Editarcuenta(cuen);
 		DaoCuenta DAOCuenta = new DaoCuenta();
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 	
@@ -498,13 +501,13 @@ public class ControladorCliente {
 		int numCuenta =Integer.parseInt(parts[1]);
 				 
 		
-		cuenta=negocioPersona.BuscarCuentaDni(Dnii,numCuenta);
-		cli=negocioPersona.BuscarCuentaxCliente(Dnii,numCuenta); 
+		cuenta=negocioCuentas.BuscarCuentaDni(Dnii,numCuenta);
+		cli=negocioCuentas.BuscarCuentaxCliente(Dnii,numCuenta); 
 	
 		cuenta.setEstado(false);
 		cli.setEstado(false);
-		negocioPersona.Eliminar1Cuentaxcliente(cli);
-		negocioPersona.Eliminar1Cuenta(cuenta);
+		negocioCuentas.Eliminar1Cuentaxcliente(cli);
+		negocioCuentas.Eliminar1Cuenta(cuenta);
 
 
 		

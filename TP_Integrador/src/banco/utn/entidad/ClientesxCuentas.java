@@ -3,6 +3,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,6 +22,7 @@ public class ClientesxCuentas implements Serializable{
 	
 	@Id
 	@Column(name="IdCuenta")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int IdCuenta;
 	
 	@Column(name="Estado")

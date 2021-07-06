@@ -20,8 +20,7 @@ public class NegPersona {
 
 	@Autowired
 	private DaoPersona daoPersona = new DaoPersona();
-	@Autowired
-	private DaoCuenta daoCuenta;
+
 	
 	public List<Cliente> listarPersonas() {
 		return daoPersona.listarPersonas();
@@ -46,12 +45,7 @@ public boolean EditarPersona(Cliente cliente) {
 	
 	return daoPersona.EditarPersona(cliente);
 }
-public boolean Editarcuenta(Cuenta cuenta) {
-	
-	
-	return daoCuenta.Editarcuenta(cuenta);
-	
-}
+
 
 public List<Object[]> VerificarDni(String Dni) {
 	
@@ -79,40 +73,19 @@ public ArrayList<Cliente> TraerClientes() {
 }
 
 
-public List<Cuenta> listarCuentas() {
-	
-return  daoPersona.listarCuentas();
-}
+
 /*
 public boolean agregarClientesxcuentas(ClientesxCuentas p) {
 	return daoPersona.agregarClientesxcuentas(p);
 }
 */
-public Cuenta BuscarCuentaDni(String Dni, int numCuenta) {
-	
-	return daoPersona.BuscarCuentaDni(Dni,numCuenta);
-}
-public ArrayList<Cuenta> BuscarTODASCuenta(String Dni) {
-	return  daoPersona.BuscarTODASCuenta(Dni);
-}
-public ClientesxCuentas BuscarCuentaxCliente(String Dni,int NumCuenta) {
-	
-	return daoPersona.BuscarCuentaxCliente(Dni,NumCuenta);
-}
 
-public ArrayList<ClientesxCuentas> BuscarTODASCuentaxCliente(String Dni) {
-	return  daoPersona.BuscarTODASCuentaxCliente(Dni);
-}
 
-public boolean Eliminar1Cuenta(Cuenta cuenta) {
-	
-	return daoPersona.Eliminar1Cuenta(cuenta);
-}
 
-public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {
-	
-	return daoPersona.Eliminar1Cuentaxcliente(cli);
-}
+
+
+
+
 /*
  * 
  * Historial
