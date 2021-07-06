@@ -31,20 +31,6 @@
 <i class="fas fa-home fa-lg"></i>
 <span class="nav-text">MENU PRINCIPAL</span>
 </a>
-</li>  
- 
-<li>                                   
-<a href="mostrarHistorial.html">
-<i class="fas fa-landmark fa-lg"></i>
-<span class="nav-text"> HISTORIAL</span>
-</a>
-</li>   
-
-<li>                                 
-<a href="mostrarTransferencia.html">
-<i class="fas fa-money-check-alt fa-lg"></i>
-<span class="nav-text">HACER TRANSFERENCIA</span>
-</a>
 </li>   
 
 <li>                                 

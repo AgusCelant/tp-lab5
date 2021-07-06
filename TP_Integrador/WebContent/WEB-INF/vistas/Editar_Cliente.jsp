@@ -127,8 +127,8 @@ background:black;
     <p align="center">Apellido: <input class="controls" type="text" name="apellido" value="${cliente.apellido}" required onkeypress="return (event.charCode ==32 || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90))"></p>
     <p align="center"> Sexo:</p> 
     <p align="center" class="controls">
-    <input type="radio" name="Sexo" checked=${cliente.sexo == "Hombre" ? true : false}> Hombre
-    <input type="radio" name="Sexo" checked=${cliente.sexo == "Mujer" ? true : false}> Mujer
+    <input type="radio" name="Sexo" value="Hombre" ${cliente.sexo == "Hombre" ? "checked" : ""}> Hombre
+    <input type="radio" name="Sexo" value="Mujer" ${cliente.sexo == "Mujer" ? "checked" : ""}> Mujer
   		</p>
  	 <p align="center">Dni: <input class="controls" type="text" name="dni" value="${cliente.dni}" readonly="readonly"></p>
      <p align="center">Año de nacimiento:<input class="controls"name="date" type="date" value="${cliente.nacimiento}">

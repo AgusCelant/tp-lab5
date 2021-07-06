@@ -234,7 +234,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();	
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Dolar'";	
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Dolares'";	
 		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
 	
 		

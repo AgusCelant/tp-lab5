@@ -21,6 +21,9 @@
 	});
 </script>
 <style>
+nav {
+z-index: 2;
+}
 center {
 	margin-left: 80px;
 }

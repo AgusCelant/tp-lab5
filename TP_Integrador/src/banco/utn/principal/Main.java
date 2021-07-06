@@ -27,8 +27,8 @@ public class Main {
 		DAO.cerrarSession(); */
 
 		/*Conexion DAO = new Conexion();
-		Cuenta cuenta1= new Cuenta("26/06/21", "Dolar", 0001, 10500, true);
-		Cuenta cuenta2= new Cuenta("27/06/21", "Peso", 0002, 10000, true);
+		Cuenta cuenta1= new Cuenta("26/06/21", "Dolares", 0001, 10500, true);
+		Cuenta cuenta2= new Cuenta("27/06/21", "Pesos", 0002, 10000, true);
 		
 		Session session = DAO.abrirConexion();
 		session.beginTransaction();

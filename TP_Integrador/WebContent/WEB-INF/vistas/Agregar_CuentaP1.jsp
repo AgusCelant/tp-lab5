@@ -52,6 +52,13 @@ border:double;
 .h2{
 color:white;
 }
+center {
+	margin-left: 80px;
+}
+
+#table_id {
+	color: black;
+}
 
 </style>
 <jsp:include page="MenuAdmin.jsp"></jsp:include>
