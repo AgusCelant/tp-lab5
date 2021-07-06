@@ -16,7 +16,7 @@ import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
 
 @Service("servicioPersona")
-public class NegPersona {
+public class NegPersona implements InterfazNegPersona {
 
 	@Autowired
 	private DaoPersona daoPersona = new DaoPersona();
@@ -61,17 +61,9 @@ public List<Object[]> VerificarLogin(String Usuario,String Contraseña) {
 	
 	return  daoPersona.VerificarLogin(Usuario,Contraseña);
 }
-
-/*
- * 
- * Cuentass
- * 
- */
-
 public ArrayList<Cliente> TraerClientes() {
 	return  daoPersona.TraerClientes();
 }
-
 
 
 /*

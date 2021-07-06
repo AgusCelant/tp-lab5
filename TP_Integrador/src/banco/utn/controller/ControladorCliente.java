@@ -413,13 +413,18 @@ public class ControladorCliente {
 		String CbuExistente="El CBU Existe";
 		String CuentaExistente="La cuenta ya fue creada";
 		DaoCuenta DAOCuenta = new DaoCuenta();
+		
 		List<Object[]> CbuVerificar=null;
 		List<Object[]> CuentaVerificar=null;
 		List<Object[]> CuentaVerificarEstado0=null;
 		CbuVerificar=DAOCuenta.Verificarcbu(cbu);
 		// CuentaVerificar=DAOCuenta.CuentaVerificar(nroCuenta, dni);
 		// CuentaVerificarEstado0=DAOCuenta.CuentaVerificarEstado0(nroCuenta, dni);
-		
+		C=new ClientesxCuentas();
+		C.setDni(dni);
+		C.setEstado(true);
+		//System.out.println(C.toString());
+		DAOCuenta.agregarClientesxcuentas(C);
 		if(!CbuVerificar.isEmpty()) {
 			ModelAndView MV = new ModelAndView();
 			String Dni =dni; 
@@ -439,7 +444,6 @@ public class ControladorCliente {
 		}*/
 		
 		//if(CuentaVerificarEstado0.isEmpty()) {
-			System.out.println("Entro a Agregar");
 			Cuen.setDni(dni);
 			//Cuen.setNumCuenta(nroCuenta);
 			Cuen.setCbu(cbu);	
@@ -447,15 +451,18 @@ public class ControladorCliente {
 			Cuen.setSaldo(saldo);
 			Cuen.setTipoCuenta(tipoCuenta);
 			Cuen.setEstado(true);
+			System.out.println(Cuen.toString()+"cuentaas");
 			DAOCuenta.AgregarCuenta(Cuen);
-			C.setDni(dni);
+			
 			//C.setIdCuenta(nroCuenta);
-			C.setEstado(true);
-			DAOCuenta.agregarClientesxcuentas(C);
+			
 			ModelAndView MV = new ModelAndView();
 			String AgregoCorrectamente="La cuenta se agrego Correctamente";
 			MV.addObject("estadoAgregarCuenta", AgregoCorrectamente);
-			MV.setViewName("Altas_Cuentas");	
+			ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
+			ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+			MV.addObject("ListaCuentas",ListaCuentas);
+			MV.setViewName("Ver_Cuentas");	
 			return MV;
 			
 		/*} else {

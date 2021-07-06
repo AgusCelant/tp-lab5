@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 @Repository("daoHisotrial")
-public class DaoHistorial {
+public class DaoHistorial implements InterfazDaoHistorial{
 	public List<Historial> obtenerHisotrialPorCuenta (int idCuenta) {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();

@@ -17,6 +17,7 @@ import banco.utn.dao.DaoCuenta;
 import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
+import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
 
 @Controller
@@ -25,15 +26,7 @@ public class ControladorInicio {
 	@RequestMapping("inicioLogin.html")
 	public ModelAndView Login() 
 	{
-		/*Conexion DAO = new Conexion();
-		Cuenta cuenta1= new Cuenta("26/06/21", "Dolar", 0001, 10500, true);
-		Cuenta cuenta2= new Cuenta("27/06/21", "Peso", 0002, 10000, true);
-		Session session = DAO.abrirConexion();
-		session.beginTransaction();
-		session.save(cuenta1);
-		session.save(cuenta2);
-		session.getTransaction().commit();
-		DAO.cerrarSession();*/
+	
 		
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("Login");
@@ -106,7 +99,7 @@ public class ControladorInicio {
 				}
 				
 			}
-			List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();
+			List<Integer> cuentasdolar = NegCuentas.ObtenerPorcentajedeCuentasDolar();
 			
 	
 			int cuenta1d=0;
@@ -178,6 +171,8 @@ public class ControladorInicio {
 			}else {
 				DaoPersona DAOPersona = new DaoPersona();
 				DaoCuenta DAOCuenta = new DaoCuenta();
+				NegCuentas NegCuentas = new NegCuentas();
+			
 				Cliente cliente = DAOPersona.obtenerDatosDeUsuario(txtUsuario);
 				List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(cliente.getDni());
 				String resumenCuentas = "";

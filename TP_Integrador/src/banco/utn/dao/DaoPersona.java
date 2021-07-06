@@ -16,7 +16,7 @@ import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
 @Repository("daoPersona")
-public class DaoPersona {
+public class DaoPersona implements InterfazDaoPersona {
 	
 
 	//anda

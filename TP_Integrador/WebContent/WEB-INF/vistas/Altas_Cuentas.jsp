@@ -46,7 +46,7 @@ background-color:#434343;
 
 </style>
 </head>
-<h4>${estadoAgregarCuenta}</h4>
+
 	<body>
 	<jsp:include page="MenuAdmin.jsp"></jsp:include>
 	<h4>${CbuExistente}</h4><h4>${Cuentayaexiste}</h4>
@@ -54,7 +54,7 @@ background-color:#434343;
 			<h1 align="center">Bienvenido Admin</h1>
 			<h4 align="center">Agregar Cuenta</h4>
 				<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${dni}" readonly="readonly"></p>
-			    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+			    <p align="center">Fecha Creacion: </p> <input type="date" id="start" name="fechaCreacion" value="2018-07-22" min="2000-01-01" max="2025-12-31">
 			    <p align="center"> Tipo Cuenta:</p>
 			    <p align="center" class="controls">
 				    <input type="radio" name="tipoCuenta" value="Pesos"> Peso

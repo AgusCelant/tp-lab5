@@ -14,7 +14,7 @@ import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
 @Service("servicioCuentas")
-public class NegCuentas {
+public class NegCuentas implements InterfazNegCuentas {
 	@Autowired
 	private DaoCuenta daoCuenta;
 	public List<Cuenta> listarCuentas() {
@@ -50,4 +50,38 @@ public class NegCuentas {
 		return daoCuenta.Editarcuenta(cuenta);
 		
 	}
+	public List<Integer> ObtenerPorcentajedeCuentasPesos() {
+		
+		
+		return daoCuenta.ObtenerPorcentajedeCuentasPesos();
+	}
+	public List<Integer> ObtenerPorcentajedeCuentasDolar() {
+		
+		
+		return daoCuenta.ObtenerPorcentajedeCuentasDolar();
+	}
+	public Cuenta obtenerCuentaPorNroCuenta (int nroCuenta) {
+		
+		return daoCuenta.obtenerCuentaPorNroCuenta(nroCuenta);
+	}
+	public Cuenta obtenerCuentaPorCbu (int cbu) {
+		return daoCuenta.obtenerCuentaPorCbu(cbu);
+	}
+	public List<Cuenta> obtenerCuentasDeUsuario (String dni){
+		
+		return daoCuenta.obtenerCuentasDeUsuario(dni);
+	}
+	public boolean AgregarCuenta(Cuenta c) {
+		
+		return daoCuenta.AgregarCuenta(c);
+	}
+	public boolean EditarcuentaxClientes(ClientesxCuentas cxc) {
+		return daoCuenta.EditarcuentaxClientes(cxc);
+	}
+	
+	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
+		
+		return daoCuenta.EditarcuentaxClientes(c);
+	}	
+	
 }

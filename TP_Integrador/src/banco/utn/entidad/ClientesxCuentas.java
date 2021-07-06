@@ -64,10 +64,9 @@ public class ClientesxCuentas implements Serializable{
 	}
 
 
-	public ClientesxCuentas(String dni, int idCuenta, boolean estado) {
+	public ClientesxCuentas(String dni, boolean estado) {
 		super();
-		Dni = dni;
-		IdCuenta = idCuenta;
+		Dni = dni;		
 		Estado = estado;
 	}
 

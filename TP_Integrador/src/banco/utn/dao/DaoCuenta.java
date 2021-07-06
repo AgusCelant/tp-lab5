@@ -1,6 +1,5 @@
 package banco.utn.dao;
 
-import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 
@@ -15,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository("daoCuenta")
-public class DaoCuenta {
+public class DaoCuenta implements InterfazDaoCuenta {
 	
 	public List<Cuenta> obtenerCuentasDeUsuario (String dni) {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		// String query = "SELECT cu FROM Cuenta cu WHERE cu.id IN (SELECT cxc.IdCuenta FROM ClientesxCuentas cxc WHERE cxc.Dni = '" + dni + "')";
-		String query = "SELECT cu FROM Cuenta cu WHERE cu.Dni = '" + dni + "'";
+		String query = "SELECT cu FROM Cuenta cu WHERE cu.Estado=true and cu.Dni = '" + dni + "'";
 		List<Cuenta> cuentasDeUsuario = (List<Cuenta>) session.createQuery(query).list();
 		DAO.cerrarSession();
 
@@ -61,7 +60,22 @@ public class DaoCuenta {
 			aux=false;
 			tx.rollback();
 		}
-		DAO.cerrarSession();
+		DAO.cerrarSession();	
+		Conexion DAO2 = new Conexion();
+		Session session2 = DAO.abrirConexion();
+		Transaction tx2= session.beginTransaction();
+		boolean aux2 = true;
+		try
+		{
+			session2.save(c); 
+			tx2 = session.getTransaction();
+			tx2.commit();
+		}
+		catch (Exception e) {
+			aux2=false;
+			tx2.rollback();
+		}
+		DAO2.cerrarSession();
 		return aux;
 	}
 	//anda
@@ -107,6 +121,7 @@ public class DaoCuenta {
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;
+		System.out.println(c.toString()+" adasdsadsa");
 		try
 		{
 			session.save(c); 
@@ -116,8 +131,11 @@ public class DaoCuenta {
 		catch (Exception e) {
 			aux=false;
 			tx.rollback();
+			System.out.println(e.toString());
 		}
+		
 		DAO.cerrarSession();
+		System.out.println(aux);
 		return aux;
 	}
 	//anda
