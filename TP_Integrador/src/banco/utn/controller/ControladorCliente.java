@@ -65,7 +65,7 @@ public class ControladorCliente {
 	public ModelAndView irMenuAdmin() {
 		ModelAndView MV = new ModelAndView();
 		DaoCuenta DAOCuenta = new DaoCuenta();
-		/*List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
+		List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
 		int cuenta1=0;
 		int cuenta2=0;
 		int cuenta3=0;
@@ -168,8 +168,6 @@ public class ControladorCliente {
 			}
 			
 		}
-		
-		*/
 		
 		
 		
