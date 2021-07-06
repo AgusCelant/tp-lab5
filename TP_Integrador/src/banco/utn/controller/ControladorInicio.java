@@ -53,55 +53,45 @@ public class ControladorInicio {
 			int cuenta2=0;
 			int cuenta3=0;
 			int cuenta4=0;
-			if(cuentaspesos.size()==1) {			
-				cuenta1=100;
-				cuenta2=200;
-				cuenta3=300;
-				cuenta4=400;
+			if(cuentaspesos.size()==0) {			
+				cuenta1=0;
+				cuenta2=0;
+				cuenta3=0;
+				cuenta4=0;
 				MV2.addObject("Cuenta1", cuenta1);
 				MV2.addObject("Cuenta2", cuenta2);
 				MV2.addObject("Cuenta3", cuenta3);
 				MV2.addObject("Cuenta4", cuenta4);
-			}/*
+			}
 			if(cuentaspesos.size()==4) {
 				MV2.addObject("Cuenta1", cuentaspesos.get(0));
 				MV2.addObject("Cuenta2", cuentaspesos.get(1));
 				MV2.addObject("Cuenta3", cuentaspesos.get(2));
 				MV2.addObject("Cuenta4", cuentaspesos.get(3));						
-			}else {
+			} else {
 				if(cuentaspesos.size()==3) {					
 					MV2.addObject("Cuenta1", cuentaspesos.get(0));
 					MV2.addObject("Cuenta2", cuentaspesos.get(1));
 					MV2.addObject("Cuenta3", cuentaspesos.get(2));
 					MV2.addObject("Cuenta4", cuenta4);		
-					
-				}else {
+				} else {
 					if(cuentaspesos.size()==2) {
-						
 						MV2.addObject("Cuenta1", cuentaspesos.get(0));
 						MV2.addObject("Cuenta2", cuentaspesos.get(1));
 						MV2.addObject("Cuenta3", cuenta3);
 						MV2.addObject("Cuenta4", cuenta4);	
-						
-					}
-					else {
+					} else {
 						if(cuentaspesos.size()==1) {
-						
 							MV2.addObject("Cuenta1", cuentaspesos.get(0));
 							MV2.addObject("Cuenta2", cuenta2);
 							MV2.addObject("Cuenta3", cuenta3);
 							MV2.addObject("Cuenta4", cuenta4);	
 						}
-						
-						
 					}
-					
 				}
-				
 			}
 			List<Integer> cuentasdolar = NegCuentas.ObtenerPorcentajedeCuentasDolar();
 			
-	
 			int cuenta1d=0;
 			int cuenta2d=0;
 			int cuenta3d=0;
@@ -152,9 +142,6 @@ public class ControladorInicio {
 				}
 				
 			}
-			*/
-			
-			
 			
 			MV2.setViewName("PerfilAdmin");
 			return MV2;
