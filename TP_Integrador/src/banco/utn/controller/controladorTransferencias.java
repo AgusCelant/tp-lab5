@@ -17,8 +17,15 @@ public class controladorTransferencias {
 	public ModelAndView mostrarTransferencia(String dni) {
 		ModelAndView MV = new ModelAndView();
 		DaoCuenta DAOCuenta = new DaoCuenta();
-		
+		String Cartel="Este cliente no tiene ninguna cuenta asociada";
 		List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(dni);
+		if(cuentas.size()==0) {
+			MV.addObject("Cartel", Cartel);
+			MV.setViewName("mainCliente");
+			return MV;
+		}
+		
+		
 		
 		String listaCuentas = "";
 		for(Cuenta cuenta : cuentas) {

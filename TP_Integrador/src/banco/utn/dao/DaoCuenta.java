@@ -61,21 +61,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 			tx.rollback();
 		}
 		DAO.cerrarSession();	
-		Conexion DAO2 = new Conexion();
-		Session session2 = DAO.abrirConexion();
-		Transaction tx2= session.beginTransaction();
-		boolean aux2 = true;
-		try
-		{
-			session2.save(c); 
-			tx2 = session.getTransaction();
-			tx2.commit();
-		}
-		catch (Exception e) {
-			aux2=false;
-			tx2.rollback();
-		}
-		DAO2.cerrarSession();
+		
 		return aux;
 	}
 	//anda
@@ -235,7 +221,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();	
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Pesos' group by c.NumCuenta ";	
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Pesos'";	
 		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
 
 		
@@ -248,7 +234,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();	
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Dolar' group by c.NumCuenta ";	
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Dolar'";	
 		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
 	
 		

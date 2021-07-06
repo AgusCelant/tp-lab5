@@ -21,6 +21,7 @@ function checkSelection (value) {
 <title>Transferencia</title>
 </head>
 <body>
+<center>
 <h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
 	<form action="confirmarTransferencia.html" method="post">
 		<input type="hidden" name="dni" value="${dni}">
@@ -38,13 +39,14 @@ function checkSelection (value) {
 		    ${listaCuentas}
 		</select>
 		<br><br>
-		<label>CBU destino:</label><input id="cbuDestino" name="cbu" type="number">
+		<label>CBU destino:</label><input id="cbuDestino" name="cbu" type="number" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
 		<br><br>
 		<label>Dinero disponible: $xxxx</label>
 		<br>
-		<label>Monto a transferir:</label><input name="monto" type="number">
+		<label>Monto a transferir:</label><input name="monto" type="number" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))">
 		<br><br>
 		<button>CANCELAR</button> <button id="botonConfirmar" type="submit">CONFIRMAR</button>
 	</form>
+	</center>
 </body>
 </html>

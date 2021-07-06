@@ -65,108 +65,26 @@ public class ControladorCliente {
 	public ModelAndView irMenuAdmin() {
 		ModelAndView MV = new ModelAndView();
 		DaoCuenta DAOCuenta = new DaoCuenta();
-		List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();
+		List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();			
+		List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();		
 		int cuenta1=0;
-		int cuenta2=0;
-		int cuenta3=0;
-		int cuenta4=0;
-
-		if(cuentaspesos.size()==0) {
-			cuenta1=0;
-			cuenta2=0;
-			cuenta3=0;
-			cuenta4=0;
-			MV.addObject("Cuenta1", cuenta1);
-			MV.addObject("Cuenta2", cuenta2);
-			MV.addObject("Cuenta3", cuenta3);
-			MV.addObject("Cuenta4", cuenta4);
-		}
-		if(cuentaspesos.size()==4) {
-			MV.addObject("Cuenta1", cuentaspesos.get(0));
-			MV.addObject("Cuenta2", cuentaspesos.get(1));
-			MV.addObject("Cuenta3", cuentaspesos.get(2));
-			MV.addObject("Cuenta4", cuentaspesos.get(3));						
-		}else {
-			if(cuentaspesos.size()==3) {					
-				MV.addObject("Cuenta1", cuentaspesos.get(0));
-				MV.addObject("Cuenta2", cuentaspesos.get(1));
-				MV.addObject("Cuenta3", cuentaspesos.get(2));
-				MV.addObject("Cuenta4", cuenta4);		
-				
-			}else {
-				if(cuentaspesos.size()==2) {
-					
-					MV.addObject("Cuenta1", cuentaspesos.get(0));
-					MV.addObject("Cuenta2", cuentaspesos.get(1));
-					MV.addObject("Cuenta3", cuenta3);
-					MV.addObject("Cuenta4", cuenta4);	
-					
-				}
-				else {
-					if(cuentaspesos.size()==1) {
-						
-						MV.addObject("Cuenta1", cuentaspesos.get(0));
-						MV.addObject("Cuenta2", cuenta2);
-						MV.addObject("Cuenta3", cuenta3);
-						MV.addObject("Cuenta4", cuenta4);	
-					}
-					
-					
-				}
-				
-			}
-			
-		}
-		List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();
-		int cuenta1d=0;
 		int cuenta2d=0;
-		int cuenta3d=0;
-		int cuenta4d=0;
-		if(cuentasdolar.size()==0) {
-			cuenta1d=0;
-			cuenta2d=0;
-			cuenta3d=0;
-			cuenta4d=0;
-			MV.addObject("Cuenta1d", cuenta1d);
-			MV.addObject("Cuenta2d", cuenta2d);
-			MV.addObject("Cuenta3d", cuenta3d);
-			MV.addObject("Cuenta4d", cuenta4d);
-		}
-		if(cuentasdolar.size()==4) {
-			MV.addObject("Cuenta1d", cuentaspesos.get(0));
-			MV.addObject("Cuenta2d", cuentaspesos.get(1));
-			MV.addObject("Cuenta3d", cuentaspesos.get(2));
-			MV.addObject("Cuenta4d", cuentaspesos.get(3));						
+
+		if(cuentaspesos.size()==0) {			
+			cuenta1=0;		
+			MV.addObject("Cuenta1", cuenta1);
 		}else {
-			if(cuentasdolar.size()==3) {					
-				MV.addObject("Cuenta1d", cuentaspesos.get(0));
-				MV.addObject("Cuenta2d", cuentaspesos.get(1));
-				MV.addObject("Cuenta3d", cuentaspesos.get(2));
-				MV.addObject("Cuenta4d", cuenta4d);		
-				
-			}else {
-				if(cuentasdolar.size()==2) {
-					
-					MV.addObject("Cuenta1d", cuentaspesos.get(0));
-					MV.addObject("Cuenta2d", cuentaspesos.get(1));
-					MV.addObject("Cuenta3d", cuenta3d);
-					MV.addObject("Cuenta4d", cuenta4d);	
-					
-				}
-				else {
-					if(cuentasdolar.size()==1) {
-						
-						MV.addObject("Cuenta1d", cuentaspesos.get(0));
-						MV.addObject("Cuenta2d", cuenta2d);
-						MV.addObject("Cuenta3d", cuenta3d);
-						MV.addObject("Cuenta4d", cuenta4d);	
-					}
-					
-					
-				}
-				
-			}
-			
+			if(cuentaspesos.size()==1) {					
+				MV.addObject("Cuenta1", cuentaspesos.get(0));					
+			}			
+		}
+		if(cuentasdolar.size()==0) {			
+			cuenta2d=0;		
+			MV.addObject("Cuenta2", cuenta2d);
+		}else {
+			if(cuentasdolar.size()==1) {					
+				MV.addObject("Cuenta2", cuentasdolar.get(0));					
+			}			
 		}
 		
 		
