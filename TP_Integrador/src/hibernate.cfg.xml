@@ -15,6 +15,7 @@
         <mapping class="banco.utn.entidad.Cuenta"/>
         <mapping class="banco.utn.entidad.ClientesxCuentas"/>
         <mapping class="banco.utn.entidad.Historial"/>
-          <mapping class="banco.utn.entidad.Generos"/>
+        <mapping class="banco.utn.entidad.Generos"/>
+        <mapping class="banco.utn.entidad.Usuario"/>
     </session-factory>
 </hibernate-configuration>

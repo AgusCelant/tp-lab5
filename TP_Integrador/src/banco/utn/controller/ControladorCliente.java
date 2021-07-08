@@ -99,7 +99,7 @@ public class ControladorCliente {
 		return MV;
 	}
 	
-	//anda
+	//anda con la modalidad de sexo
 	@RequestMapping("agregarPersona.html")
 	public ModelAndView eventoRedireccionarPag1(String Nombre,String Apellido,String Sexo,String Dni,String Date,String Nacionalidad,String Provincia,String Localidad,String Contraseña,String Usuario)
 	{
@@ -118,11 +118,12 @@ public class ControladorCliente {
 		cliente.setNacionalidad(Nacionalidad);
 		cliente.setLocalidad(Localidad);
 		cliente.setProvincia(Provincia);
-		cliente.setUsuario(Usuario);
-		cliente.setContraseña(Contraseña);
+		cliente.getUsuario().setUsuario(Usuario);
+		cliente.getUsuario().setContraseña(Contraseña);
+		cliente.getUsuario().setEstado(true);
 		cliente.setEstado(true);
 		String dni=cliente.getDni();
-		String Usuarioo=cliente.getUsuario();
+		String Usuarioo=cliente.getUsuario().getUsuario();
 		dniverificar=negocioPersona.VerificarDni(dni);
 		Usu=negocioPersona.VerificarUsuario(Usuarioo);
 		
@@ -151,7 +152,7 @@ public class ControladorCliente {
 		
 		return MV;
 	}
-	//anda
+	//anda con la modalidad de sexo
 	@RequestMapping("verCliente.html")
 	public ModelAndView eventovercliente()
 	{
@@ -163,7 +164,7 @@ public class ControladorCliente {
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
-	//anda
+	//anda con la modalidad de sexo
 	@RequestMapping("/Eliminar.html")
 	public ModelAndView eventoeliminar(HttpServletRequest request)
 	{
@@ -233,8 +234,8 @@ public class ControladorCliente {
 		cli.setNacionalidad(nacionalidad);
 		cli.setProvincia(Provincia);
 		cli.setLocalidad(Localidad);
-		cli.setUsuario(usuario);
-		cli.setContraseña(contraseña);
+		cli.getUsuario().setUsuario(usuario);
+		cli.getUsuario().setContraseña(contraseña);
 		cli.setEstado(true);
 ;
 		

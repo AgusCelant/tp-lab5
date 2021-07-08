@@ -107,13 +107,13 @@ color:white;
    
       <td>${cliente.nombre}</td>
       <td>${cliente.apellido} </td>
-      <td>${cliente.sexo} </td>
+      <td>${cliente.sexo.genero} </td>
       <td>${cliente.dni} </td>
       <td>${cliente.nacimiento} </td>
       <td>${cliente.nacionalidad} </td>
       <td>${cliente.provincia} </td>
       <td>${cliente.localidad} </td>
-      <td>${cliente.usuario} </td>
+      <td>${cliente.usuario.usuario} </td>
    	  <td><a href="Editar.html?id=${cliente.dni}" >Editar </a> </td>
    	  <td><a href="Eliminar.html?id=${cliente.dni}">Eliminar </a> </td>
 

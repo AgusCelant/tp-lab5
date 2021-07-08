@@ -46,7 +46,7 @@ public class Generos implements Serializable{
 
 	@Override
 	public String toString() {
-		return  genero ;
+		return  genero+dni ;
 	}
 	
 	

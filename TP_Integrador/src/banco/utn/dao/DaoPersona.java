@@ -16,6 +16,7 @@ import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Generos;
 import banco.utn.entidad.Historial;
+import banco.utn.entidad.Usuario;
 @Repository("daoPersona")
 public class DaoPersona implements InterfazDaoPersona {
 	
@@ -25,7 +26,7 @@ public class DaoPersona implements InterfazDaoPersona {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();	
 		session.beginTransaction();
-		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery(" From Cliente as c inner join c.sexo where c.Estado=true").list();
+		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery(" From Cliente as c inner join c.sexo inner join c.Usuario where c.Estado=true").list();
 		DAO.cerrarSession();
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		for(Object[] objeto: ListarClientes) {
@@ -77,18 +78,8 @@ public class DaoPersona implements InterfazDaoPersona {
 		Query query=session.createQuery(hql);
 		query.setParameter("dnii", Dni);
 		Cliente cliente= new Cliente();
-
-		cliente=(Cliente)query.uniqueResult();
-		System.out.println(cliente.toString());
-		
-	
-
- 
-		
-		
+		cliente=(Cliente)query.uniqueResult();	
 		DAO.cerrarSession();
-		
-
 		return cliente;
 			
 	}

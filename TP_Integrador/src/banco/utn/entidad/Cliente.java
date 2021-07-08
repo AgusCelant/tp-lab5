@@ -33,10 +33,9 @@ public class Cliente implements Serializable{
 	private String Provincia;
 	@Column(name="Localidad")
 	private String Localidad;
-	@Column(name="Usuario")
-	private String Usuario;
-	@Column(name="Contraseña")
-	private String Contraseña;
+	@OneToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="Usuario")
+	private Usuario Usuario= new Usuario();
 	@Column(name="Estado")
 	private Boolean Estado;
 	@Id
@@ -45,8 +44,10 @@ public class Cliente implements Serializable{
 	
 	public Cliente() {}
 
+
+
 	public Cliente(String nombre, String apellido, Generos sexo, String nacimiento, String nacionalidad,
-			String provincia, String localidad, String dni, String usuario, String contraseña,Boolean estado) {
+			String provincia, String localidad, Usuario usuario, Boolean estado, String dni) {
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
@@ -56,10 +57,11 @@ public class Cliente implements Serializable{
 		Provincia = provincia;
 		Localidad = localidad;
 		Usuario = usuario;
-		Contraseña = contraseña;
-		Dni = dni;
 		Estado = estado;
+		Dni = dni;
 	}
+
+
 
 	public String getNombre() {
 		return Nombre;
@@ -83,7 +85,7 @@ public class Cliente implements Serializable{
 	}
 
 	public void setSexo(Generos sexo) {
-		sexo = sexo;
+		this.sexo = sexo;
 	}
 
 	public String getNacimiento() {
@@ -117,21 +119,22 @@ public class Cliente implements Serializable{
 	public void setLocalidad(String localidad) {
 		Localidad = localidad;
 	}
-	public String getUsuario() {
+
+	
+	
+	
+	public Usuario getUsuario() {
 		return Usuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.Usuario = usuario;
-	}
-	public String getContraseña() {
-		return Contraseña;
+
+
+	public void setUsuario(Usuario usuario) {
+		Usuario = usuario;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.Contraseña = contraseña;
-	}
-	
+
+
 	public Boolean getEstado() {
 		return Estado;
 	}
