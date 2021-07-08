@@ -24,6 +24,7 @@ import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
+import banco.utn.entidad.Generos;
 import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
 import org.hibernate.Session;
@@ -36,6 +37,8 @@ public class ControladorCliente {
 	private NegPersona negocioPersona;
 	@Autowired
 	private Cliente cliente;
+	@Autowired
+	private Generos gen;
 	@Autowired
 	private ClientesxCuentas C;
 	@Autowired
@@ -108,7 +111,8 @@ public class ControladorCliente {
 		String cartel=" ";
 		cliente.setNombre(Nombre);
 		cliente.setApellido(Apellido);
-		cliente.setSexo(Sexo);
+		cliente.getSexo().setDni(Dni);
+		cliente.getSexo().setGenero(Sexo);
 		cliente.setDni(Dni);
 		cliente.setNacimiento(Date);
 		cliente.setNacionalidad(Nacionalidad);
@@ -121,7 +125,7 @@ public class ControladorCliente {
 		String Usuarioo=cliente.getUsuario();
 		dniverificar=negocioPersona.VerificarDni(dni);
 		Usu=negocioPersona.VerificarUsuario(Usuarioo);
-
+		
 		if(dniverificar.isEmpty()) {
 			
 		} else {
@@ -154,7 +158,7 @@ public class ControladorCliente {
 		ModelAndView MV = new ModelAndView();
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 
-		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
+		ListaClientes =(ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
 		MV.setViewName("Ver_Clientes");
 		return MV;
@@ -167,12 +171,13 @@ public class ControladorCliente {
 		String id=request.getParameter("id");
 		java.util.List Dni = null;
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
+		
 		cli.setEstado(false);
 		negocioPersona.EliminarPersona(cli);
-		ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
-		ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioCuentas.BuscarTODASCuentaxCliente(id);
+		//ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
+		//ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioCuentas.BuscarTODASCuentaxCliente(id);
 		
-		for(ClientesxCuentas obj : ListaClientesxcuentas) {
+/*		for(ClientesxCuentas obj : ListaClientesxcuentas) {
 			obj.setEstado(false);
 			negocioCuentas.Eliminar1Cuentaxcliente(obj);
 			
@@ -185,7 +190,7 @@ public class ControladorCliente {
 			obj2.setEstado(false);
 			negocioCuentas.Eliminar1Cuenta(obj2);
 			
-		}
+		}*/
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
@@ -221,7 +226,8 @@ public class ControladorCliente {
 		Cliente cli= new Cliente();
 		cli.setNombre(nombre);
 		cli.setApellido(apellido);
-		cli.setSexo(Sexo);
+		cli.getSexo().setDni(dni);
+		cli.getSexo().setGenero(Sexo);
 		cli.setDni(dni);
 		cli.setNacimiento(date);
 		cli.setNacionalidad(nacionalidad);

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
+import banco.utn.entidad.Generos;
 import banco.utn.entidad.Historial;
 @Repository("daoPersona")
 public class DaoPersona implements InterfazDaoPersona {
@@ -24,10 +25,27 @@ public class DaoPersona implements InterfazDaoPersona {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();	
 		session.beginTransaction();
-		List<Cliente> ListarClientes=(List<Cliente>) session.createQuery("From Cliente where Estado=true").list();
-		//session.close();
+		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery(" From Cliente as c inner join c.sexo where c.Estado=true").list();
 		DAO.cerrarSession();
-		return ListarClientes;
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
+		for(Object[] objeto: ListarClientes) {
+			Cliente cliente= new Cliente();
+			Cliente cliente2= new Cliente();
+			cliente=(Cliente) objeto[0];
+			cliente2.setDni(cliente.getDni());
+			cliente2.setNombre(cliente.getNombre());
+			cliente2.setApellido(cliente.getApellido());
+			cliente2.getSexo().setGenero(cliente.getSexo().getGenero());
+			cliente2.setNacimiento(cliente.getNacimiento());
+			cliente2.setProvincia(cliente.getProvincia());
+			cliente2.setNacionalidad(cliente.getNacimiento());
+			cliente2.setLocalidad(cliente.getLocalidad());
+			cliente2.setUsuario(cliente.getUsuario());
+			ListaClientes.add(cliente2);
+		}
+			
+		
+		return ListaClientes;
 	}
 //anda
 	public boolean agregarPersona(Cliente p) {
@@ -38,6 +56,7 @@ public class DaoPersona implements InterfazDaoPersona {
 		try
 		{
 			session.save(p); 
+		
 			tx = session.getTransaction();
 			tx.commit();
 		}
@@ -52,27 +71,25 @@ public class DaoPersona implements InterfazDaoPersona {
 	public Cliente BuscarPersonaDni(String Dni) {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
-		Transaction tx= session.beginTransaction();						
-		String hql="Select c.Dni,c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Contraseña,c.Estado From Cliente as c  where c.Dni="+Dni+" and c.Estado=true ";		
-		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
-		Cliente cli = new Cliente();
-		for(Object[] obj : result) {		
-			cli.setDni((String)obj[0]);
-			cli.setNombre((String)obj[1]);
-			cli.setApellido((String)obj[2]);
-			cli.setSexo((String)obj[3]);
-			cli.setNacimiento((String)obj[4]);
-			cli.setNacionalidad((String)obj[5]);
-			cli.setProvincia((String)obj[6]);
-			cli.setLocalidad((String)obj[7]);
-			cli.setUsuario((String)obj[8]);	
-			cli.setContraseña((String)obj[9]);	
-			cli.setEstado((Boolean)obj[10]);
-		}
+		Transaction tx= session.beginTransaction();	
+		
+		String hql=" From Cliente as c  where c.Dni=:dnii and c.Estado=true ";	
+		Query query=session.createQuery(hql);
+		query.setParameter("dnii", Dni);
+		Cliente cliente= new Cliente();
+
+		cliente=(Cliente)query.uniqueResult();
+		System.out.println(cliente.toString());
+		
+	
+
+ 
+		
 		
 		DAO.cerrarSession();
 		
-		return cli;
+
+		return cliente;
 			
 	}
 	//anda

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
+import banco.utn.entidad.Generos;
 public interface InterfazNegPersona {
 	public List<Cliente> listarPersonas();
 	public boolean agregarPersona(Cliente p);

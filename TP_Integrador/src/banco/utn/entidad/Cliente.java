@@ -1,9 +1,13 @@
 package banco.utn.entidad;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -18,8 +22,9 @@ public class Cliente implements Serializable{
 	private String Nombre;
 	@Column(name="Apellido")
 	private String Apellido;
-	@Column(name="Sexo")
-	private String Sexo;
+	@OneToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="Sexo")
+	private Generos sexo = new Generos();
 	@Column(name="Nacimiento")
 	private String Nacimiento;
 	@Column(name="Nacionalidad")
@@ -40,12 +45,12 @@ public class Cliente implements Serializable{
 	
 	public Cliente() {}
 
-	public Cliente(String nombre, String apellido, String sexo, String nacimiento, String nacionalidad,
+	public Cliente(String nombre, String apellido, Generos sexo, String nacimiento, String nacionalidad,
 			String provincia, String localidad, String dni, String usuario, String contraseña,Boolean estado) {
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
-		Sexo = sexo;
+		this.sexo = sexo;
 		Nacimiento = nacimiento;
 		Nacionalidad = nacionalidad;
 		Provincia = provincia;
@@ -72,12 +77,13 @@ public class Cliente implements Serializable{
 		this.Apellido = apellido;
 	}
 
-	public String getSexo() {
-		return Sexo;
+	
+	public Generos getSexo() {
+		return sexo;
 	}
 
-	public void setSexo(String sexo) {
-		Sexo = sexo;
+	public void setSexo(Generos sexo) {
+		sexo = sexo;
 	}
 
 	public String getNacimiento() {
@@ -144,7 +150,7 @@ public class Cliente implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Nombre: "+ Nombre + ", Apellido: " + Apellido + ", Sexo: " + Sexo + ",  Nacimiento: " + Nacimiento
+		return "Nombre: "+ Nombre + ", Apellido: " + Apellido + ", Sexo: " + sexo + ",  Nacimiento: " + Nacimiento
 				+ ", Nacionalidad: " + Nacionalidad + ", Provincia: " + Provincia + ",  Localidad: " + Localidad + ",  Dni: "
 				+ Dni;
 	}
