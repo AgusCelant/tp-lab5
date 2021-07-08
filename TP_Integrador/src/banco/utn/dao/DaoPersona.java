@@ -26,7 +26,7 @@ public class DaoPersona implements InterfazDaoPersona {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();	
 		session.beginTransaction();
-		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery(" From Cliente as c inner join c.sexo inner join c.Usuario where c.Estado=true").list();
+		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery(" From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Estado=true and c.Provincia.Estado=true").list();
 		DAO.cerrarSession();
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		for(Object[] objeto: ListarClientes) {
@@ -39,7 +39,7 @@ public class DaoPersona implements InterfazDaoPersona {
 			cliente2.getSexo().setGenero(cliente.getSexo().getGenero());
 			cliente2.setNacimiento(cliente.getNacimiento());
 			cliente2.setProvincia(cliente.getProvincia());
-			cliente2.setNacionalidad(cliente.getNacimiento());
+			cliente2.getNacionalidad().setNacionalidad(cliente.getNacionalidad().getNacionalidad());
 			cliente2.setLocalidad(cliente.getLocalidad());
 			cliente2.setUsuario(cliente.getUsuario());
 			ListaClientes.add(cliente2);

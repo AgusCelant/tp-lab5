@@ -27,12 +27,15 @@ public class Cliente implements Serializable{
 	private Generos sexo = new Generos();
 	@Column(name="Nacimiento")
 	private String Nacimiento;
-	@Column(name="Nacionalidad")
-	private String Nacionalidad;
-	@Column(name="Provincia")
-	private String Provincia;
-	@Column(name="Localidad")
-	private String Localidad;
+	@OneToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="Nacionalidad")
+	private Nacionalidad Nacionalidad = new Nacionalidad();
+	@OneToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="Provincia")
+	private Provincia Provincia= new Provincia();
+	@OneToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="Localidad")
+	private Localidad Localidad = new Localidad();
 	@OneToOne(cascade= {CascadeType.ALL}) 
 	@JoinColumn(name="Usuario")
 	private Usuario Usuario= new Usuario();
@@ -46,8 +49,8 @@ public class Cliente implements Serializable{
 
 
 
-	public Cliente(String nombre, String apellido, Generos sexo, String nacimiento, String nacionalidad,
-			String provincia, String localidad, Usuario usuario, Boolean estado, String dni) {
+	public Cliente(String nombre, String apellido, Generos sexo, String nacimiento, Nacionalidad nacionalidad,
+			Provincia provincia, Localidad localidad, Usuario usuario, Boolean estado, String dni) {
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
@@ -96,27 +99,27 @@ public class Cliente implements Serializable{
 		Nacimiento = nacimiento;
 	}
 
-	public String getNacionalidad() {
+	public Nacionalidad getNacionalidad() {
 		return Nacionalidad;
 	}
 
-	public void setNacionalidad(String nacionalidad) {
+	public void setNacionalidad(Nacionalidad nacionalidad) {
 		Nacionalidad = nacionalidad;
 	}
 
-	public String getProvincia() {
+	public Provincia getProvincia() {
 		return Provincia;
 	}
 
-	public void setProvincia(String provincia) {
+	public void setProvincia(Provincia provincia) {
 		Provincia = provincia;
 	}
 
-	public String getLocalidad() {
+	public Localidad getLocalidad() {
 		return Localidad;
 	}
 
-	public void setLocalidad(String localidad) {
+	public void setLocalidad(Localidad localidad) {
 		Localidad = localidad;
 	}
 

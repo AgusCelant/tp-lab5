@@ -115,9 +115,15 @@ public class ControladorCliente {
 		cliente.getSexo().setGenero(Sexo);
 		cliente.setDni(Dni);
 		cliente.setNacimiento(Date);
-		cliente.setNacionalidad(Nacionalidad);
-		cliente.setLocalidad(Localidad);
-		cliente.setProvincia(Provincia);
+		cliente.getNacionalidad().setDni(Dni);
+		cliente.getNacionalidad().setNacionalidad(Nacionalidad);
+		cliente.getNacionalidad().setEstado(true);
+		cliente.getLocalidad().setDni(Dni);
+		cliente.getLocalidad().setNombre(Localidad);
+		cliente.getLocalidad().setEstado(true);
+		cliente.getProvincia().setDni(Dni);
+		cliente.getProvincia().setNombre(Provincia);
+		cliente.getProvincia().setEstado(true);
 		cliente.getUsuario().setUsuario(Usuario);
 		cliente.getUsuario().setContraseña(Contraseña);
 		cliente.getUsuario().setEstado(true);
@@ -174,6 +180,7 @@ public class ControladorCliente {
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		
 		cli.setEstado(false);
+		cli.getProvincia().setEstado(false);
 		negocioPersona.EliminarPersona(cli);
 		//ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
 		//ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioCuentas.BuscarTODASCuentaxCliente(id);
@@ -231,9 +238,15 @@ public class ControladorCliente {
 		cli.getSexo().setGenero(Sexo);
 		cli.setDni(dni);
 		cli.setNacimiento(date);
-		cli.setNacionalidad(nacionalidad);
-		cli.setProvincia(Provincia);
-		cli.setLocalidad(Localidad);
+		cli.getNacionalidad().setDni(dni);
+		cli.getNacionalidad().setNacionalidad(nacionalidad);
+		cli.getNacionalidad().setEstado(true);
+		cli.getProvincia().setDni(dni);
+		cli.getProvincia().setNombre(Provincia);
+		cli.getProvincia().setEstado(true);
+		cli.getLocalidad().setDni(dni);
+		cli.getLocalidad().setNombre(Localidad);
+		cli.getLocalidad().setEstado(true);
 		cli.getUsuario().setUsuario(usuario);
 		cli.getUsuario().setContraseña(contraseña);
 		cli.setEstado(true);

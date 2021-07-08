@@ -17,5 +17,8 @@
         <mapping class="banco.utn.entidad.Historial"/>
         <mapping class="banco.utn.entidad.Generos"/>
         <mapping class="banco.utn.entidad.Usuario"/>
+        <mapping class="banco.utn.entidad.Nacionalidad"/>
+        <mapping class="banco.utn.entidad.Provincia"/>
+        <mapping class="banco.utn.entidad.Localidad"/>
     </session-factory>
 </hibernate-configuration>

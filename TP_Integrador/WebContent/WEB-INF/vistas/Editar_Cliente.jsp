@@ -132,10 +132,10 @@ background:black;
   		</p>
  	 <p align="center">Dni: <input class="controls" type="text" name="dni" value="${cliente.dni}" readonly="readonly"></p>
      <p align="center">Año de nacimiento:<input class="controls"name="date" type="date" value="${cliente.nacimiento}">
-       <p align="center">Nacionalidad: <input class="controls" type="text" name="nacionalidad" value="${cliente.nacionalidad}" ></p>
+       <p align="center">Nacionalidad: <input class="controls" type="text" name="nacionalidad" value="${cliente.nacionalidad.nacionalidad}" ></p>
         <p>Provincia:
         <select class="controls" name='Provincia' onchange="onProvinciaChange(this)">
-         	<option selected="selected">${cliente.provincia} </option>
+         	<option selected="selected">${cliente.provincia.nombre} </option>
         	<option>Buenos Aires</option>
 	        <option>Buenos Aires-GBA</option>
 	        <option>Capital Federal</option>
@@ -164,7 +164,7 @@ background:black;
          </select> </p>      
       <p>Localidad:
       <select id="ddLocalidad" class="controls" name='Localidad'>
-         <option selected="selected">${cliente.localidad} </option>        
+         <option selected="selected">${cliente.localidad.nombre} </option>        
       </select> </p>
         <p align="center">Usuario: <input class="controls" type="text" name="usuario" value="${cliente.usuario.usuario}" readonly="readonly"></p>
          <p align="center">Usuario: <input class="controls" type="password" name="contraseña" value="${cliente.usuario.contraseña}" readonly="readonly"></p>
