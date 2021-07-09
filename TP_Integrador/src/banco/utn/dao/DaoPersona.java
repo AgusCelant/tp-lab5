@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import banco.utn.entidad.Cliente;
-import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Generos;
 import banco.utn.entidad.Historial;
@@ -141,7 +140,7 @@ public class DaoPersona implements InterfazDaoPersona {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select c.Usuario From Cliente as c  where c.Usuario='"+Usuario+"' and c.Contraseña='"+Contraseña+"' and c.Estado=true";
+		String hql="Select c.Usuario From Cliente as c  where c.Usuario.Usuario='"+Usuario+"' and c.Usuario.Contraseña='"+Contraseña+"' and c.Estado=true";
 		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
 		DAO.cerrarSession();
 		return result;
@@ -151,7 +150,13 @@ public class DaoPersona implements InterfazDaoPersona {
 	public Cliente obtenerDatosDeUsuario (String usuario) {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
-		Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE Usuario='" + usuario + "'").uniqueResult();
+		//Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE Usuario.Usuario='" + usuario + "'").uniqueResult();
+		String hql=" From Cliente as c  where c.Usuario.Usuario=:Usu and c.Estado=true ";	
+		Query query=session.createQuery(hql);
+		query.setParameter("Usu", usuario);	
+		Cliente cliente= new Cliente();
+		cliente=(Cliente)query.uniqueResult();	
+		
 		DAO.cerrarSession();
 		return cliente;
 	}
@@ -164,7 +169,7 @@ public class DaoPersona implements InterfazDaoPersona {
 		Session session = DAO.abrirConexion();
 		session.beginTransaction();						
 		//String hql="From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true";
-		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery("From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true").list();	
+		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery("From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Cliente.Dni from Cuenta as a where a.Estado=true group by a.Cliente.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (select b.Cliente.Dni from Cuenta as b where b.Estado=true) and c.Estado=true").list();	
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();	
 		for(Object[] result: ListarClientes) {
 			Cliente cliente= new Cliente();

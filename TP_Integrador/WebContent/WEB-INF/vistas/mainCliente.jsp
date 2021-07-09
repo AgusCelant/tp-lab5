@@ -55,11 +55,11 @@ center {
 				</thead>
 			<tbody class="grid_Linea">
 				<tr>
-					<td>${clienteLogueado.usuario}</td>
+					<td>${clienteLogueado.usuario.usuario}</td>
 					<td>${clienteLogueado.nombre}</td>
 					<td>${clienteLogueado.apellido}</td>
 					<td>${clienteLogueado.dni}</td><input type="hidden" name="dni" value="${clienteLogueado.dni}">
-					<td>${clienteLogueado.localidad}</td>
+					<td>${clienteLogueado.localidad.nombre}</td>
 				</tr>
 				</tbody>
 			</table>

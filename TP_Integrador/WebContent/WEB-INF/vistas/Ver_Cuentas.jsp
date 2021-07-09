@@ -92,15 +92,15 @@ center {
   </thead>
    <c:forEach var="cuenta" items="${ ListaCuentas }"  >
   <tr>
-  	  <td>${cuenta.dni}</td>
+  	  <td>${cuenta.cliente.dni}</td>
       <td>${cuenta.fecha} </td>
-      <td>${cuenta.tipoCuenta} </td>
+      <td>${cuenta.tipoCuenta.nombre} </td>
       <td>${cuenta.numCuenta} </td>
       <td>${cuenta.cbu} </td>
       <td>${cuenta.saldo} </td>
 
-   	  <td><a href="EditarCuentas.html?id=${cuenta.dni},${cuenta.numCuenta}" >Editar </a> </td>
-   	  <td><a href="EliminarCuenta.html?id=${cuenta.dni},${cuenta.numCuenta}">Eliminar </a> </td>
+   	  <td><a href="EditarCuentas.html?id=${cuenta.cliente.dni},${cuenta.numCuenta}" >Editar </a> </td>
+   	  <td><a href="EliminarCuenta.html?id=${cuenta.cliente.dni},${cuenta.numCuenta}">Eliminar </a> </td>
 
 
    

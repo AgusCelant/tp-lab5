@@ -61,12 +61,12 @@ background:black;
 
 <form action="ActualizarCuenta.html" method="post">
  <c:forEach var="cuenta" items="${ ListaCuentas }"  >
-	<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${cuenta.dni}"readonly="readonly" ></p>
+	<p align="center">Cliente: <input class="controls" type="text" name="dni" value="${cuenta.cliente.dni}"readonly="readonly" ></p>
 
     <p align="center"> Tipo Cuenta:</p> 
     <p align="center" class="controls">
-    <input type="radio" name="TipoCuenta" value="Pesos" ${cuenta.tipoCuenta == "Pesos" ? "checked" : ""} > Pesos
-    <input type="radio" name="TipoCuenta" value="Dolares" ${cuenta.tipoCuenta == "Dolares" ? "checked" : ""} > Dolares
+    <input type="radio" name="TipoCuenta" value="Pesos" ${cuenta.tipoCuenta.nombre == "Pesos" ? "checked" : ""} > Pesos
+    <input type="radio" name="TipoCuenta" value="Dolares" ${cuenta.tipoCuenta.nombre == "Dolares" ? "checked" : ""} > Dolares
   		</p>
 
     <p align="center">Nº Cuenta:<input class="controls"name="nrocuenta"value="${cuenta.numCuenta}" readonly="readonly" >

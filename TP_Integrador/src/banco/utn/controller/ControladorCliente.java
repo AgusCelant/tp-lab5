@@ -22,7 +22,6 @@ import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoCuenta;
 import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
-import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Generos;
 import banco.utn.negocio.NegCuentas;
@@ -39,8 +38,6 @@ public class ControladorCliente {
 	private Cliente cliente;
 	@Autowired
 	private Generos gen;
-	@Autowired
-	private ClientesxCuentas C;
 	@Autowired
 	private Cuenta Cuen;
 	@Autowired
@@ -170,7 +167,7 @@ public class ControladorCliente {
 		MV.setViewName("Ver_Clientes");
 		return MV;
 	}
-	//anda con la modalidad de sexo
+	//anda 
 	@RequestMapping("/Eliminar.html")
 	public ModelAndView eventoeliminar(HttpServletRequest request)
 	{
@@ -181,24 +178,22 @@ public class ControladorCliente {
 		
 		cli.setEstado(false);
 		cli.getProvincia().setEstado(false);
+		cli.getNacionalidad().setEstado(false);
+		cli.getLocalidad().setEstado(false);
+		cli.getUsuario().setEstado(false);
+	
 		negocioPersona.EliminarPersona(cli);
-		//ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
-		//ListaClientesxcuentas = (ArrayList<ClientesxCuentas>) negocioCuentas.BuscarTODASCuentaxCliente(id);
 		
-/*		for(ClientesxCuentas obj : ListaClientesxcuentas) {
-			obj.setEstado(false);
-			negocioCuentas.Eliminar1Cuentaxcliente(obj);
-			
-		}
 		
 		ArrayList<Cuenta> Listatodascuentas= new ArrayList<Cuenta>();
 		Listatodascuentas = (ArrayList<Cuenta>) negocioCuentas.BuscarTODASCuenta(id);
 		
 		for(Cuenta obj2 : Listatodascuentas) {
 			obj2.setEstado(false);
+			obj2.getTipoCuenta().setEstado(false);
 			negocioCuentas.Eliminar1Cuenta(obj2);
 			
-		}*/
+		}
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
@@ -271,10 +266,8 @@ public class ControladorCliente {
 		
 		String[] parts = id.split(",");
 		String Dnii = parts[0]; 
-		int numCuenta =Integer.parseInt(parts[1]);
-	
-		Cuenta Cuen=negocioCuentas.BuscarCuentaDni(Dnii, numCuenta);
-		
+		int numCuenta =Integer.parseInt(parts[1]);	
+		Cuenta Cuen=negocioCuentas.BuscarCuentaDni(Dnii, numCuenta);		
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 		ListaCuentas.add(Cuen);
 		MV.addObject("ListaCuentas",ListaCuentas);		
@@ -288,9 +281,10 @@ public class ControladorCliente {
 		ModelAndView MV = new ModelAndView();
 		
 		Cuenta cuen= new Cuenta();
-		cuen.setDni(dni);
-		cuen.setTipoCuenta(TipoCuenta);
-		System.out.println(cuen.getTipoCuenta()+"asdasa");
+		Cliente cli=negocioPersona.BuscarPersonaDni(dni);
+		cuen.setCliente(cli);
+		cuen.getTipoCuenta().setNombre(TipoCuenta);
+		cuen.getTipoCuenta().setEstado(true);
 		cuen.setNumCuenta(nrocuenta);
 		cuen.setCbu(cbu);
 		cuen.setFecha(fechaCreacion);
@@ -350,20 +344,10 @@ public class ControladorCliente {
 			*/	
 		
 		String CbuExistente="El CBU Existe";
-		String CuentaExistente="La cuenta ya fue creada";
-		DaoCuenta DAOCuenta = new DaoCuenta();
-		
+		DaoCuenta DAOCuenta = new DaoCuenta();		
 		List<Object[]> CbuVerificar=null;
-		List<Object[]> CuentaVerificar=null;
-		List<Object[]> CuentaVerificarEstado0=null;
 		CbuVerificar=DAOCuenta.Verificarcbu(cbu);
-		// CuentaVerificar=DAOCuenta.CuentaVerificar(nroCuenta, dni);
-		// CuentaVerificarEstado0=DAOCuenta.CuentaVerificarEstado0(nroCuenta, dni);
-		C=new ClientesxCuentas();
-		C.setDni(dni);
-		C.setEstado(true);
-		//System.out.println(C.toString());
-		DAOCuenta.agregarClientesxcuentas(C);
+		
 		if(!CbuVerificar.isEmpty()) {
 			ModelAndView MV = new ModelAndView();
 			String Dni =dni; 
@@ -373,27 +357,25 @@ public class ControladorCliente {
 			return MV;
 		}
 		
-		/*if(!CuentaVerificar.isEmpty()) {
-			ModelAndView MV = new ModelAndView();
-			String Dni =dni; 
-			MV.addObject("dni", Dni);
-			MV.addObject("Cuentayaexiste", CuentaExistente);
-			MV.setViewName("Altas_Cuentas");	
-			return MV;
-		}*/
+	
+		Cliente cli=negocioPersona.BuscarPersonaDni(dni);
+
 		
-		//if(CuentaVerificarEstado0.isEmpty()) {
-			Cuen.setDni(dni);
-			//Cuen.setNumCuenta(nroCuenta);
+		
+			Cuen.setCliente(cli);
 			Cuen.setCbu(cbu);	
 			Cuen.setFecha(fechaCreacion);
 			Cuen.setSaldo(saldo);
-			Cuen.setTipoCuenta(tipoCuenta);
+			Cuen.getTipoCuenta().setNumCuenta(0);
+			Cuen.getTipoCuenta().setNombre(tipoCuenta);
+			Cuen.getTipoCuenta().setEstado(true);
 			Cuen.setEstado(true);
-			System.out.println(Cuen.toString()+"cuentaas");
 			DAOCuenta.AgregarCuenta(Cuen);
+	
 			
-			//C.setIdCuenta(nroCuenta);
+		
+			
+
 			
 			ModelAndView MV = new ModelAndView();
 			String AgregoCorrectamente="La cuenta se agrego Correctamente";
@@ -404,26 +386,6 @@ public class ControladorCliente {
 			MV.setViewName("Ver_Cuentas");	
 			return MV;
 			
-		/*} else {
-			System.out.println("Entro a modificar");
-			Cuen.setDni(dni);
-			//Cuen.setNumCuenta(nroCuenta);
-			Cuen.setCbu(cbu);	
-			Cuen.setFecha(fechaCreacion);
-			Cuen.setSaldo(saldo);
-			Cuen.setTipoCuenta(tipoCuenta);
-			Cuen.setEstado(true);
-			DAOCuenta.Editarcuenta(Cuen);
-			C.setDni(dni);
-			//C.setIdCuenta(nroCuenta);
-			C.setEstado(true);
-			DAOCuenta.EditarcuentaxClientes(C);
-			ModelAndView MV = new ModelAndView();
-			String AgregoCorrectamente="La cuenta se agrego Correctamente";
-			MV.addObject("estadoAgregarCuenta", AgregoCorrectamente);
-			MV.setViewName("Altas_Cuentas");	
-			return MV;
-		}*/
 
 		
 	}
@@ -432,21 +394,18 @@ public class ControladorCliente {
 	public ModelAndView EventoEliminarCuenta(HttpServletRequest request)
 	{	DaoCuenta DAOCuenta = new DaoCuenta();
 		Cuenta cuenta = new Cuenta();
-		ClientesxCuentas cli = new ClientesxCuentas();
 		ModelAndView MV = new ModelAndView();	
-		String Dni=request.getParameter("id");	
-		
+		String Dni=request.getParameter("id");			
 		String[] parts = Dni.split(",");
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);
 				 
 		
 		cuenta=negocioCuentas.BuscarCuentaDni(Dnii,numCuenta);
-		cli=negocioCuentas.BuscarCuentaxCliente(Dnii,numCuenta); 
+
 	
 		cuenta.setEstado(false);
-		cli.setEstado(false);
-		negocioCuentas.Eliminar1Cuentaxcliente(cli);
+		cuenta.getTipoCuenta().setEstado(false);
 		negocioCuentas.Eliminar1Cuenta(cuenta);
 
 

@@ -1,6 +1,6 @@
 package banco.utn.dao;
 
-import banco.utn.entidad.ClientesxCuentas;
+import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
 
 import java.util.ArrayList;
@@ -20,8 +20,9 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		// String query = "SELECT cu FROM Cuenta cu WHERE cu.id IN (SELECT cxc.IdCuenta FROM ClientesxCuentas cxc WHERE cxc.Dni = '" + dni + "')";
-		String query = "SELECT cu FROM Cuenta cu WHERE cu.Estado=true and cu.Dni = '" + dni + "'";
+		String query = "SELECT cu FROM Cuenta cu WHERE cu.Estado=true and cu.Cliente.Dni = '" + dni + "'";
 		List<Cuenta> cuentasDeUsuario = (List<Cuenta>) session.createQuery(query).list();
+		System.out.println("djsajdsjadssadddd");
 		DAO.cerrarSession();
 
 		return cuentasDeUsuario;
@@ -34,9 +35,9 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		
 		Cuenta cuenta = (Cuenta)session.get(Cuenta.class, Integer.parseInt(nroCuenta));
 		System.out.println(cuenta.toString());
-		cuenta.setDni(dni);
+		cuenta.getCliente().setDni(dni);
 		cuenta.setFecha(fechaCreacion);
-		cuenta.setTipoCuenta(tipoCuenta);
+		cuenta.getTipoCuenta().setNombre(tipoCuenta);
 		cuenta.setCbu(Integer.parseInt(cbu));
 		cuenta.setSaldo(Float.parseFloat(saldo));
 		
@@ -83,71 +84,16 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		DAO.cerrarSession();
 		return aux;
 	}
-	public boolean EditarcuentaxClientes(ClientesxCuentas cxc) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
-		Transaction tx= session.beginTransaction();
-		boolean aux = true;
-		try
-		{
-			session.update(cxc); 
-			tx = session.getTransaction();
-			tx.commit();
-		}
-		catch (Exception e) {
-			aux=false;
-			tx.rollback();
-		}
-		DAO.cerrarSession();
-		return aux;
-	}
-	//anda
-	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
-		Transaction tx= session.beginTransaction();
-		boolean aux = true;
-		System.out.println(c.toString()+" adasdsadsa");
-		try
-		{
-			session.save(c); 
-			tx = session.getTransaction();
-			tx.commit();
-		}
-		catch (Exception e) {
-			aux=false;
-			tx.rollback();
-			System.out.println(e.toString());
-		}
-		
-		DAO.cerrarSession();
-		System.out.println(aux);
-		return aux;
-	}
-	//anda
-	public int ContadordeCuentasxclientes() {
-		Conexion DAO = new Conexion();	
-		Session session = DAO.abrirConexion();
-		int resultado=0;
-		Transaction tx= session.beginTransaction();						
-		String hql="Select count(*) From ClientesxCuentas";		
-		List<Long> result= session.createQuery(hql).list();
-		
-		resultado=result.get(0).intValue();
 
-		
-		System.out.println(resultado);
 
-		DAO.cerrarSession();
-		return resultado;
-	}
+
 //anda
 	public List<Cuenta> listarCuentas() {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();	
 		session.beginTransaction();
 		List<Cuenta> listarCuentas=(List<Cuenta>) session.createQuery("From Cuenta where Estado=true").list();
-		DAO.cerrarSession();
+		DAO.cerrarSession();				
 		return listarCuentas;
 	}
 	
@@ -165,6 +111,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Session session = DAO.abrirConexion();	
 		session.beginTransaction();
 		Cuenta cuenta = (Cuenta) session.createQuery("FROM Cuenta WHERE Estado=true AND Cbu=" + cbu).uniqueResult();
+	
 		DAO.cerrarSession();
 		return cuenta;
 	}
@@ -173,11 +120,14 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - monto);
-		cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);
+		cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);	
+		
 		session.beginTransaction();
 		session.update(cuentaOrigen);
 		session.update(cuentaDestino);
-		session.getTransaction().commit();		
+
+		session.getTransaction().commit();	
+	
 		DAO.cerrarSession();
 	}
 	
@@ -221,10 +171,8 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();	
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Pesos'";	
-		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
-
-		
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta.Nombre='Pesos'";	
+		List<Integer> result=(List<Integer>)session.createQuery(hql).list();		
 		DAO.cerrarSession();
 		return result;
 			
@@ -234,7 +182,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Conexion DAO = new Conexion();	
 		Session session = DAO.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta='Dolares'";	
+		String hql="Select sum(c.Saldo) as cuenta From Cuenta as c  where c.Estado=true and c.TipoCuenta.Nombre='Dolares'";	
 		List<Integer> result=(List<Integer>)session.createQuery(hql).list();
 	
 		
@@ -249,95 +197,44 @@ public class DaoCuenta implements InterfazDaoCuenta {
 			Conexion DAO = new Conexion();
 			Session session = DAO.abrirConexion();
 			Transaction tx= session.beginTransaction();						
-			String hql="Select c.NumCuenta,c.Dni,c.Fecha,c.TipoCuenta,c.Cbu,c.Saldo,c.Estado From Cuenta as c  where c.Dni="+Dni+" and c.NumCuenta="+numCuenta+"and  c.Estado=true ";		
+			String hql=" From Cuenta as c where c.NumCuenta=:numcuenta and c.Cliente.Dni=:dnii and  c.Estado=true ";	
 			Query query=session.createQuery(hql);
-			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+			query.setParameter("numcuenta", numCuenta);
+			query.setParameter("dnii", Dni);
 			Cuenta cuenta = new Cuenta();
-			for(Object[] obj : result) {
-				
-				cuenta.setNumCuenta((int) obj[0]);
-				cuenta.setDni((String)obj[1]);
-				cuenta.setFecha((String)obj[2]);
-				cuenta.setTipoCuenta((String)obj[3]);
-				cuenta.setCbu((int)obj[4]);
-				cuenta.setSaldo((float)obj[5]);
-				cuenta.setEstado((boolean)obj[6]);
-				
-			}
+			cuenta=(Cuenta)query.uniqueResult();	
 			tx.commit();
 			DAO.cerrarSession();
 
 			return cuenta;
 				
 		}
-		//anda
-		public ClientesxCuentas BuscarCuentaxCliente(String Dni,int NumCuenta) {
-			Conexion DAO = new Conexion();
-			Session session = DAO.abrirConexion();
-			Transaction tx= session.beginTransaction();						
-			String hql="select c.Dni,c.IdCuenta,c.Estado From ClientesxCuentas as c WHERE c.Dni="+Dni+"and c.IdCuenta="+NumCuenta+" and c.Estado=true ";
-			Query query=session.createQuery(hql);
-			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
-			ClientesxCuentas cli = new ClientesxCuentas();
-			for(Object[] obj : result) {
-				
-				cli.setDni((String) obj[0]);
-				cli.setIdCuenta((int)obj[1]);
-				cli.setEstado((boolean)obj[2]);
-			}
-			tx.commit();
-			DAO.cerrarSession();
+		
 
-			return cli;
-				
-		}
-		//anda
-		public ArrayList<ClientesxCuentas> BuscarTODASCuentaxCliente(String Dni) {
-			Conexion DAO = new Conexion();
-			Session session = DAO.abrirConexion();
-			Transaction tx= session.beginTransaction();						
-			String hql="select c.Dni,c.IdCuenta,c.Estado From ClientesxCuentas as c WHERE c.Dni="+Dni+" and c.Estado=true ";
-			Query query=session.createQuery(hql);
-			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
-			
-			ArrayList<ClientesxCuentas> ListaClientesxcuentas= new ArrayList<ClientesxCuentas>();
-			for(Object[] obj : result) {
-				ClientesxCuentas cli = new ClientesxCuentas();
-				cli.setDni((String) obj[0]);
-				cli.setIdCuenta((int)obj[1]);
-				cli.setEstado((boolean)obj[2]);
-				ListaClientesxcuentas.add(cli);
-			}
-			tx.commit();
-			DAO.cerrarSession();
-
-			return ListaClientesxcuentas;
-				
-		}
 		//anda
 		public ArrayList<Cuenta> BuscarTODASCuenta(String Dni) {
 			Conexion DAO = new Conexion();
 			Session session = DAO.abrirConexion();
 			Transaction tx= session.beginTransaction();						
-			String hql="Select c.NumCuenta,c.Dni,c.Fecha,c.TipoCuenta,c.Cbu,c.Saldo,c.Estado From Cuenta as c  where c.Dni="+Dni+"and  c.Estado=true ";
-			Query query=session.createQuery(hql);
-			List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
+		//	String hql="Select c.NumCuenta,c.Dni,c.Fecha,c.TipoCuenta,c.Cbu,c.Saldo,c.Estado From Cuenta as c  where c.Dni="+Dni+"and  c.Estado=true ";
+			//Query query=session.createQuery(hql);
+			//List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
 			
+			String hql=" From Cuenta as c  where c.Cliente.Dni=:dnii and c.Estado=true ";	
+			Query query=session.createQuery(hql);
+			query.setParameter("dnii", Dni);
+		
+			List<Cuenta> result= (List<Cuenta>) query.list();
+			
+
 			ArrayList<Cuenta> Listacuentas= new ArrayList<Cuenta>();
-		for(Object[] obj : result) {
-				Cuenta cuenta = new Cuenta();
-				cuenta.setNumCuenta((int) obj[0]);
-				cuenta.setDni((String)obj[1]);
-				cuenta.setFecha((String)obj[2]);
-				cuenta.setTipoCuenta((String)obj[3]);
-				cuenta.setCbu((int)obj[4]);
-				cuenta.setSaldo((float)obj[5]);
-				cuenta.setEstado((boolean)obj[6]);
-				Listacuentas.add(cuenta);
+			
+	
+		for(Cuenta obj : result) {				
+				Listacuentas.add(obj);
 			}
 			tx.commit();
 			DAO.cerrarSession();
-
 			return Listacuentas;
 				
 		}
@@ -351,16 +248,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 				DAO.cerrarSession();
 				return true;
 		}
-		//anda
-		public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {	
-			Conexion DAO = new Conexion();
-			Session session = DAO.abrirConexion();
-			session.beginTransaction();
-			session.update(cli);
-			session.getTransaction().commit();					
-			DAO.cerrarSession();
-				return true;
-		}
+
 	
 	
 	

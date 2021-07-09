@@ -68,7 +68,7 @@ public class controladorTransferencias {
 		ModelAndView MV = new ModelAndView();
 		DaoCuenta DAOCuenta = new DaoCuenta();
 		DaoHistorial DAOHistorial = new DaoHistorial();
-		
+
 		Cuenta cuentaOrigen = DAOCuenta.obtenerCuentaPorNroCuenta(Integer.parseInt(nroCuentaOrigen));
 		Cuenta cuentaDestino = new Cuenta();
 		if (cbu != null && nroCuentaDestino.equals("cuentaNoPropia")) {
@@ -83,12 +83,12 @@ public class controladorTransferencias {
 			MV.addObject("mensajeError", "<h2>El monto indicado es mayor al disponible!</h2>");
 		} else {
 			DAOCuenta.actualizarCuentas(cuentaOrigen, cuentaDestino, Float.parseFloat(monto));
-			DAOHistorial.crearRegistroEnHisotrial(cuentaOrigen.getNumCuenta(), cuentaDestino.getNumCuenta(), Float.parseFloat(monto), cuentaOrigen.getTipoCuenta());
+			DAOHistorial.crearRegistroEnHisotrial(cuentaOrigen.getNumCuenta(), cuentaDestino.getNumCuenta(), Float.parseFloat(monto), cuentaOrigen.getTipoCuenta().getNombre());
 			MV.addObject("mensajeError", "<h2>La transferencia se realizo correctamente!</h2>");
 		}
 		
 		List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(dni);
-		
+
 		String listaCuentas = "";
 		for(Cuenta cuenta : cuentas) {
 			listaCuentas = listaCuentas + "<option>" + cuenta.getNumCuenta() + "</option>";

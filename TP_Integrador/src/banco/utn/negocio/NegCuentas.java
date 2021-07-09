@@ -10,7 +10,6 @@ import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoPersona;
 import banco.utn.dao.DaoCuenta;
 import banco.utn.entidad.Cliente;
-import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
 @Service("servicioCuentas")
@@ -28,22 +27,14 @@ public class NegCuentas implements InterfazNegCuentas {
 	public ArrayList<Cuenta> BuscarTODASCuenta(String Dni) {
 		return  daoCuenta.BuscarTODASCuenta(Dni);
 	}
-	public ClientesxCuentas BuscarCuentaxCliente(String Dni,int NumCuenta) {
-		
-		return daoCuenta.BuscarCuentaxCliente(Dni,NumCuenta);
-	}
-	public ArrayList<ClientesxCuentas> BuscarTODASCuentaxCliente(String Dni) {
-		return  daoCuenta.BuscarTODASCuentaxCliente(Dni);
-	}
+
+
 	public boolean Eliminar1Cuenta(Cuenta cuenta) {
 		
 		return daoCuenta.Eliminar1Cuenta(cuenta);
 	}
 
-	public boolean Eliminar1Cuentaxcliente(ClientesxCuentas cli) {
-		
-		return daoCuenta.Eliminar1Cuentaxcliente(cli);
-	}
+
 	public boolean Editarcuenta(Cuenta cuenta) {
 		
 		
@@ -75,13 +66,6 @@ public class NegCuentas implements InterfazNegCuentas {
 		
 		return daoCuenta.AgregarCuenta(c);
 	}
-	public boolean EditarcuentaxClientes(ClientesxCuentas cxc) {
-		return daoCuenta.EditarcuentaxClientes(cxc);
-	}
 	
-	public boolean agregarClientesxcuentas(ClientesxCuentas c) {
-		
-		return daoCuenta.EditarcuentaxClientes(c);
-	}	
 	
 }

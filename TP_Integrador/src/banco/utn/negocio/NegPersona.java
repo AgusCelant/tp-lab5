@@ -11,7 +11,6 @@ import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoPersona;
 import banco.utn.dao.DaoCuenta;
 import banco.utn.entidad.Cliente;
-import banco.utn.entidad.ClientesxCuentas;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
 import banco.utn.entidad.Generos;

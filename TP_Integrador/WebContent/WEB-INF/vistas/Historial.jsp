@@ -39,10 +39,13 @@ center {
 <title>Hisotrial</title>
 </head>
 <body>
+<center>
 <h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
+
 <jsp:include page="MenuCliente.jsp"></jsp:include>
 	<form action="mostrarHistorial.html" method="post">
 		<h2>HISTORIAL</h2>
+		</center>
 		<input type="hidden" name="dni" value="${dni}">
 		<lablel>Cuenta:</lablel>
 		<select id="selectCuentaOrigen" name="cuentaSeleccionada" onchange="this.form.submit()">

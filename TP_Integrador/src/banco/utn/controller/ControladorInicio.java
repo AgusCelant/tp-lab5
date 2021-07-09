@@ -29,7 +29,7 @@ public class ControladorInicio {
 	
 		
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Alta_Cliente");
+		MV.setViewName("Login");
 		return MV;
 	}
 	

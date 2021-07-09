@@ -14,10 +14,12 @@ public class Cuenta implements Serializable {
 	private int NumCuenta;
 	@Column(name = "fecha")
 	private String Fecha;
-	@Column(name = "dni", nullable = true)
-	private String Dni;
-	@Column(name = "tipo")
-	private String TipoCuenta;
+	@ManyToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="Dni")
+	private Cliente Cliente= new Cliente();
+	@OneToOne(cascade= {CascadeType.ALL}) 
+	@JoinColumn(name="TipoCuenta")
+	private TipoCuenta TipoCuenta= new TipoCuenta();
 	@Column(name = "cbu")
 	private int Cbu;
 	@Column(name = "saldo")
@@ -25,7 +27,7 @@ public class Cuenta implements Serializable {
 	@Column(name = "estado")
 	private boolean Estado;
 	
-	public Cuenta(String fecha, String tipoCuenta, int cbu, float saldo, boolean estado) {
+	public Cuenta(String fecha, TipoCuenta tipoCuenta, int cbu, float saldo, boolean estado) {
 	// public Cuenta(String fecha, String tipoCuenta, int cbu, float saldo) {
 		super();
 		Fecha = fecha;
@@ -43,10 +45,10 @@ public class Cuenta implements Serializable {
 	public void setFecha(String fecha) {
 		Fecha = fecha;
 	}
-	public String getTipoCuenta() {
+	public TipoCuenta getTipoCuenta() {
 		return TipoCuenta;
 	}
-	public void setTipoCuenta(String tipoCuenta) {
+	public void setTipoCuenta(TipoCuenta tipoCuenta) {
 		TipoCuenta = tipoCuenta;
 	}
 	public int getNumCuenta() {
@@ -73,16 +75,18 @@ public class Cuenta implements Serializable {
 	public void setEstado(Boolean estado) {
 		Estado =  estado;
 	}
-	public String getDni() {
-		return Dni;
+
+	public Cliente getCliente() {
+		return Cliente;
 	}
 
-	public void setDni(String dni) {
-		Dni = dni;
+	public void setCliente(Cliente cliente) {
+		Cliente = cliente;
 	}
+
 	@Override
 	public String toString() {
-		return "Dni=" + Dni +", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo + ", Estado=" + Estado;
+		return "Dni=" + Cliente.getDni() +", Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo + ", Estado=" + Estado;
 		// return "Fecha=" + Fecha + ", TipoCuenta=" + TipoCuenta + ", NumCuenta=" + NumCuenta + ", Cbu=" + Cbu + ", Saldo=" + Saldo;
 	}
 }
