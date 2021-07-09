@@ -90,13 +90,13 @@ center {
   <tr>
   	  <td>${cliente.nombre}</td>
       <td>${cliente.apellido} </td>
-      <td>${cliente.sexo} </td>
+      <td>${cliente.sexo.genero} </td>
       <td>${cliente.dni} </td>
       <td>${cliente.nacimiento} </td>
-      <td>${cliente.nacionalidad} </td>
-      <td>${cliente.provincia} </td>
-      <td>${cliente.localidad} </td>
-      <td>${cliente.usuario} </td>
+      <td>${cliente.nacionalidad.nacionalidad} </td>
+      <td>${cliente.provincia.nombre} </td>
+      <td>${cliente.localidad.nombre} </td>
+      <td>${cliente.usuario.usuario} </td>
       <td><a href="AgregarCuentaP1.html?dni=${cliente.dni}" >Agregar Cuenta </a> </td>
 
 

@@ -163,23 +163,23 @@ public class DaoPersona implements InterfazDaoPersona {
 		Conexion DAO = new Conexion();
 		Session session = DAO.abrirConexion();
 		session.beginTransaction();						
-		String hql="select c.Nombre,c.Apellido,c.Sexo,c.Nacimiento,c.Nacionalidad,c.Provincia,c.Localidad,c.Usuario,c.Dni From Cliente as c where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true";
-		
-		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
-		List<Object[]> result= (List<Object[]>) session.createQuery(hql).list();
-		for(Object[] obj : result) {
-			Cliente cli = new Cliente();
-			cli.setNombre((String)obj[0]);
-			cli.setApellido((String)obj[1]);
-			cli.setSexo((String)obj[2]);
-			cli.setNacimiento((String)obj[3]);
-			cli.setNacionalidad((String)obj[4]);
-			cli.setProvincia((String)obj[5]);
-			cli.setLocalidad((String)obj[6]);
-			cli.setUsuario((String)obj[7]);	
-			cli.setDni((String)obj[8]);	
-			System.out.println(cli.toString());
-			ListaClientes.add(cli);
+		//String hql="From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true";
+		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery("From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true").list();	
+		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();	
+		for(Object[] result: ListarClientes) {
+			Cliente cliente= new Cliente();
+			Cliente cliente2= new Cliente();
+			cliente=(Cliente) result[0];
+			cliente2.setDni(cliente.getDni());
+			cliente2.setNombre(cliente.getNombre());
+			cliente2.setApellido(cliente.getApellido());
+			cliente2.getSexo().setGenero(cliente.getSexo().getGenero());
+			cliente2.setNacimiento(cliente.getNacimiento());
+			cliente2.setProvincia(cliente.getProvincia());
+			cliente2.getNacionalidad().setNacionalidad(cliente.getNacionalidad().getNacionalidad());
+			cliente2.setLocalidad(cliente.getLocalidad());
+			cliente2.setUsuario(cliente.getUsuario());
+			ListaClientes.add(cliente2);
 		}
 		DAO.cerrarSession();
 		
