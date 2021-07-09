@@ -30,19 +30,12 @@ import org.hibernate.Session;
 
 @Controller
 public class ControladorCliente {
-
-	@Autowired
-	@Qualifier("servicioPersona")
 	private NegPersona negocioPersona;
-	@Autowired
 	private Cliente cliente;
-	@Autowired
 	private Generos gen;
 	@Autowired
 	private Cuenta Cuen;
-	@Autowired
 	private DaoCuenta DaoCuen;
-	@Autowired
 	private NegCuentas negocioCuentas;
 	
 	@RequestMapping("mainCliente.html")

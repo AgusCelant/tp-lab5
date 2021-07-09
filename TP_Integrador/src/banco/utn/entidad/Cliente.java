@@ -47,8 +47,6 @@ public class Cliente implements Serializable{
 	
 	public Cliente() {}
 
-
-
 	public Cliente(String nombre, String apellido, Generos sexo, String nacimiento, Nacionalidad nacionalidad,
 			Provincia provincia, Localidad localidad, Usuario usuario, Boolean estado, String dni) {
 		super();
@@ -63,8 +61,6 @@ public class Cliente implements Serializable{
 		Estado = estado;
 		Dni = dni;
 	}
-
-
 
 	public String getNombre() {
 		return Nombre;
@@ -82,7 +78,6 @@ public class Cliente implements Serializable{
 		this.Apellido = apellido;
 	}
 
-	
 	public Generos getSexo() {
 		return sexo;
 	}
@@ -122,21 +117,14 @@ public class Cliente implements Serializable{
 	public void setLocalidad(Localidad localidad) {
 		Localidad = localidad;
 	}
-
-	
-	
 	
 	public Usuario getUsuario() {
 		return Usuario;
 	}
 
-
-
 	public void setUsuario(Usuario usuario) {
 		Usuario = usuario;
 	}
-
-
 
 	public Boolean getEstado() {
 		return Estado;

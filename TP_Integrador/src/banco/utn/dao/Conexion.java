@@ -25,16 +25,14 @@ public class Conexion {
 	
 	public Session abrirConexion()
 	{
-		System.out.println("abriendo");
 		session=sessionFactory.openSession();
-		System.out.println("pasando");
 		return session;
 	}
 	
 	public void cerrarSession()
 	{
 		session.close();
-		cerrarSessionFactory();
+		// cerrarSessionFactory();
 	}
 	
 	

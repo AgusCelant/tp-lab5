@@ -11,22 +11,17 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import banco.utn.entidad.Cliente;
-import banco.utn.entidad.Cuenta;
-import banco.utn.entidad.Generos;
-import banco.utn.entidad.Historial;
-import banco.utn.entidad.Usuario;
+import banco.utn.entidad.*;
 @Repository("daoPersona")
 public class DaoPersona implements InterfazDaoPersona {
+	@Autowired
+	private Conexion conexion;
 	
-
-	//anda
 	public List<Cliente> listarPersonas() {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();	
+		Session session = conexion.abrirConexion();
 		session.beginTransaction();
 		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery(" From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Estado=true and c.Provincia.Estado=true").list();
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();
 		for(Object[] objeto: ListarClientes) {
 			Cliente cliente= new Cliente();
@@ -49,8 +44,7 @@ public class DaoPersona implements InterfazDaoPersona {
 	}
 //anda
 	public boolean agregarPersona(Cliente p) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;
 		try
@@ -64,13 +58,12 @@ public class DaoPersona implements InterfazDaoPersona {
 			aux=false;
 			tx.rollback();
 		}
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return aux;
 	}
 	//anda
 	public Cliente BuscarPersonaDni(String Dni) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();	
 		
 		String hql=" From Cliente as c  where c.Dni=:dnii and c.Estado=true ";	
@@ -78,24 +71,22 @@ public class DaoPersona implements InterfazDaoPersona {
 		query.setParameter("dnii", Dni);
 		Cliente cliente= new Cliente();
 		cliente=(Cliente)query.uniqueResult();	
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return cliente;
 			
 	}
 	//anda
 	public boolean EliminarPersona(Cliente cliente) {	
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();	
+		Session session = conexion.abrirConexion();	
 			session.beginTransaction();
 			session.update(cliente);
 			session.getTransaction().commit();					
-			DAO.cerrarSession();
+			conexion.cerrarSession();
 		return true;
 	}
 	//anda
 	public boolean EditarPersona(Cliente p) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;
 		try
@@ -108,48 +99,41 @@ public class DaoPersona implements InterfazDaoPersona {
 			aux=false;
 			tx.rollback();
 		}
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return aux;
 	}
-	
-	
 	//anda
 	public List<Object[]> VerificarDni(String Dni) {
-		Conexion DAO = new Conexion();	
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();						
 		String hql="Select c.Dni From Cliente as c  where c.Dni="+Dni+" and c.Estado=true ";		
 		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
 		
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return result;
-			
 	}
 	//anda
 	public List<Object[]> VerificarUsuario(String Usuarioo) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();						
 		String hql="Select c.Usuario From Cliente as c  where c.Usuario='"+Usuarioo+"' and c.Estado=true ";	
 		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return result;
 	}
 	
 	public List<Object[]> VerificarLogin(String Usuario,String Contraseña) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();						
 		String hql="Select c.Usuario From Cliente as c  where c.Usuario.Usuario='"+Usuario+"' and c.Usuario.Contraseña='"+Contraseña+"' and c.Estado=true";
 		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return result;
 			
 	}
 	
 	public Cliente obtenerDatosDeUsuario (String usuario) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		//Cliente cliente = (Cliente) session.createQuery("SELECT c FROM Cliente c WHERE Usuario.Usuario='" + usuario + "'").uniqueResult();
 		String hql=" From Cliente as c  where c.Usuario.Usuario=:Usu and c.Estado=true ";	
 		Query query=session.createQuery(hql);
@@ -157,7 +141,7 @@ public class DaoPersona implements InterfazDaoPersona {
 		Cliente cliente= new Cliente();
 		cliente=(Cliente)query.uniqueResult();	
 		
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return cliente;
 	}
 	/* 
@@ -165,10 +149,8 @@ public class DaoPersona implements InterfazDaoPersona {
 	 */
 	//anda
 	public ArrayList<Cliente> TraerClientes() {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		session.beginTransaction();						
-		//String hql="From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Dni from ClientesxCuentas as a where a.Estado=true group by a.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (SELECT b.Dni from ClientesxCuentas as b where b.Estado=true) and c.Estado=true";
 		List<Object[]> ListarClientes=(List<Object[]>) session.createQuery("From Cliente as c inner join c.sexo inner join c.Usuario  inner join c.Nacionalidad inner join c.Provincia inner join c.Localidad where c.Dni in(select a.Cliente.Dni from Cuenta as a where a.Estado=true group by a.Cliente.Dni having count (*)<4  ) and c.Estado=true or c.Dni not in (select b.Cliente.Dni from Cuenta as b where b.Estado=true) and c.Estado=true").list();	
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();	
 		for(Object[] result: ListarClientes) {
@@ -186,34 +168,17 @@ public class DaoPersona implements InterfazDaoPersona {
 			cliente2.setUsuario(cliente.getUsuario());
 			ListaClientes.add(cliente2);
 		}
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		
 		return ListaClientes;
-			
 	}
-	
-	
-	
-
-
-	
-	
-	
-
-	
-	
-
-
-
-	
 /*
  * 
  * Historial
  * 	
  */
 	public boolean AgregarenHistorial(Historial histo) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();
 		boolean aux = true;
 		try
@@ -226,25 +191,23 @@ public class DaoPersona implements InterfazDaoPersona {
 			aux=false;
 			tx.rollback();
 		}
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return aux;
 	}
 	
 	public List<Historial> ListarHistorial() {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		session.beginTransaction();
 		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial ").list();
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return ListarHistorial;
 	}
 	
 	public List<Historial> ListarHistorialxCuenta(int nroCuenta) {
-		Conexion DAO = new Conexion();
-		Session session = DAO.abrirConexion();
+		Session session = conexion.abrirConexion();
 		session.beginTransaction();
 		List<Historial> ListarHistorial=(List<Historial>) session.createQuery("From Historial where nrocuentaorigen="+nroCuenta+"").list();
-		DAO.cerrarSession();
+		conexion.cerrarSession();
 		return ListarHistorial;
 	}	
 	
