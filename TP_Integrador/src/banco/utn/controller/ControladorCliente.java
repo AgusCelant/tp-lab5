@@ -42,7 +42,7 @@ public class ControladorCliente {
 		String resumenCuentas = "";
 		
 		for(Cuenta cuenta : cuentas) {
-			resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
+			resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta().getNombre() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
 		}
 		System.out.println(resumenCuentas);
 		MV.addObject("clienteLogueado", cliente);
