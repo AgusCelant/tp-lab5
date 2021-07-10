@@ -15,6 +15,7 @@ import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
+import banco.utn.negocio.NegHistorial;
 import banco.utn.negocio.NegPersona;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class controladorHistorial {
 	@Autowired
 	private DaoPersona BDaoPersona;
 	@Autowired
-	private DaoHistorial BDaoHistorial;
+	private NegHistorial negocioHistorial;
 	
 	@RequestMapping("mostrarHistorial.html")
 	public ModelAndView mostrarHistorial(String dni, String cuentaSeleccionada, HttpServletRequest request) {
@@ -62,9 +63,9 @@ public class controladorHistorial {
 		}
 		
 		if (cuentaSeleccionada != null) {
-			listaHistorial = (ArrayList<Historial>)BDaoHistorial.obtenerHisotrialPorCuenta(Integer.parseUnsignedInt(cuentaSeleccionada));
+			listaHistorial = (ArrayList<Historial>)negocioHistorial.obtenerHisotrialPorCuenta(Integer.parseUnsignedInt(cuentaSeleccionada));
 		} else {
-			listaHistorial = (ArrayList<Historial>)BDaoHistorial.obtenerHisotrialPorCuenta(cuentas.get(0).getNumCuenta());
+			listaHistorial = (ArrayList<Historial>)negocioHistorial.obtenerHisotrialPorCuenta(cuentas.get(0).getNumCuenta());
 		}
 		
 		MV.addObject("dni", dni);

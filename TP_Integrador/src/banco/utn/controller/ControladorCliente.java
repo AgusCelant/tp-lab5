@@ -2,31 +2,19 @@ package banco.utn.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.service.config.spi.ConfigurationService.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import banco.utn.dao.Conexion;
 import banco.utn.dao.DaoCuenta;
 import banco.utn.dao.DaoPersona;
-import banco.utn.entidad.Cliente;
-import banco.utn.entidad.Cuenta;
-import banco.utn.entidad.Generos;
+import banco.utn.entidad.*;
 import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
-import org.hibernate.Session;
 
 @Controller
 public class ControladorCliente {
