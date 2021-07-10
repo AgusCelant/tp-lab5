@@ -30,10 +30,6 @@ import banco.utn.resources.BeansConexion;
 public class ControladorInicio {
 	private ApplicationContext appContext = null;
 	@Autowired
-	private DaoCuenta BDaoCuenta;
-	@Autowired
-	private DaoPersona BDaoPersona;
-	@Autowired
 	private NegPersona negocioPersona;
 	@Autowired
 	private NegCuentas negocioCuenta;
@@ -42,7 +38,7 @@ public class ControladorInicio {
 	public ModelAndView Login() 
 	{
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Alta_Cliente");
+		MV.setViewName("Login");
 		return MV;
 	}
 	

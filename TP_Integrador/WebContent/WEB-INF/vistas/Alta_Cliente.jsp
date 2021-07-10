@@ -127,9 +127,9 @@ background:white;
 	<p align="center">Nombre: <input class="controls" type="text" name="Nombre" required  onkeypress="return (event.charCode ==32 || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90))" ></p>
     <p align="center">Apellido: <input class="controls" type="text" name="Apellido" required onkeypress="return (event.charCode ==32 || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90))" ></p>
     <p align="center"> Sexo:</p> 
-    <p align="center" class="controls">
-	    <input type="radio" name="Sexo" value="Hombre"> Hombre
-	    <input type="radio" name="Sexo" value="Mujer"> Mujer
+    <p align="center" class="controls" >
+	    <input type="radio" name="Sexo" value="Hombre" required> Hombre
+	    <input type="radio" name="Sexo" value="Mujer" required> Mujer
   	</p>
     <p align="center" >Dni: <input class="controls" type="text" name="Dni" required minlength="7" maxlength="8" placeholder="Ej:42469737"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
     <p align="center">Año de nacimiento:<input class="controls" type="date" name="Date">

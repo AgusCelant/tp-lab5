@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import banco.utn.dao.DaoHistorial;
 import banco.utn.entidad.Historial;
 
-public class NegHistorial {
+public class NegHistorial implements InterfazNegHistorial{
 	@Autowired
 	private DaoHistorial BDaoHistorial;
 	

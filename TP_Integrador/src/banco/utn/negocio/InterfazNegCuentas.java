@@ -1,7 +1,6 @@
 package banco.utn.negocio;
 import java.util.ArrayList;
 import java.util.List;
-import banco.utn.dao.DaoCuenta;
 import banco.utn.entidad.Cuenta;
 public interface InterfazNegCuentas {
 	public List<Cuenta> listarCuentas() ;

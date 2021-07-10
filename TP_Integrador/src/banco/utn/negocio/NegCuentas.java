@@ -70,7 +70,11 @@ public class NegCuentas implements InterfazNegCuentas {
 		
 		return daoCuenta.Verificarcbu(Cbu);
 	}
-
+	public void actualizarCuentas(Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto) {
+		
+		daoCuenta.actualizarCuentas(cuentaOrigen,cuentaDestino,monto);
+		
+	}
 	
 	
 }

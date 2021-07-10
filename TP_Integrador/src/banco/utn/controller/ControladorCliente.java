@@ -22,13 +22,10 @@ public class ControladorCliente {
 	private NegPersona negocioPersona;
 	@Autowired
 	private Cliente cliente;
-	private Generos gen;
+
 	@Autowired
 	private Cuenta cuenta;
-	@Autowired
-	private DaoCuenta BDaoCuenta;
-	@Autowired
-	private DaoPersona BDaoPersona;
+
 	@Autowired
 	private NegCuentas negocioCuenta;
 	
