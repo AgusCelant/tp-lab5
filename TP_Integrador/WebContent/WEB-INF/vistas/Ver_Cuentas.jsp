@@ -92,7 +92,7 @@ center {
   </thead>
    <c:forEach var="cuenta" items="${ ListaCuentas }"  >
   <tr>
-  	  <td>${cuenta.cliente.dni}</td>
+  	  <td>${cuenta.cliente.dni} ${cuenta.cliente.nombre} ${cuenta.cliente.apellido }</td>
       <td>${cuenta.fecha} </td>
       <td>${cuenta.tipoCuenta.nombre} </td>
       <td>${cuenta.numCuenta} </td>
