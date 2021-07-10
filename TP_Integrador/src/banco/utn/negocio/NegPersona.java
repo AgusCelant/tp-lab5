@@ -66,11 +66,10 @@ public ArrayList<Cliente> TraerClientes() {
 }
 
 
-/*
-public boolean agregarClientesxcuentas(ClientesxCuentas p) {
-	return daoPersona.agregarClientesxcuentas(p);
+public Cliente obtenerDatosDeUsuario (String usuario) {
+	
+	return daoPersona.obtenerDatosDeUsuario(usuario);
 }
-*/
 
 
 

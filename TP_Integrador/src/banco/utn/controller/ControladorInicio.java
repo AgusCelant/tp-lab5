@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import banco.utn.dao.*;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
+import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
 import banco.utn.resources.BeanDao;
 import banco.utn.resources.BeansCliente;
@@ -34,12 +35,14 @@ public class ControladorInicio {
 	private DaoPersona BDaoPersona;
 	@Autowired
 	private NegPersona negocioPersona;
+	@Autowired
+	private NegCuentas negocioCuenta;
 	
 	@RequestMapping("inicioLogin.html")
 	public ModelAndView Login() 
 	{
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Login");
+		MV.setViewName("Alta_Cliente");
 		return MV;
 	}
 	
@@ -54,8 +57,8 @@ public class ControladorInicio {
 			ModelAndView MV2 = new ModelAndView();
 			// DaoCuenta BDAOCuenta = (DaoCuenta)appContext.getBean("BDaoCuenta");
 			//anda
-			List<Integer> cuentaspesos = BDaoCuenta.ObtenerPorcentajedeCuentasPesos();			
-			List<Integer> cuentasdolar = BDaoCuenta.ObtenerPorcentajedeCuentasDolar();		
+			List<Integer> cuentaspesos = negocioCuenta.ObtenerPorcentajedeCuentasPesos();			
+			List<Integer> cuentasdolar = negocioCuenta.ObtenerPorcentajedeCuentasDolar();		
 			int cuenta1=0;
 			int cuenta2=0;
 			if (cuentaspesos.get(0)==null) {				
@@ -84,8 +87,8 @@ public class ControladorInicio {
 				((ConfigurableApplicationContext)(appContext)).close();
 				return MV;		
 			} else {
-				Cliente cliente = BDaoPersona.obtenerDatosDeUsuario(txtUsuario);
-				List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(cliente.getDni());
+				Cliente cliente = negocioPersona.obtenerDatosDeUsuario(txtUsuario);
+				List<Cuenta> cuentas = negocioCuenta.obtenerCuentasDeUsuario(cliente.getDni());
 				String resumenCuentas = "";
 				
 				for(Cuenta cuenta : cuentas) {

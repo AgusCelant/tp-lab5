@@ -66,6 +66,11 @@ public class NegCuentas implements InterfazNegCuentas {
 		
 		return daoCuenta.AgregarCuenta(c);
 	}
+	public List<Object[]> Verificarcbu(int Cbu) {
+		
+		return daoCuenta.Verificarcbu(Cbu);
+	}
+
 	
 	
 }
