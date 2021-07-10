@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
 
-import banco.utn.dao.DaoCuenta;
-import banco.utn.dao.DaoPersona;
+import banco.utn.dao.*;
 
 @Configuration
 public class BeanDao {
@@ -23,5 +22,11 @@ public class BeanDao {
 	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 	public DaoPersona BDaoPersona() {
 		return new DaoPersona();
+	}
+	
+	@Bean
+	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+	public DaoHistorial BDaoHistorial() {
+		return new DaoHistorial();
 	}
 }

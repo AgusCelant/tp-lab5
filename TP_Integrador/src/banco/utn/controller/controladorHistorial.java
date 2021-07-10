@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,28 +15,32 @@ import banco.utn.dao.DaoPersona;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Historial;
+import banco.utn.negocio.NegPersona;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class controladorHistorial {
-
+	@Autowired
+	private DaoCuenta BDaoCuenta;
+	@Autowired
+	private DaoPersona BDaoPersona;
+	@Autowired
+	private DaoHistorial BDaoHistorial;
+	
 	@RequestMapping("mostrarHistorial.html")
 	public ModelAndView mostrarHistorial(String dni, String cuentaSeleccionada, HttpServletRequest request) {
-		DaoCuenta DAOCuenta = new DaoCuenta();
-		DaoHistorial DAOHistorial = new DaoHistorial();
 		ModelAndView MV = new ModelAndView();
 		ArrayList<Historial> listaHistorial = new ArrayList<Historial>();
 		String Cartel="Este cliente no tiene ninguna cuenta asociada";
-		List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(dni);
+		List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(dni);
 		if(cuentas.size()==0) {
 			MV.addObject("Cartel", Cartel);
 		
-			DaoPersona DAOPersona = new DaoPersona();
 			String Dnii=(String) request.getSession().getAttribute("Dni");
 			String Clientelogueado=(String) request.getSession().getAttribute("Clienteelogueado");
-			List<Cuenta> cuentas1 = DAOCuenta.obtenerCuentasDeUsuario(Dnii);
-			Cliente cliente = DAOPersona.obtenerDatosDeUsuario(Clientelogueado);
+			List<Cuenta> cuentas1 = BDaoCuenta.obtenerCuentasDeUsuario(Dnii);
+			Cliente cliente = BDaoPersona.obtenerDatosDeUsuario(Clientelogueado);
 			String resumenCuentas = "";
 			
 			for(Cuenta cuenta : cuentas1) {
@@ -57,9 +62,9 @@ public class controladorHistorial {
 		}
 		
 		if (cuentaSeleccionada != null) {
-			listaHistorial = (ArrayList<Historial>)DAOHistorial.obtenerHisotrialPorCuenta(Integer.parseUnsignedInt(cuentaSeleccionada));
+			listaHistorial = (ArrayList<Historial>)BDaoHistorial.obtenerHisotrialPorCuenta(Integer.parseUnsignedInt(cuentaSeleccionada));
 		} else {
-			listaHistorial = (ArrayList<Historial>)DAOHistorial.obtenerHisotrialPorCuenta(cuentas.get(0).getNumCuenta());
+			listaHistorial = (ArrayList<Historial>)BDaoHistorial.obtenerHisotrialPorCuenta(cuentas.get(0).getNumCuenta());
 		}
 		
 		MV.addObject("dni", dni);

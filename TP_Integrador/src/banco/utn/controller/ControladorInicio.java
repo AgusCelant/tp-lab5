@@ -17,9 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import banco.utn.dao.Conexion;
-import banco.utn.dao.DaoCuenta;
-import banco.utn.dao.DaoPersona;
+import banco.utn.dao.*;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
 import banco.utn.negocio.NegCuentas;
@@ -33,6 +31,10 @@ public class ControladorInicio {
 	private ApplicationContext appContext = null;
 	@Autowired
 	private DaoCuenta BDaoCuenta;
+	@Autowired
+	private DaoPersona BDaoPersona;
+	@Autowired
+	private NegPersona negocioPersona;
 	
 	@RequestMapping("inicioLogin.html")
 	public ModelAndView Login() 
@@ -74,7 +76,6 @@ public class ControladorInicio {
 		} else {						
 			List<Object[]> verificarlogin=null;
 			
-			NegPersona negocioPersona = new NegPersona();
 			verificarlogin=negocioPersona.VerificarLogin(txtUsuario,txtPass);
 			
 			if (verificarlogin.isEmpty()) {
@@ -84,12 +85,8 @@ public class ControladorInicio {
 				((ConfigurableApplicationContext)(appContext)).close();
 				return MV;		
 			} else {
-				DaoPersona DAOPersona = new DaoPersona();
-				DaoCuenta DAOCuenta = new DaoCuenta();
-				NegCuentas NegCuentas = new NegCuentas();
-			
-				Cliente cliente = DAOPersona.obtenerDatosDeUsuario(txtUsuario);
-				List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(cliente.getDni());
+				Cliente cliente = BDaoPersona.obtenerDatosDeUsuario(txtUsuario);
+				List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(cliente.getDni());
 				String resumenCuentas = "";
 				
 				for(Cuenta cuenta : cuentas) {

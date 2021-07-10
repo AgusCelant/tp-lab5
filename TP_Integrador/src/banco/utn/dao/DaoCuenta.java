@@ -9,7 +9,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("daoCuenta")
 public class DaoCuenta implements InterfazDaoCuenta {
 	@Autowired
 	private Conexion conexion;
@@ -18,7 +20,6 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		Session session = conexion.abrirConexion();
 		String query = "SELECT cu FROM Cuenta cu WHERE cu.Estado=true and cu.Cliente.Dni = '" + dni + "'";
 		List<Cuenta> cuentasDeUsuario = (List<Cuenta>) session.createQuery(query).list();
-		System.out.println("djsajdsjadssadddd");
 		conexion.cerrarSession();
 
 		return cuentasDeUsuario;

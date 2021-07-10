@@ -8,7 +8,7 @@ import banco.utn.dao.Conexion;
 @Configuration
 public class BeansConexion {
 	@Bean
-	// @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 	public Conexion conexion () {
 		return new Conexion();
 	}

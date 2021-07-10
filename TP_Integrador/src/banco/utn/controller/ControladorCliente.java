@@ -37,7 +37,6 @@ public class ControladorCliente {
 	private Generos gen;
 	@Autowired
 	private Cuenta cuenta;
-	private DaoCuenta DaoCuen;
 	@Autowired
 	private DaoCuenta BDaoCuenta;
 	@Autowired
