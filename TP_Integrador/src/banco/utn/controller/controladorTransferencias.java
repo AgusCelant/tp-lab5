@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import banco.utn.dao.*;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
+import banco.utn.negocio.NegHistorial;
 
 @Controller
 public class controladorTransferencias {
@@ -20,7 +21,7 @@ public class controladorTransferencias {
 	@Autowired
 	private DaoPersona BDaoPersona;
 	@Autowired
-	private DaoHistorial BDaoHistorial;
+	private NegHistorial NegocioHistorial;
 	
 	@RequestMapping("mostrarTransferencia.html")
 	public ModelAndView mostrarTransferencia(String dni, HttpServletRequest request) {
@@ -82,7 +83,7 @@ public class controladorTransferencias {
 			MV.addObject("mensajeError", "<h2>El monto indicado es mayor al disponible!</h2>");
 		} else {
 			BDaoCuenta.actualizarCuentas(cuentaOrigen, cuentaDestino, Float.parseFloat(monto));
-			BDaoHistorial.crearRegistroEnHisotrial(cuentaOrigen.getNumCuenta(), cuentaDestino.getNumCuenta(), Float.parseFloat(monto), cuentaOrigen.getTipoCuenta().getNombre());
+			NegocioHistorial.crearRegistroEnHisotrial(cuentaOrigen.getNumCuenta(), cuentaDestino.getNumCuenta(), Float.parseFloat(monto), cuentaOrigen.getTipoCuenta().getNombre());
 			MV.addObject("mensajeError", "<h2>La transferencia se realizo correctamente!</h2>");
 		}
 		
