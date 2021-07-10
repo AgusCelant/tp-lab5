@@ -133,7 +133,76 @@ background:white;
   	</p>
     <p align="center" >Dni: <input class="controls" type="text" name="Dni" required minlength="7" maxlength="8" placeholder="Ej:42469737"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))"></p>
     <p align="center">Año de nacimiento:<input class="controls" type="date" name="Date">
-    <p align="center">Nacionalidad: <input class="controls" type="text" name="Nacionalidad" ></p>
+    <p>Nacionalidad:</p>
+     <select class="controls" name='Nacionalidad'>
+     <option>afgano/a</option>
+<option>alemán/a</option>
+<option>árabe</option>
+<option>argentino/a</option>
+<option>australiano/a</option>
+<option>belga</option>
+<option>boliviano/a</option>
+<option>brasileño/a</option>
+<option>camboyano/a</option>
+<option>canadiense</option>
+<option>chileno/a</option>	
+<option>chino/a</option>
+<option>colombiano/a</option>
+<option>coreano/a</option>
+<option>cubano/a</option>
+<option>danés/a</option>
+<option>ecuatoriano/a</option>
+<option>egipcio/a</option>
+<option>salvadoreño/a</option>
+<option>escocés/a</option>
+<option>español/a</option>
+<option>estadounidense</option>
+<option>estonio/a</option>
+<option>etiope</option>
+<option>filipino/a</option>
+<option>finlandés/a</option>
+<option>francés/a</option>
+<option>galés/a</option>
+<option>griego/a</option>
+<option>guatemalteco/a</option>
+<option>haitiano/a</option>
+<option>holandés/a</option>
+<option>hondureño/a</option>
+<option>indonés/a</option>
+<option>inglés/a</option>
+<option>iraquí</option>
+<option>iraní</option>
+<option>irlandés/a</option>
+<option>israelí</option>
+<option>italiano/a</option>
+<option>japonés/a</option>
+<option>jordano/a</option>
+<option>laosiano/a</option>
+<option>letón/a</option>
+<option>letonés/a</option>
+<option>malayo/a</option>
+<option>marroquí</option>
+<option>mexicano/a</option>
+<option>noruego/a</option>
+<option>neozelandés/a</option>
+<option>panameño/a</option>
+<option>paraguayo/a</option>
+<option>peruano/a</option>
+<option>polaco/a</option>
+<option>portugués/a</option>
+<option>puertorriqueño</option>
+<option>dominicano/a</option>
+<option>rumano/a</option>
+<option>ruso/a</option>
+<option>sueco/a</option>
+<option>suizo/a</option>
+<option>tailandés/a</option>
+<option>taiwanes/a</option>
+<option>ucraniano/a</option>
+<option>uruguayo/a</option>
+<option>venezolano/a</option>
+<option>vietnamita</option>
+     </select> 
 	<p>Provincia:</p>
         <select class="controls" name='Provincia' onchange="onProvinciaChange(this)">
 	        <option>Buenos Aires</option>

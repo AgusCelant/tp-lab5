@@ -172,12 +172,12 @@ public class ControladorCliente {
 		java.util.List Dni = null;
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		
-		cliente.setEstado(false);
-		cliente.getProvincia().setEstado(false);
-		cliente.getNacionalidad().setEstado(false);
-		cliente.getLocalidad().setEstado(false);
-		cliente.getUsuario().setEstado(false);
-	
+		cli.setEstado(false);
+		cli.getProvincia().setEstado(false);
+		cli.getNacionalidad().setEstado(false);
+		cli.getLocalidad().setEstado(false);
+		cli.getUsuario().setEstado(false);
+		System.out.println(cli.toString());
 		negocioPersona.EliminarPersona(cli);
 		
 		
@@ -193,7 +193,7 @@ public class ControladorCliente {
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
-		String EstadoeliminarCliente="El cliente "+cliente.getNombre()+" "+cliente.getApellido() +" con dni "+cliente.getDni()+" se elimino correctamente";
+		String EstadoeliminarCliente="El cliente "+cli.getNombre()+" "+cli.getApellido() +" con dni "+cli.getDni()+" se elimino correctamente";
 		MV.addObject("EstadoeliminarCliente",EstadoeliminarCliente);
 		MV.setViewName("Ver_Clientes");
 		return MV;
@@ -221,7 +221,6 @@ public class ControladorCliente {
 	public ModelAndView EventoActualizarCliente(String nombre,String apellido,String Sexo,String dni,String date, String nacionalidad, String Provincia,String Localidad,String usuario,String contraseña)
 	{
 		ModelAndView MV = new ModelAndView();
-		
 		cliente.setNombre(nombre);
 		cliente.setApellido(apellido);
 		cliente.getSexo().setDni(dni);

@@ -110,7 +110,7 @@ color:white;
       <td>${cliente.sexo.genero} </td>
       <td>${cliente.dni} </td>
       <td>${cliente.nacimiento} </td>
-      <td>${cliente.nacionalidad.nacionalidad} </td>
+      <td>${cliente.nacionalidad.nacionalidad}</td>
       <td>${cliente.provincia.nombre} </td>
       <td>${cliente.localidad.nombre} </td>
       <td>${cliente.usuario.usuario} </td>
