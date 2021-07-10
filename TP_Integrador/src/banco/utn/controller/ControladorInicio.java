@@ -89,7 +89,7 @@ public class ControladorInicio {
 				String resumenCuentas = "";
 				
 				for(Cuenta cuenta : cuentas) {
-					resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
+					resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta().getNombre() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
 				}
 				request.getSession().setAttribute("Usuario", cliente.getNombre());	
 				request.getSession().setAttribute("Dni", cliente.getDni());
