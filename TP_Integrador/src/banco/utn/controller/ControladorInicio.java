@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import banco.utn.dao.*;
 import banco.utn.entidad.Cliente;
 import banco.utn.entidad.Cuenta;
-import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
 import banco.utn.resources.BeanDao;
 import banco.utn.resources.BeansCliente;

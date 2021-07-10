@@ -108,8 +108,8 @@ public class DaoCuenta implements InterfazDaoCuenta {
 		cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);	
 		
 		session.beginTransaction();
-		session.update(cuentaOrigen);
-		session.update(cuentaDestino);
+		session.merge(cuentaOrigen);
+		session.merge(cuentaDestino);
 
 		session.getTransaction().commit();	
 	
@@ -119,7 +119,7 @@ public class DaoCuenta implements InterfazDaoCuenta {
 	public List<Object[]> Verificarcbu(int Cbu) {
 		Session session = conexion.abrirConexion();
 		Transaction tx= session.beginTransaction();						
-		String hql="Select c.Cbu From Cuenta as c  where c.Cbu="+Cbu+" and c.Estado=true ";		
+		String hql="Select c.Cbu From Cuenta as c  where c.Cbu="+Cbu+" and c.Estado=true";		
 		List<Object[]> result=(List<Object[]>)session.createQuery(hql).list();		
 		conexion.cerrarSession();
 		return result;

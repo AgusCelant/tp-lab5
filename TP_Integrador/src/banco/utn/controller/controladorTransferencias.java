@@ -69,7 +69,7 @@ public class controladorTransferencias {
 		ModelAndView MV = new ModelAndView();
 
 		Cuenta cuentaOrigen = BDaoCuenta.obtenerCuentaPorNroCuenta(Integer.parseInt(nroCuentaOrigen));
-		Cuenta cuentaDestino = new Cuenta();
+		Cuenta cuentaDestino;
 		if (cbu != null && nroCuentaDestino.equals("cuentaNoPropia")) {
 			cuentaDestino = BDaoCuenta.obtenerCuentaPorCbu(Integer.parseInt(cbu));
 		} else {

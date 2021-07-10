@@ -41,7 +41,8 @@ public class ControladorCliente {
 	private DaoCuenta BDaoCuenta;
 	@Autowired
 	private DaoPersona BDaoPersona;
-	private NegCuentas negocioCuentas;
+	@Autowired
+	private NegCuentas negocioCuenta;
 	
 	@RequestMapping("mainCliente.html")
 	public ModelAndView eventoRedireccionarMainCliente(HttpServletRequest request) {
@@ -181,12 +182,12 @@ public class ControladorCliente {
 		
 		
 		ArrayList<Cuenta> Listatodascuentas= new ArrayList<Cuenta>();
-		Listatodascuentas = (ArrayList<Cuenta>) negocioCuentas.BuscarTODASCuenta(id);
+		Listatodascuentas = (ArrayList<Cuenta>) negocioCuenta.BuscarTODASCuenta(id);
 		
 		for(Cuenta obj2 : Listatodascuentas) {
 			obj2.setEstado(false);
 			obj2.getTipoCuenta().setEstado(false);
-			negocioCuentas.Eliminar1Cuenta(obj2);
+			negocioCuenta.Eliminar1Cuenta(obj2);
 			
 		}
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
@@ -259,7 +260,7 @@ public class ControladorCliente {
 		String[] parts = id.split(",");
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);	
-		Cuenta cuenta=negocioCuentas.BuscarCuentaDni(Dnii, numCuenta);		
+		Cuenta cuenta=negocioCuenta.BuscarCuentaDni(Dnii, numCuenta);		
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 		ListaCuentas.add(cuenta);
 		MV.addObject("ListaCuentas",ListaCuentas);		
@@ -281,7 +282,7 @@ public class ControladorCliente {
 		cuenta.setFecha(fechaCreacion);
 		cuenta.setSaldo(saldo);
 		cuenta.setEstado(true);
-		negocioCuentas.Editarcuenta(cuenta);
+		negocioCuenta.Editarcuenta(cuenta);
 		DaoCuenta DAOCuenta = new DaoCuenta();
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 	
@@ -330,7 +331,6 @@ public class ControladorCliente {
 			*/	
 		
 		String CbuExistente="El CBU Existe";
-		DaoCuenta DAOCuenta = new DaoCuenta();		
 		List<Object[]> CbuVerificar=null;
 		CbuVerificar=BDaoCuenta.Verificarcbu(cbu);
 		
@@ -378,11 +378,11 @@ public class ControladorCliente {
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);
 		
-		cuenta=negocioCuentas.BuscarCuentaDni(Dnii,numCuenta);
+		cuenta=negocioCuenta.BuscarCuentaDni(Dnii,numCuenta);
 	
 		cuenta.setEstado(false);
 		cuenta.getTipoCuenta().setEstado(false);
-		negocioCuentas.Eliminar1Cuenta(cuenta);
+		negocioCuenta.Eliminar1Cuenta(cuenta);
 	
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 		ListaCuentas = (ArrayList<Cuenta>)BDaoCuenta.listarCuentas() ;
