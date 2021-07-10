@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,6 +30,10 @@ import banco.utn.resources.BeansConexion;
 
 @Controller
 public class ControladorInicio {
+	private ApplicationContext appContext = null;
+	@Autowired
+	private DaoCuenta BDaoCuenta;
+	
 	@RequestMapping("inicioLogin.html")
 	public ModelAndView Login() 
 	{
@@ -41,15 +46,15 @@ public class ControladorInicio {
 	public ModelAndView ingresar(String txtUsuario, String txtPass,HttpServletRequest request)
 	{
 		ModelAndView MV = new ModelAndView();
-		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeansConexion.class, BeansCliente.class, BeanDao.class);
+		if (appContext == null) appContext = new AnnotationConfigApplicationContext(BeansConexion.class, BeansCliente.class, BeanDao.class);
 		
 		if(txtUsuario.equals("admin") && txtPass.equals("admin")){
 
 			ModelAndView MV2 = new ModelAndView();
-			DaoCuenta BDAOCuenta = (DaoCuenta)appContext.getBean("BDaoCuenta");
+			// DaoCuenta BDAOCuenta = (DaoCuenta)appContext.getBean("BDaoCuenta");
 			//anda
-			List<Integer> cuentaspesos = BDAOCuenta.ObtenerPorcentajedeCuentasPesos();			
-			List<Integer> cuentasdolar = BDAOCuenta.ObtenerPorcentajedeCuentasDolar();		
+			List<Integer> cuentaspesos = BDaoCuenta.ObtenerPorcentajedeCuentasPesos();			
+			List<Integer> cuentasdolar = BDaoCuenta.ObtenerPorcentajedeCuentasDolar();		
 			int cuenta1=0;
 			int cuenta2=0;
 			if (cuentaspesos.get(0)==null) {				
@@ -68,6 +73,7 @@ public class ControladorInicio {
 			return MV2;
 		} else {						
 			List<Object[]> verificarlogin=null;
+			
 			NegPersona negocioPersona = new NegPersona();
 			verificarlogin=negocioPersona.VerificarLogin(txtUsuario,txtPass);
 			

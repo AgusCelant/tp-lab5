@@ -43,8 +43,6 @@ public class controladorTransferencias {
 			return MV;
 		}
 		
-		
-		
 		String listaCuentas = "";
 		float DineroDisponible = 0;
 		int c=0;

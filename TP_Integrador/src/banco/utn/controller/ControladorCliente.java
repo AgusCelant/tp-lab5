@@ -31,22 +31,25 @@ import org.hibernate.Session;
 @Controller
 public class ControladorCliente {
 	private NegPersona negocioPersona;
+	@Autowired
 	private Cliente cliente;
 	private Generos gen;
 	@Autowired
-	private Cuenta Cuen;
+	private Cuenta cuenta;
 	private DaoCuenta DaoCuen;
+	@Autowired
+	private DaoCuenta BDaoCuenta;
+	@Autowired
+	private DaoPersona BDaoPersona;
 	private NegCuentas negocioCuentas;
 	
 	@RequestMapping("mainCliente.html")
 	public ModelAndView eventoRedireccionarMainCliente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-		DaoCuenta DAOCuenta = new DaoCuenta();
-		DaoPersona DAOPersona = new DaoPersona();
 		String Dnii=(String) request.getSession().getAttribute("Dni");
 		String Clientelogueado=(String) request.getSession().getAttribute("Clienteelogueado");
-		List<Cuenta> cuentas = DAOCuenta.obtenerCuentasDeUsuario(Dnii);
-		Cliente cliente = DAOPersona.obtenerDatosDeUsuario(Clientelogueado);
+		List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(Dnii);
+		Cliente cliente = BDaoPersona.obtenerDatosDeUsuario(Clientelogueado);
 		String resumenCuentas = "";
 		
 		for(Cuenta cuenta : cuentas) {
@@ -69,9 +72,8 @@ public class ControladorCliente {
 	@RequestMapping("irMenuAdmin.html")
 	public ModelAndView irMenuAdmin() {
 		ModelAndView MV = new ModelAndView();
-		DaoCuenta DAOCuenta = new DaoCuenta();
-		List<Integer> cuentaspesos = DAOCuenta.ObtenerPorcentajedeCuentasPesos();			
-		List<Integer> cuentasdolar = DAOCuenta.ObtenerPorcentajedeCuentasDolar();		
+		List<Integer> cuentaspesos = BDaoCuenta.ObtenerPorcentajedeCuentasPesos();			
+		List<Integer> cuentasdolar = BDaoCuenta.ObtenerPorcentajedeCuentasDolar();		
 		int cuenta1=0;
 		int cuenta2=0;
 		if (cuentaspesos.get(0)==null) {				
@@ -169,11 +171,11 @@ public class ControladorCliente {
 		java.util.List Dni = null;
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		
-		cli.setEstado(false);
-		cli.getProvincia().setEstado(false);
-		cli.getNacionalidad().setEstado(false);
-		cli.getLocalidad().setEstado(false);
-		cli.getUsuario().setEstado(false);
+		cliente.setEstado(false);
+		cliente.getProvincia().setEstado(false);
+		cliente.getNacionalidad().setEstado(false);
+		cliente.getLocalidad().setEstado(false);
+		cliente.getUsuario().setEstado(false);
 	
 		negocioPersona.EliminarPersona(cli);
 		
@@ -190,7 +192,7 @@ public class ControladorCliente {
 	 	ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
-		String EstadoeliminarCliente="El cliente "+cli.getNombre()+" "+cli.getApellido() +" con dni "+cli.getDni()+" se elimino correctamente";
+		String EstadoeliminarCliente="El cliente "+cliente.getNombre()+" "+cliente.getApellido() +" con dni "+cliente.getDni()+" se elimino correctamente";
 		MV.addObject("EstadoeliminarCliente",EstadoeliminarCliente);
 		MV.setViewName("Ver_Clientes");
 		return MV;
@@ -219,29 +221,26 @@ public class ControladorCliente {
 	{
 		ModelAndView MV = new ModelAndView();
 		
-		Cliente cli= new Cliente();
-		cli.setNombre(nombre);
-		cli.setApellido(apellido);
-		cli.getSexo().setDni(dni);
-		cli.getSexo().setGenero(Sexo);
-		cli.setDni(dni);
-		cli.setNacimiento(date);
-		cli.getNacionalidad().setDni(dni);
-		cli.getNacionalidad().setNacionalidad(nacionalidad);
-		cli.getNacionalidad().setEstado(true);
-		cli.getProvincia().setDni(dni);
-		cli.getProvincia().setNombre(Provincia);
-		cli.getProvincia().setEstado(true);
-		cli.getLocalidad().setDni(dni);
-		cli.getLocalidad().setNombre(Localidad);
-		cli.getLocalidad().setEstado(true);
-		cli.getUsuario().setUsuario(usuario);
-		cli.getUsuario().setContraseña(contraseña);
-		cli.setEstado(true);
-;
+		cliente.setNombre(nombre);
+		cliente.setApellido(apellido);
+		cliente.getSexo().setDni(dni);
+		cliente.getSexo().setGenero(Sexo);
+		cliente.setDni(dni);
+		cliente.setNacimiento(date);
+		cliente.getNacionalidad().setDni(dni);
+		cliente.getNacionalidad().setNacionalidad(nacionalidad);
+		cliente.getNacionalidad().setEstado(true);
+		cliente.getProvincia().setDni(dni);
+		cliente.getProvincia().setNombre(Provincia);
+		cliente.getProvincia().setEstado(true);
+		cliente.getLocalidad().setDni(dni);
+		cliente.getLocalidad().setNombre(Localidad);
+		cliente.getLocalidad().setEstado(true);
+		cliente.getUsuario().setUsuario(usuario);
+		cliente.getUsuario().setContraseña(contraseña);
+		cliente.setEstado(true);
 		
-		
-		negocioPersona.EditarPersona(cli);
+		negocioPersona.EditarPersona(cliente);
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();			
 		ListaClientes = (ArrayList<Cliente>) negocioPersona.listarPersonas();
 		MV.addObject("ListaClientes",ListaClientes);
@@ -260,9 +259,9 @@ public class ControladorCliente {
 		String[] parts = id.split(",");
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);	
-		Cuenta Cuen=negocioCuentas.BuscarCuentaDni(Dnii, numCuenta);		
+		Cuenta cuenta=negocioCuentas.BuscarCuentaDni(Dnii, numCuenta);		
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
-		ListaCuentas.add(Cuen);
+		ListaCuentas.add(cuenta);
 		MV.addObject("ListaCuentas",ListaCuentas);		
 		MV.setViewName("Editar_Cuenta");
 		return MV;
@@ -273,29 +272,26 @@ public class ControladorCliente {
 	{
 		ModelAndView MV = new ModelAndView();
 		
-		Cuenta cuen= new Cuenta();
 		Cliente cli=negocioPersona.BuscarPersonaDni(dni);
-		cuen.setCliente(cli);
-		cuen.getTipoCuenta().setNombre(TipoCuenta);
-		cuen.getTipoCuenta().setEstado(true);
-		cuen.setNumCuenta(nrocuenta);
-		cuen.setCbu(cbu);
-		cuen.setFecha(fechaCreacion);
-		cuen.setSaldo(saldo);
-		cuen.setEstado(true);
-		negocioCuentas.Editarcuenta(cuen);
+		cuenta.setCliente(cli);
+		cuenta.getTipoCuenta().setNombre(TipoCuenta);
+		cuenta.getTipoCuenta().setEstado(true);
+		cuenta.setNumCuenta(nrocuenta);
+		cuenta.setCbu(cbu);
+		cuenta.setFecha(fechaCreacion);
+		cuenta.setSaldo(saldo);
+		cuenta.setEstado(true);
+		negocioCuentas.Editarcuenta(cuenta);
 		DaoCuenta DAOCuenta = new DaoCuenta();
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 	
-		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas();
+		ListaCuentas = (ArrayList<Cuenta>)BDaoCuenta.listarCuentas();
 		MV.addObject("ListaCuentas",ListaCuentas);
 		String estadoEditarCuenta="la cuenta nro "+nrocuenta+" y el Dni: "+dni+" se actualizaron correctamente";
 		MV.addObject("estadoEditarCuenta",estadoEditarCuenta);
 		MV.setViewName("Ver_Cuentas");
 		return MV;
 	}
-	
-	
 		
 		//anda
 	@RequestMapping("/MostrarClientes.html")
@@ -306,9 +302,6 @@ public class ControladorCliente {
 		ArrayList<Cliente> ListaClientes= new ArrayList<Cliente>();	
 		NegPersona negP=new NegPersona();
 		ListaClientes=negocioPersona.TraerClientes();
-		
-		
-		
 		
 		MV.addObject("ListaClientes", ListaClientes);
 		MV.setViewName("Agregar_CuentaP1");
@@ -339,7 +332,7 @@ public class ControladorCliente {
 		String CbuExistente="El CBU Existe";
 		DaoCuenta DAOCuenta = new DaoCuenta();		
 		List<Object[]> CbuVerificar=null;
-		CbuVerificar=DAOCuenta.Verificarcbu(cbu);
+		CbuVerificar=BDaoCuenta.Verificarcbu(cbu);
 		
 		if(!CbuVerificar.isEmpty()) {
 			ModelAndView MV = new ModelAndView();
@@ -349,32 +342,24 @@ public class ControladorCliente {
 			MV.setViewName("Altas_Cuentas");	
 			return MV;
 		}
-		
 	
 		Cliente cli=negocioPersona.BuscarPersonaDni(dni);
 
-		
-		
-			Cuen.setCliente(cli);
-			Cuen.setCbu(cbu);	
-			Cuen.setFecha(fechaCreacion);
-			Cuen.setSaldo(saldo);
-			Cuen.getTipoCuenta().setNumCuenta(0);
-			Cuen.getTipoCuenta().setNombre(tipoCuenta);
-			Cuen.getTipoCuenta().setEstado(true);
-			Cuen.setEstado(true);
-			DAOCuenta.AgregarCuenta(Cuen);
+			cuenta.setCliente(cli);
+			cuenta.setCbu(cbu);	
+			cuenta.setFecha(fechaCreacion);
+			cuenta.setSaldo(saldo);
+			cuenta.getTipoCuenta().setNumCuenta(0);
+			cuenta.getTipoCuenta().setNombre(tipoCuenta);
+			cuenta.getTipoCuenta().setEstado(true);
+			cuenta.setEstado(true);
+			BDaoCuenta.AgregarCuenta(cuenta);
 	
-			
-		
-			
-
-			
 			ModelAndView MV = new ModelAndView();
 			String AgregoCorrectamente="La cuenta se agrego Correctamente";
 			MV.addObject("estadoAgregarCuenta", AgregoCorrectamente);
 			ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
-			ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+			ListaCuentas = (ArrayList<Cuenta>)BDaoCuenta.listarCuentas() ;
 			MV.addObject("ListaCuentas",ListaCuentas);
 			MV.setViewName("Ver_Cuentas");	
 			return MV;
@@ -392,20 +377,15 @@ public class ControladorCliente {
 		String[] parts = Dni.split(",");
 		String Dnii = parts[0]; 
 		int numCuenta =Integer.parseInt(parts[1]);
-				 
 		
 		cuenta=negocioCuentas.BuscarCuentaDni(Dnii,numCuenta);
-
 	
 		cuenta.setEstado(false);
 		cuenta.getTipoCuenta().setEstado(false);
 		negocioCuentas.Eliminar1Cuenta(cuenta);
-
-
-		
 	
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
-		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+		ListaCuentas = (ArrayList<Cuenta>)BDaoCuenta.listarCuentas() ;
 		String EliminoCorrectamente="La cuenta nro: "+numCuenta+" y dni: "+Dnii+" se elimino correctamente";
 		MV.addObject("estadoeliminarCuenta", EliminoCorrectamente);
 		MV.addObject("ListaCuentas",ListaCuentas);
@@ -418,12 +398,11 @@ public class ControladorCliente {
 	@RequestMapping("verCuenta.html")
 	public ModelAndView eventovercuentas()
 	{
-		DaoCuenta DAOCuenta = new DaoCuenta();
 		ModelAndView MV = new ModelAndView();
 		ArrayList<Cuenta> ListaCuentas= new ArrayList<Cuenta>();
 	
 		
-		ListaCuentas = (ArrayList<Cuenta>)DAOCuenta.listarCuentas() ;
+		ListaCuentas = (ArrayList<Cuenta>)BDaoCuenta.listarCuentas() ;
 		MV.addObject("ListaCuentas",ListaCuentas);
 		MV.setViewName("Ver_Cuentas");
 		return MV;
