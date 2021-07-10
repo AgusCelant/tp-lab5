@@ -30,6 +30,7 @@ import org.hibernate.Session;
 
 @Controller
 public class ControladorCliente {
+	@Autowired
 	private NegPersona negocioPersona;
 	@Autowired
 	private Cliente cliente;
