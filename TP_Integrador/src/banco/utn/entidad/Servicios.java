@@ -24,7 +24,8 @@ public class Servicios implements Serializable {
 	public Servicios(){}
 
 	// HOLAAAAAAAAAA
-
+	/// cambioooos
+	
 	public int getIdServicio() {
 		return IdServicio;
 	}
