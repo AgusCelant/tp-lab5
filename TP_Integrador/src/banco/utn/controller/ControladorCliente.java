@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import banco.utn.dao.DaoCuenta;
 import banco.utn.dao.DaoPersona;
+import banco.utn.dao.DaoServicios;
 import banco.utn.entidad.*;
 import banco.utn.negocio.NegCuentas;
 import banco.utn.negocio.NegPersona;
@@ -31,6 +32,9 @@ public class ControladorCliente {
 	private DaoPersona BDaoPersona;
 	@Autowired
 	private NegCuentas negocioCuenta;
+	@Autowired
+	private DaoServicios daoServicios;
+	
 	
 	@RequestMapping("mainCliente.html")
 	public ModelAndView eventoRedireccionarMainCliente(HttpServletRequest request) {
@@ -38,15 +42,20 @@ public class ControladorCliente {
 		String Dnii=(String) request.getSession().getAttribute("Dni");
 		String Clientelogueado=(String) request.getSession().getAttribute("Clienteelogueado");
 		List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(Dnii);
+		List<Servicios> servicios = daoServicios.ListarServicios();
+		
 		Cliente cliente = BDaoPersona.obtenerDatosDeUsuario(Clientelogueado);
 		String resumenCuentas = "";
 		
 		for(Cuenta cuenta : cuentas) {
 			resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Moneda: <b>" + cuenta.getTipoCuenta().getNombre() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
 		}
+		
+		
 		System.out.println(resumenCuentas);
 		MV.addObject("clienteLogueado", cliente);
 		MV.addObject("cuentasCliente", resumenCuentas);
+		MV.addObject("listServicios", servicios);
 		MV.setViewName("mainCliente");
 		return MV;
 	}

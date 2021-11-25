@@ -15,11 +15,13 @@ public class DaoServicios implements InterfazDaoServicios{
 	private Conexion conexion;
 	
 	public List<Servicios> ListarServicios () {
+	
 		Session session = conexion.abrirConexion();
-		String query = "select idservicios, tipoServicio from servicios";
-		List<Servicios> listaServicios = (List<Servicios>) session.createQuery(query).list();
+		session.beginTransaction();		
+		List<Servicios> listaServicios = (List<Servicios>) session.createQuery("From Servicios").list();
 		conexion.cerrarSession();
-
+	
 		return listaServicios;
+	
 	}
 }

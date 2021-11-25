@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -70,6 +72,14 @@ center {
 			<h2>ACCIONES</h2>
 			<button formaction="mostrarHistorial.html" type="submit">VER HISOTRIAL DE CUENTAS</button>
 			<button formaction="mostrarTransferencia.html" type="submit">TRANSFERENCIAS</button>
+		
+		<select>
+		
+		
+		<c:forEach var="servicios" items="${ listServicios }">
+                   <option value="${servicios.getIdServicio()}">${servicios.getServicio()}</option>                   
+                </c:forEach>
+                </select>
 		</form>
 	</center>
 </body>

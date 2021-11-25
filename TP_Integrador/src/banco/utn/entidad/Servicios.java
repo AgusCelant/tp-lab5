@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="servicios")
@@ -23,9 +22,6 @@ public class Servicios implements Serializable {
 	
 	public Servicios(){}
 
-	// HOLAAAAAAAAAA
-	/// cambioooos
-	
 	public int getIdServicio() {
 		return IdServicio;
 	}

@@ -20,5 +20,6 @@
         <mapping class="banco.utn.entidad.Provincia"/>
         <mapping class="banco.utn.entidad.Localidad"/>
         <mapping class="banco.utn.entidad.TipoCuenta"/>
+        <mapping class="banco.utn.entidad.Servicios"/>
     </session-factory>
 </hibernate-configuration>
