@@ -22,6 +22,23 @@
 		$('#table_id').DataTable();
 	});
 </script>
+<script type="text/javascript">
+function listadoServicios()
+{	
+/* Para obtener el valor */
+var cod = document.getElementById("ddlServicios").value;
+//alert(cod);
+
+/* Para obtener el texto */
+var combo = document.getElementById("ddlServicios");
+var selected = combo.options[combo.selectedIndex].text;
+//alert(selected);
+
+document.getElementById("idServ").value = cod;
+
+document.getElementById("serv").value = selected;
+}
+</script>
 <style>
 nav {
 z-index: 2;
@@ -41,7 +58,7 @@ center {
 <body>
 <jsp:include page="MenuCliente.jsp"></jsp:include>
 	<center>
-		<form method="post">
+		<form method="post" action="Pagos.jsp">
 			<h4>${Cartel}</h4>
 			<h4>${Cartel2}</h4>
 			<h1>Bienvenido/a <%=session.getAttribute("Usuario")%></h1>
@@ -52,7 +69,7 @@ center {
 					<th>NOMBRE</th>
 					<th>APELLIDO</th>
 					<th>DNI</th>
-					<th>DOMICILIO</th>
+					
 				</tr>
 				</thead>
 			<tbody class="grid_Linea">
@@ -61,7 +78,7 @@ center {
 					<td>${clienteLogueado.nombre}</td>
 					<td>${clienteLogueado.apellido}</td>
 					<td>${clienteLogueado.dni}</td><input type="hidden" name="dni" value="${clienteLogueado.dni}">
-					<td>${clienteLogueado.localidad.nombre}</td>
+					
 				</tr>
 				</tbody>
 			</table>
@@ -72,15 +89,29 @@ center {
 			<h2>ACCIONES</h2>
 			<button formaction="mostrarHistorial.html" type="submit">VER HISOTRIAL DE CUENTAS</button>
 			<button formaction="mostrarTransferencia.html" type="submit">TRANSFERENCIAS</button>
-		
-		<select>
-		
-		
-		<c:forEach var="servicios" items="${ listServicios }">
+		<br>
+		<br>
+		<h3>SELECCIONE SERVICIO A PAGAR: </h3>
+		<select id="ddlServicios" name="servicios" onchange="listadoServicios();">
+			<option>-Seleccione servicio-</option>
+			<c:forEach var="servicios" items="${ listServicios }">
                    <option value="${servicios.getIdServicio()}">${servicios.getServicio()}</option>                   
                 </c:forEach>
                 </select>
+                
+                <input type="hidden" name="idServ" id="idServ" value="">
+				<input type="hidden" name="serv" id="serv" value="">
+				
+			<% String id;
+				String serv;
+			id=request.getParameter("idServ");
+        	serv = request.getParameter("serv");
+			%>
+				
+                <button formaction="pagos.html" type="submit" > PAGAR </button>
+				
 		</form>
+              
 	</center>
 </body>
 </html>
