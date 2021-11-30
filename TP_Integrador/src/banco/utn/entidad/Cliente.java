@@ -27,7 +27,7 @@ public class Cliente implements Serializable{
 	private Generos sexo = new Generos();
 	@Column(name="Nacimiento")
 	private String Nacimiento;
-	@OneToOne(cascade= {CascadeType.ALL}) 
+	/*@OneToOne(cascade= {CascadeType.ALL}) 
 	@JoinColumn(name="Nacionalidad")
 	private Nacionalidad Nacionalidad = new Nacionalidad();
 	@OneToOne(cascade= {CascadeType.ALL}) 
@@ -35,7 +35,7 @@ public class Cliente implements Serializable{
 	private Provincia Provincia= new Provincia();
 	@OneToOne(cascade= {CascadeType.ALL}) 
 	@JoinColumn(name="Localidad")
-	private Localidad Localidad = new Localidad();
+	private Localidad Localidad = new Localidad();*/
 	@OneToOne(cascade= {CascadeType.ALL}) 
 	@JoinColumn(name="Usuario")
 	private Usuario Usuario= new Usuario();
@@ -54,9 +54,9 @@ public class Cliente implements Serializable{
 		Apellido = apellido;
 		this.sexo = sexo;
 		Nacimiento = nacimiento;
-		Nacionalidad = nacionalidad;
+		/*Nacionalidad = nacionalidad;
 		Provincia = provincia;
-		Localidad = localidad;
+		Localidad = localidad;*/
 		Usuario = usuario;
 		Estado = estado;
 		Dni = dni;
@@ -94,7 +94,7 @@ public class Cliente implements Serializable{
 		Nacimiento = nacimiento;
 	}
 
-	public Nacionalidad getNacionalidad() {
+	/*public Nacionalidad getNacionalidad() {
 		return Nacionalidad;
 	}
 
@@ -117,7 +117,7 @@ public class Cliente implements Serializable{
 	public void setLocalidad(Localidad localidad) {
 		Localidad = localidad;
 	}
-	
+	*/
 	public Usuario getUsuario() {
 		return Usuario;
 	}
@@ -145,7 +145,7 @@ public class Cliente implements Serializable{
 	@Override
 	public String toString() {
 		return "Nombre: "+ Nombre + ", Apellido: " + Apellido + ", Sexo: " + sexo + ",  Nacimiento: " + Nacimiento
-				+ ", Nacionalidad: " + Nacionalidad + ", Provincia: " + Provincia + ",  Localidad: " + Localidad + ",  Dni: "
+				+ /*", Nacionalidad: " + Nacionalidad + ", Provincia: " + Provincia + ",  Localidad: " + Localidad + */",  Dni: "
 				+ Dni;
 	}
 }

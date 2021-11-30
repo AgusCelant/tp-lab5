@@ -105,7 +105,7 @@ public class ControladorCliente {
 		cliente.getSexo().setGenero(Sexo);
 		cliente.setDni(Dni);
 		cliente.setNacimiento(Date);
-		cliente.getNacionalidad().setDni(Dni);
+		/*cliente.getNacionalidad().setDni(Dni);
 		cliente.getNacionalidad().setNacionalidad(Nacionalidad);
 		cliente.getNacionalidad().setEstado(true);
 		cliente.getLocalidad().setDni(Dni);
@@ -113,7 +113,7 @@ public class ControladorCliente {
 		cliente.getLocalidad().setEstado(true);
 		cliente.getProvincia().setDni(Dni);
 		cliente.getProvincia().setNombre(Provincia);
-		cliente.getProvincia().setEstado(true);
+		cliente.getProvincia().setEstado(true);*/
 		cliente.getUsuario().setUsuario(Usuario);
 		cliente.getUsuario().setContraseña(Contraseña);
 		cliente.getUsuario().setEstado(true);
@@ -170,9 +170,9 @@ public class ControladorCliente {
 		Cliente cli=negocioPersona.BuscarPersonaDni(id);
 		
 		cli.setEstado(false);
-		cli.getProvincia().setEstado(false);
+		/*cli.getProvincia().setEstado(false);
 		cli.getNacionalidad().setEstado(false);
-		cli.getLocalidad().setEstado(false);
+		cli.getLocalidad().setEstado(false);*/
 		cli.getUsuario().setEstado(false);
 		System.out.println(cli.toString());
 		negocioPersona.EliminarPersona(cli);
@@ -224,7 +224,7 @@ public class ControladorCliente {
 		cliente.getSexo().setGenero(Sexo);
 		cliente.setDni(dni);
 		cliente.setNacimiento(date);
-		cliente.getNacionalidad().setDni(dni);
+		/*cliente.getNacionalidad().setDni(dni);
 		cliente.getNacionalidad().setNacionalidad(nacionalidad);
 		cliente.getNacionalidad().setEstado(true);
 		cliente.getProvincia().setDni(dni);
@@ -232,7 +232,7 @@ public class ControladorCliente {
 		cliente.getProvincia().setEstado(true);
 		cliente.getLocalidad().setDni(dni);
 		cliente.getLocalidad().setNombre(Localidad);
-		cliente.getLocalidad().setEstado(true);
+		cliente.getLocalidad().setEstado(true);*/
 		cliente.getUsuario().setUsuario(usuario);
 		cliente.getUsuario().setContraseña(contraseña);
 		cliente.setEstado(true);

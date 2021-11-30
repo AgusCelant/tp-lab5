@@ -67,11 +67,6 @@ public class Pagos implements Serializable {
 		this.monto = txtMonto;
 	}
 
-	@Override
-	public String toString() {
-		return "Pagos [idPago=" + idPago + ", idServicio=" + idServicio + ", Servicio=" + Servicio + ", idCliente="
-				+ idCliente + ", monto=" + monto + "]";
-	}
 
 
 	

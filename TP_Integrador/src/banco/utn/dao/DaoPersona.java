@@ -32,9 +32,9 @@ public class DaoPersona implements InterfazDaoPersona {
 			cliente2.setApellido(cliente.getApellido());
 			cliente2.getSexo().setGenero(cliente.getSexo().getGenero());
 			cliente2.setNacimiento(cliente.getNacimiento());
-			cliente2.setProvincia(cliente.getProvincia());
+		/*	cliente2.setProvincia(cliente.getProvincia());
 			cliente2.getNacionalidad().setNacionalidad(cliente.getNacionalidad().getNacionalidad());
-			cliente2.setLocalidad(cliente.getLocalidad());
+			cliente2.setLocalidad(cliente.getLocalidad());*/
 			cliente2.setUsuario(cliente.getUsuario());
 			ListaClientes.add(cliente2);
 		}
@@ -162,9 +162,9 @@ public class DaoPersona implements InterfazDaoPersona {
 			cliente2.setApellido(cliente.getApellido());
 			cliente2.getSexo().setGenero(cliente.getSexo().getGenero());
 			cliente2.setNacimiento(cliente.getNacimiento());
-			cliente2.setProvincia(cliente.getProvincia());
+			/*cliente2.setProvincia(cliente.getProvincia());
 			cliente2.getNacionalidad().setNacionalidad(cliente.getNacionalidad().getNacionalidad());
-			cliente2.setLocalidad(cliente.getLocalidad());
+			cliente2.setLocalidad(cliente.getLocalidad());*/
 			cliente2.setUsuario(cliente.getUsuario());
 			ListaClientes.add(cliente2);
 		}

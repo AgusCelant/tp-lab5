@@ -56,10 +56,12 @@ public class ControladorPagos {
 		else { //model para hacer el pago
 		ModelAndView MV = new ModelAndView();
 		
+		Cuenta c = new Cuenta();
+		
 		String msg = "NO TIENE DINERO EN LA CUENTA PARA REALIZAR EL PAGO ";
 		List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(dni);
 		if(cuentas.isEmpty()){
-			//mostrar msg
+			MV.addObject("dineroInsufuciente", msg);
 		}
 		
 		String Dnii=(String) request.getSession().getAttribute("Dni");
@@ -69,6 +71,13 @@ public class ControladorPagos {
 		String resumenCuentas = "";
 		for(Cuenta cuenta : cuentas1) {
 			resumenCuentas = "<div>Nro de caja de ahorro: <b>" + cuenta.getNumCuenta() + "</b>, Saldo: <b>" + cuenta.getSaldo() + "</b></div><br>";
+		c.setNumCuenta(cuenta.getNumCuenta());
+		c.setFecha(cuenta.getFecha());
+		c.setCliente(cuenta.getCliente());
+		c.setTipoCuenta(cuenta.getTipoCuenta());
+		c.setCbu(cuenta.getCbu());
+		c.setSaldo(cuenta.getSaldo());
+		c.setEstado(cuenta.getEstado());
 		}
 		
 		
@@ -88,6 +97,8 @@ public class ControladorPagos {
 		}
 		else
 		{
+			
+			daoPagos.descontarPago(c, p);
 			String mensaje = "EL PAGO SE EFECTUO CORRECTAMENTE";
 			MV.addObject("estadoPago",mensaje);
 		}

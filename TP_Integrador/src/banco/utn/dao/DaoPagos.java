@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import banco.utn.entidad.Cuenta;
 import banco.utn.entidad.Pagos;
 import banco.utn.entidad.Servicios;
 
@@ -34,6 +35,21 @@ public class DaoPagos {
 		conexion.cerrarSession();
 		return aux;
 	}
+	
+	public void descontarPago(Cuenta c, Pagos p) {
+	
+		Session session = conexion.abrirConexion();
+		c.setSaldo((c.getSaldo() - Integer.parseInt(p.getMonto())));
+		
+		session.beginTransaction();
+		session.update(c);
+	
+		session.getTransaction().commit();	
+	
+		conexion.cerrarSession();
+	}
+	
+	
 	
 	public List<Pagos> ListarPagos (String dni) {
 		

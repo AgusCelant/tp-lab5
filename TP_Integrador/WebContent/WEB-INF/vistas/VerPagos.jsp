@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet" type="text/css"
@@ -35,6 +39,7 @@ center {
 <title>VER PAGOS</title>
 </head>
 <body>
+<center>
 <jsp:include page="MenuCliente.jsp"></jsp:include>
 <h1>${PAGOS}</h1>
   <table id="table_id" class="display">
@@ -43,18 +48,21 @@ center {
 					<th>SERVICIO</th>
 					<th>CLIENTE</th>
 					<th>PAGO</th>
+					
 				</tr>
 				</thead>
-				<c:forEach var="pagos" items="${ listadoPagos }"  >
 			<tbody class="grid_Linea">
+				<c:forEach var="pagos" items="${ listadoPagos }"  >
 				<tr>
-					<td>${listadoPagos.Servicio()}</td>
+					<td>${pagos.getServicio()}</td>
 					<td>${pagos.getIdCliente()}</td>
 					<td>${pagos.getMonto()}</td>
-			
+					
 				</tr>
-				</tbody>
 				</c:forEach>
+				</tbody>
 			</table>
+		
+			</center>
 </body>
 </html>
