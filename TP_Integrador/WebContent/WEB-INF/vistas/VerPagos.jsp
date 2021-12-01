@@ -48,6 +48,7 @@ center {
 					<th>SERVICIO</th>
 					<th>CLIENTE</th>
 					<th>PAGO</th>
+					<th>COD.BARRA</th>
 					
 				</tr>
 				</thead>
@@ -57,6 +58,7 @@ center {
 					<td>${pagos.getServicio()}</td>
 					<td>${pagos.getIdCliente()}</td>
 					<td>${pagos.getMonto()}</td>
+					<td>${pagos.getCodbarra()}</td>
 					
 				</tr>
 				</c:forEach>

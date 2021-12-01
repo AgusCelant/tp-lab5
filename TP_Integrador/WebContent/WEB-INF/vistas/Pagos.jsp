@@ -32,15 +32,15 @@
 				<input type="hidden" name="idServ" id="idServ" value="<%=id%>">
 				<input type="hidden" name="serv" id="serv" value="<%=serv%>">
 				
-    	<label>N° Codigo de Barra: </label><input type="text" name="txtCodigoBarra" placeholder="Codigo de Barra" />
-        <label>Monto a pagar: </label><input type="text" name="txtMonto" placeholder="Monto a pagar" />
+    	<label>N° Codigo de Barra: </label><input type="text" name="txtCodigoBarra" placeholder="Codigo de Barra" required="required" />
+        <label>Monto a pagar: </label><input type="text" name="txtMonto" placeholder="Monto a pagar" required="required"/>
         <button type="submit" class="btn btn-primary btn-block btn-large" name="btnPagar">PAGAR</button>
   
   		<button formaction="verpagos.html" type="submit"> VER PAGOS</button>
   		
   		<br><br>
   		<h1>${estadoPago}</h1>
-  
+  		<h1>${MensajePago}</h1>
     </form>
  </div>
 </center>

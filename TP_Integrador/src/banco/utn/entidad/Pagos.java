@@ -24,7 +24,9 @@ public class Pagos implements Serializable {
 	private String idCliente;
 	@Column(name="monto")
 	private String monto;
-
+	@Column(name="codbarra")
+	private int codbarra;
+	
 	public Pagos() {}
 
 	public int getIdPago() {
@@ -65,6 +67,14 @@ public class Pagos implements Serializable {
 
 	public void setMonto(String txtMonto) {
 		this.monto = txtMonto;
+	}
+
+	public int getCodbarra() {
+		return codbarra;
+	}
+
+	public void setCodbarra(int codbarra) {
+		this.codbarra = codbarra;
 	}
 
 

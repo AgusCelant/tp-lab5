@@ -28,16 +28,11 @@ public class ControladorPagos {
 	
 	
 	@RequestMapping("pagos.html")
-	public ModelAndView pagos(String txtMonto, String dni, String idServ, String serv, HttpServletRequest request) {
+	public ModelAndView pagos(String txtCodigoBarra, String txtMonto, String dni, String idServ, String serv, HttpServletRequest request) {
 		
 		if(txtMonto == null) {//model ingresa por primera vez
 			ModelAndView MV = new ModelAndView();
-			String msg = "NO TIENE DINERO EN LA CUENTA PARA REALIZAR EL PAGO ";
-			List<Cuenta> cuentas = BDaoCuenta.obtenerCuentasDeUsuario(dni);
-			if(cuentas.isEmpty()){
-				//mostrar msg
-			}
-			
+						
 			String Dnii=(String) request.getSession().getAttribute("Dni");
 			String Clientelogueado=(String) request.getSession().getAttribute("Clienteelogueado");
 			List<Cuenta> cuentas1 = BDaoCuenta.obtenerCuentasDeUsuario(Dnii);
@@ -80,6 +75,16 @@ public class ControladorPagos {
 		c.setEstado(cuenta.getEstado());
 		}
 		
+		if(Integer.parseInt(txtMonto) > c.getSaldo()) {
+			String mensaje = "NO TIENE SUFICIENTE SALDO EN LA CUENTA PARA EFECTUAR EL PAGO";
+			
+			MV.addObject("MensajePago",mensaje);
+			MV.addObject("cuentasCliente", resumenCuentas);
+			MV.addObject("clienteLogueado", cliente);
+			MV.setViewName("Pagos");
+			return MV;
+		}
+		
 		
 		Boolean pago = true;
 		Pagos p = new Pagos();
@@ -88,6 +93,7 @@ public class ControladorPagos {
 		p.setIdServicio(idServ);
 		p.setServicio(serv);
 		p.setMonto(txtMonto);
+		p.setCodbarra(Integer.parseInt(txtCodigoBarra));
 		pago = daoPagos.agregarPago(p);
 		
 		if(pago == false) {
@@ -108,6 +114,7 @@ public class ControladorPagos {
 		MV.setViewName("Pagos");
 		return MV;
 	}
+	
 	
 }
 	
